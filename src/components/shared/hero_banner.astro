@@ -1,20 +1,19 @@
 ---
-//const { image_path = "" } = Astro.props;
-import image_path from "../../../public/hero_banners/sy_london_youthacks_logo.png";
+const { image_path = "" } = Astro.props;
 import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
 ---
 
 <div class="container">
-  <img class="image" src={image_path.src} />
+  <img class="image" src={image_path} />
   <div class="arrow_container"><img class="arrow" src={hero_arrow.src} /></div>
 </div>
 
 <style>
   .container {
     width: 100vw;
-    height: 75vh;
+    height: 85vh;
 
-    position: absolute;
+    position: relative;
     top: 0;
     z-index: -1;
   }

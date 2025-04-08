@@ -1,13 +1,47 @@
 ---
 import Default from "../layouts/default.astro";
+
+// Import images
 import HeroBanner from "../components/shared/hero_banner.astro";
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
+import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
+
+import ImageDescription1 from "../components/layout/image_description_1.astro";
+import TextButton from "../components/UI_components/text_button.astro";
 ---
 
 <Default>
-  <HeroBanner />
+  <HeroBanner image_path={HeroBannerImage.src} />
+  <ImageDescription1>
+    <div class="description">
+      <div class="text_wrapper">
+        <h1>
+          "We support and run student-led hackathons, providing advice for
+          organisers, delivering events, and creating safe spaces for young
+          coders"
+        </h1>
+        <p>
+          Hackathons are social coding events, where people can get together,
+          make new friends, and work on amazing projects together, no matter
+          their skill level. Our mission is to support student-led hackathons,
+          as we believe every young coder should have the right to safe spaces
+          to learn and thrive together.
+        </p>
+        <TextButton href="" text="Support Us" />
+      </div>
+    </div>
+    <div class="image">
+      <div class="image_container">
+        <img src={ScrapyardCambridge1.src} />
+        <p>Scrapyard Cambridge @ Raspberry Pi Foundation</p>
+      </div>
+    </div>
+  </ImageDescription1>
   <style>
+    /*
     * {
       border: 1px solid black;
     }
+      */
   </style>
 </Default>

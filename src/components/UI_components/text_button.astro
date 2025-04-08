@@ -1,0 +1,43 @@
+---
+const { href = "" } = Astro.props;
+const { text = "" } = Astro.props;
+---
+
+<html>
+  <a href={href}>{text}</a>
+
+  <style>
+    a {
+      display: flex;
+      width: fit-content;
+      height: fit-content;
+
+      padding-left: 3em;
+      padding-right: 3em;
+      padding-top: 0.8em;
+      padding-bottom: 0.8em;
+
+      margin-top: 2em;
+
+      align-items: end;
+
+      border-radius: 10px;
+      border: 2px solid #3b3a3a;
+      background-color: white;
+      color: black;
+
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-size: 1.1em;
+      font-weight: 500;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    a:hover {
+      box-shadow: 8px 8px 36px 0px rgba(0, 0, 0, 0.3);
+      transition: 0.4s;
+    }
+  </style>
+
+
+</html>
