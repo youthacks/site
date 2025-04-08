@@ -1,11 +1,17 @@
 ---
+// Create prop for handling tab title
+const { tab_title = "" } = Astro.props;
 
+// Import ClientRouter for smooth transitions on supported browsers
+import { ClientRouter } from "astro:transitions";
 ---
 
-<head>
+<html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="generator" content={Astro.generator} />
-  <title>Astro Basics</title>
-</head>
+  <title>{tab_title}</title>
+
+  <ClientRouter fallback="swap" />
+</html>

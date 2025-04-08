@@ -1,9 +1,13 @@
 ---
 import Default from "../layouts/default.astro";
-
-import Hero_banner from "../components/shared/hero_banner.astro";
+import HeroBanner from "../components/shared/hero_banner.astro";
 ---
 
 <Default>
-  <h1>Welcome to the Youthacks site. We are creating it.</h1>
+  <HeroBanner />
+  <style>
+    * {
+      border: 1px solid black;
+    }
+  </style>
 </Default>

@@ -1,0 +1,50 @@
+---
+// Create prop for handling navbar title at top of page
+const { navbar_title = "" } = Astro.props;
+---
+
+<html>
+  <div class="container">
+    <div>
+      <h2>{navbar_title}</h2>
+    </div>
+
+    <div class="links">
+      <a href="">Test Link</a>
+      <a href="">Test Link</a>
+      <a href="">Test Link</a>
+    </div>
+  </div>
+
+  <style>
+    .container {
+      display: flex;
+      height: 10vh;
+      position: fixed;
+      width: 100%;
+
+      align-content: space-between;
+    }
+
+    div {
+      width: 50vw;
+    }
+    .links {
+      align-items: center;
+      justify-content: right;
+      display: flex;
+      width: 50vw;
+      padding-right: 2em;
+    }
+    .links a {
+      padding-left: 2em;
+      text-decoration: none;
+      color: white;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+
+</html>
