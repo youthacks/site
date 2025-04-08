@@ -1,11 +1,98 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// Import default layout
+import Default from "../layouts/default.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Import images
+import HeroBanner from "../components/shared/hero_banner.astro";
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
+import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
+import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpeg";
+import ScrapyardCambridge2 from "../../public/images/scrapyard_cambridge_2.jpg";
+import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.png";
+
+// Import components
+import ImageDescription1 from "../components/layout/image_description_1.astro";
+import TextButton from "../components/UI_components/text_button.astro";
+import Grid1 from "../components/layout/grid1.astro";
+import Card1 from "../components/UI_components/card1.astro";
 ---
 
-<Layout>
-	<h1>Welcome to the Youthacks site. We are creating it.</h1>
-</Layout>
+<Default>
+  <HeroBanner image_path={HeroBannerImage.src} />
+
+  <ImageDescription1>
+    <div class="description">
+      <div class="text_wrapper">
+        <h1>
+          "We support and run student-led hackathons, providing advice for
+          organisers, delivering events, and creating safe spaces for young
+          coders"
+        </h1>
+        <p>
+          Hackathons are social coding events, where people can get together,
+          make new friends, and work on amazing projects together no matter
+          their skill level. Our mission is to support student-led hackathons,
+          as we believe every young coder should have the right to safe spaces
+          to learn and thrive together.
+        </p>
+        <TextButton href="" text="Support Us" />
+      </div>
+    </div>
+    <div class="image">
+      <div class="image_container">
+        <img src={ScrapyardCambridge1.src} />
+        <p>Scrapyard Cambridge @ Raspberry Pi Foundation</p>
+      </div>
+    </div>
+  </ImageDescription1>
+
+  <Grid1>
+    <Card1>
+      <div class="wrapper">
+        <img src={ScrapyardCambridge2.src} />
+        <h2>Scrapyard Cambridge</h2>
+        <h3>15.03.2025</h3>
+        <p>
+          A 12 hour hackathon hosted at the Raspberry Pi Foundation headquarters
+          where teens worked together to create the "scrappiest projects"
+          alongside events from 60+ other cities worldwide in a global event
+          coordinated globally by Hack Club, and organised locally by us.
+        </p>
+      </div>
+    </Card1>
+    <Card1>
+      <div class="wrapper">
+        <img src={ScrapyardLondon1.src} />
+        <h2>Scrapyard London</h2>
+        <h3>15.03.2025</h3>
+        <p>
+          A 12 hour hackathon hosted at tldraw HQ alongside our Cambridge event
+          where teens worked together to create the "scrappiest projects"
+          alongside events from 60+ other cities worldwide in a global event
+          coordinated globally by Hack Club, and organised locally by us.
+        </p>
+      </div>
+    </Card1>
+    <Card1>
+      <div class="wrapper">
+        <img src={CounterspellCambridge1.src} />
+        <h2>Counterspell Cambridge</h2>
+        <h3>15.03.2025</h3>
+        <p>
+          An 8-hour game jam hosted at the Raspberry Pi Foundation's
+          headquarters, where young artists, coders and musicians got together
+          to make amazing games together, alongside teens in 50+ cities
+          worldwide in an event coordinated by Hack Club and locally organised
+          by us.
+        </p>
+      </div>
+    </Card1>
+  </Grid1>
+  <style>
+    /*
+    * {
+      border: 1px solid black;
+    }
+      */
+  </style>
+</Default>

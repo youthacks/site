@@ -1,0 +1,29 @@
+---
+// Import shared components
+import Footer from "../components/shared/footer.astro";
+import Head from "../components/shared/head.astro";
+import Navbar from "../components/shared/navbar.astro";
+
+// Create props for handling tab and navbar titles on different pages
+const { navbar_title = "" } = Astro.props;
+const { tab_title = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head tab_title={tab_title} />
+  </head>
+
+  <body>
+    <Navbar navbar_title={navbar_title} />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html body {
+    margin: 0;
+  }
+</style>

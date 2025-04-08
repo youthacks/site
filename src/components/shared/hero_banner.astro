@@ -1,0 +1,39 @@
+---
+const { image_path = "" } = Astro.props;
+import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
+---
+
+<div class="container">
+  <img class="image" src={image_path} />
+  <div class="arrow_container"><img class="arrow" src={hero_arrow.src} /></div>
+</div>
+
+<style>
+  .container {
+    width: 100vw;
+    height: 85vh;
+
+    position: relative;
+    top: 0;
+    z-index: -1;
+  }
+  .container .image {
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+  }
+  .arrow {
+    height: 10vh;
+    width: 10vh;
+  }
+
+  .arrow_container {
+    width: 100vw;
+    position: relative;
+    top: -20%;
+    left: 50%;
+    width: 50vw;
+    align-self: center;
+    z-index: 1;
+  }
+</style>

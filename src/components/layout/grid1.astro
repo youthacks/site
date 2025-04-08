@@ -1,0 +1,31 @@
+---
+
+---
+
+<html>
+  <h1>Past projects</h1>
+  <div class="container">
+    <slot />
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 2em;
+    }
+    @media only screen and (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+    h1 {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+      margin-left: 1.5em;
+    }
+  </style>
+
+
+</html>
