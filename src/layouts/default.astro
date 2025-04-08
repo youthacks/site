@@ -1,0 +1,22 @@
+---
+// Import shared components
+import Footer from "../components/shared/footer.astro";
+import Head from "../components/shared/head.astro";
+import Navbar from "../components/shared/hero_banner.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <Head />
+  <body>
+    <Navbar />
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style>
+  html {
+    margin: 0;
+  }
+</style>
