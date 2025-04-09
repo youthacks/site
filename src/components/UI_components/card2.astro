@@ -1,0 +1,73 @@
+---
+
+---
+
+<style>
+    .container {
+      display: block;
+      min-height: inherit;
+      margin: 2em;
+      /*border: 3px solid #a49898;*/
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 8px 8px 36px 0px rgba(0, 0, 0, 0.3);
+      padding: 2em;
+    }
+    .container:hover {
+      transition: 0.4s;
+    }
+    .container :global(.wrapper) {
+      height: inherit;
+    }
+    .container :global(div img) {
+      width: 100%;
+      object-fit: cover;
+      height: 10vh;
+      display: flex;
+      margin: auto;
+  
+      border-radius: 18px;
+    }
+  
+    .container :global(h2) {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+    }
+    .container :global(h3) {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-weight: 500;
+      font-style: normal;
+    }
+    .container :global(p) {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .container :global(a) {
+      display: flex;
+      width: fit-content;
+      height: fit-content;
+  
+      padding-left: 5em;
+      padding-right: 5em;
+      padding-top: 1em;
+      padding-bottom: 1em;
+  
+      margin-top: 2em;
+  
+      align-items: end;
+  
+      border-radius: 10px;
+      border: 2px solid #3b3a3a;
+      background-color: white;
+  
+      font-family: "Lexend", sans-serif;
+      text-decoration: none;
+    }
+  </style>
+  
+  <div class="container">
+    <slot />
+  </div>
+  
