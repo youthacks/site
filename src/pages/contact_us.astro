@@ -1,0 +1,22 @@
+---
+// Import default layout
+import Default from "../layouts/default.astro";
+
+// Import images
+import HeroBanner from "../components/shared/hero_banner.astro";
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
+import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
+import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpeg";
+import ScrapyardCambridge2 from "../../public/images/scrapyard_cambridge_2.jpg";
+import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.png";
+
+// Import components
+import ImageDescription1 from "../components/layout/image_description_1.astro";
+import TextButton from "../components/UI_components/text_button.astro";
+import Grid1 from "../components/layout/grid1.astro";
+import Card1 from "../components/UI_components/card1.astro";
+---
+
+<Default>
+    <HeroBanner image_path={ScrapyardLondon1.src} text="Contact Us" />
+</Default>
