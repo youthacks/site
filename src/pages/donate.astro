@@ -1,0 +1,54 @@
+---
+import Defualt from '../layouts/default.astro';
+import HeroBanner from "../components/shared/hero_banner.astro";
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
+---
+
+<Defualt title="Donate or Sponsor">
+    <HeroBanner image_path={HeroBannerImage.src} />
+    <section class="donate-page">
+        <div class="container">
+            <h1>Support YouthHacks</h1>
+            <p>
+                At YouthHacks, we are dedicated to empowering the next generation of innovators and problem-solvers. Your support helps us provide resources, organize events, and create opportunities for young minds to thrive in the world of technology.
+            </p>
+            <p>
+                Whether you're an individual looking to make a difference or a company interested in sponsoring our initiatives, we welcome your contributions.
+            </p>
+            <h2>How to Donate or Sponsor</h2>
+            <p>
+                Please reach out to us at <a href="mailto:donate@youthacks.org">donate@youthacks.org</a> to discuss how you can support our mission. Every contribution, big or small, makes a meaningful impact.
+            </p>
+            <p>
+                Thank you for helping us inspire and empower the next generation of tech leaders!
+            </p>
+        </div>
+    </section>
+
+    <style>
+        .donate-page {
+            padding: 2rem;
+            text-align: center;
+        }
+        .donate-page .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .donate-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .donate-page p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .donate-page a {
+            color: #0070f3;
+            text-decoration: none;
+        }
+        .donate-page a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</Layout></p>

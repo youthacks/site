@@ -1,0 +1,44 @@
+---
+import Defualt from '../layouts/default.astro';
+import HeroBanner from "../components/shared/hero_banner.astro";
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
+---
+
+<Defualt title="Contact Us">
+    <HeroBanner image_path={HeroBannerImage.src} />
+    <section class="contact-us">
+        <h1>Contact Us</h1>
+        <h2>If you have any questions or inquiries, feel free to reach out to us at:
+        <a href="mailto:enquiries@youthacks.org">enquiries@youthacks.org</a></h2>
+
+        <h2>For inquiries related to UK data protection regulations (GDPR), please reach out to us at:
+            <a href="mailto:gdpr@youthacks.org">gdpr@youthacks.org</a></h2>
+    </section>
+
+    <style>
+        .contact-us {
+            padding: 2rem;
+            text-align: center;
+        }
+        .contact-us .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-us h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .contact-us p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .contact-us a {
+            color: #0070f3;
+            text-decoration: none;
+        }
+        .contact-us a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</Default>
