@@ -9,6 +9,7 @@ import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
 import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpg";
 import ScrapyardCambridge2 from "../../public/images/scrapyard_cambridge_2.jpg";
 import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.jpg";
+import CoolAsHackTemp from "../../public/images/cool-as-hack_temp.jpg";
 
 // Import components
 import ImageDescription1 from "../components/layout/image_description_1.astro";
@@ -17,6 +18,8 @@ import Grid1 from "../components/layout/grid1.astro";
 import Grid2 from "../components/layout/grid2.astro";
 import Card1 from "../components/UI_components/card1.astro";
 import Card2 from "../components/UI_components/card2.astro";
+import Upcoming from "../components/layout/upcoming.astro";
+import UpcomingCard from "../components/UI_components/upcoming_card.astro";
 ---
 
 <Default>
@@ -42,12 +45,18 @@ import Card2 from "../components/UI_components/card2.astro";
     </div>
     <div class="image">
       <div class="image_container">
-        <img src={ScrapyardCambridge1.src} />
+        <img src={ScrapyardCambridge1.src} style="max-width: 50%; height: auto;" />
         <p>Scrapyard Cambridge @ Raspberry Pi Foundation</p>
       </div>
     </div>
   </ImageDescription1>
-
+  <Upcoming>
+    <UpcomingCard>
+      <div class="wrapper" >
+        <img src={CoolAsHackTemp.src} />  
+      </div>
+    </UpcomingCard>
+  </Upcoming>
   <Grid1>
     <Card1>
       <div class="wrapper">
