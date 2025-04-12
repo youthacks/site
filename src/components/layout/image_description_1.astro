@@ -5,20 +5,26 @@
 <html>
   <div class="container">
     <slot />
-
+    
     <style>
+
+      
       .container {
         display: grid;
-        height: 50vh;
+        height: auto;
         grid-template-columns: 1fr 1fr;
         margin-top: 2em;
-        margin-bottom: 8em;
+        margin-bottom: 2em;
       }
 
       /* Colaspe components on top of each other if using mobile layout */
       @media only screen and (max-width: 900px) {
         .container {
           grid-template-columns: 1fr;
+          margin-bottom:2em;
+        }
+        .container :global(.description .support-button) {
+          place-items: center;
         }
       }
       .container :global(.image) {

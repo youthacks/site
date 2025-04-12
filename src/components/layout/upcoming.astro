@@ -3,20 +3,23 @@
 ---
 
 <html>
-<h1>Upcoming events...</h1>
-<div class="container"></div>
+    <div class="container">
+        <h1>Upcoming events...</h1>
+    </div>
+    
     <slot />
 </div>
 
 <style>
     .container {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
         margin-top: 2em;
     }
     @media only screen and (max-width: 900px) {
         .container {
             grid-template-columns: 1fr;
+            margin-top:2em;
         }
     }
     h1 {

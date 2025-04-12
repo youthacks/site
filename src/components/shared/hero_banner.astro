@@ -4,14 +4,14 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
 ---
 
 <div class="container">
-  <img class="image" src={image_path} />
-  <div class="arrow_container"><img class="arrow" src={hero_arrow.src} /></div>
+  <img class="image" src={image_path} style="width: 100%;" />
+  <img class="arrow" src={hero_arrow.src} />
 </div>
 
 <style>
   .container {
     width: 100vw;
-    height: 85vh;
+    height: auto;
 
     position: relative;
     top: 0;
@@ -23,6 +23,10 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     object-fit: cover;
   }
   .arrow {
+    position: absolute;
+    bottom: 2em; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
     height: 10vh;
     width: 10vh;
   }
