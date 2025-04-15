@@ -61,5 +61,8 @@ import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.
           }
         }
       });
+      document.addEventListener('DOMContentLoaded', scrollToHashIfPresent);
+      window.addEventListener('hashchange', scrollToHashIfPresent);
+      document.addEventListener('astro:page-load', scrollToHashIfPresent);
     </script>
 </Default>
