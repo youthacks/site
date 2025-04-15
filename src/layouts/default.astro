@@ -11,6 +11,10 @@ const { tab_title = "" } = Astro.props;
 
 <!doctype html>
 <html lang="en">
+  // smooth scrolling
+  html {
+    scroll-behavior: smooth;
+  }
   <head>
     <Head tab_title={tab_title} />
   </head>
