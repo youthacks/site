@@ -41,4 +41,25 @@ import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.
             text-decoration: underline;
         }
     </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.location.hash) {
+          const element = document.querySelector(window.location.hash);
+      
+          if (element) {
+            setTimeout(() => {
+        
+              const navbarHeight = 80; 
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+            }, 300); 
+          }
+        }
+      });
+    </script>
 </Default>
