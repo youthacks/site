@@ -1,0 +1,28 @@
+---
+// Component for a title and description
+---
+
+<html>
+    <div class="container">
+        <slot />
+    </div>
+</html>
+
+<style>
+    .container :global(p) {
+        font-family: "Atkinson Hyperlegible", sans-serif;
+        font-weight: 400;
+        font-style: normal;    
+    }
+
+    .container :global(h1) {
+        font-family: "Atkinson Hyperlegible", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        margin-bottom: 1em;
+    }
+
+    .container {
+        margin-left: 3em;
+    }
+</style>
