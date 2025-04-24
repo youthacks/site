@@ -6,18 +6,23 @@ import Default from "../layouts/default.astro";
 import HeroBanner from "../components/shared/hero_banner.astro";
 import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
 import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
-import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpeg";
+import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpg";
 import ScrapyardCambridge2 from "../../public/images/scrapyard_cambridge_2.jpg";
-import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.png";
+import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.jpg";
+import CoolAsHackTemp from "../../public/images/cool-as-hack_temp.jpg";
 
 // Import components
 import ImageDescription1 from "../components/layout/image_description_1.astro";
 import TextButton from "../components/UI_components/text_button.astro";
 import Grid1 from "../components/layout/grid1.astro";
+import Grid2 from "../components/layout/grid2.astro";
 import Card1 from "../components/UI_components/card1.astro";
+import Card2 from "../components/UI_components/card2.astro";
+import Upcoming from "../components/layout/upcoming.astro";
+import UpcomingCard from "../components/UI_components/upcoming_card.astro";
 ---
 
-<Default>
+<Default tab_title="Youthacks">
   <HeroBanner image_path={HeroBannerImage.src} />
 
   <ImageDescription1>
@@ -35,17 +40,19 @@ import Card1 from "../components/UI_components/card1.astro";
           as we believe every young coder should have the right to safe spaces
           to learn and thrive together.
         </p>
-        <TextButton href="" text="Support Us" />
+        <div class="support-button">
+        <TextButton href="donate" style="" text="Support Us" />
+        </div>
       </div>
     </div>
     <div class="image">
       <div class="image_container">
-        <img src={ScrapyardCambridge1.src} />
+        <img alt="Scrapyard Cambridge Participants" src={ScrapyardCambridge1.src} style="max-width: 100%; height: 100%;" />
         <p>Scrapyard Cambridge @ Raspberry Pi Foundation</p>
       </div>
     </div>
   </ImageDescription1>
-
+  
   <Grid1 text="Past Projects">
     <Card1>
       <div class="wrapper">
@@ -77,9 +84,9 @@ import Card1 from "../components/UI_components/card1.astro";
       <div class="wrapper">
         <img src={CounterspellCambridge1.src} />
         <h2>Counterspell Cambridge</h2>
-        <h3>15.03.2025</h3>
+        <h3>23.11.2024</h3>
         <p>
-          An 8-hour game jam hosted at the Raspberry Pi Foundation's
+          A 12-hour game jam hosted at the Raspberry Pi Foundation's
           headquarters, where young artists, coders and musicians got together
           to make amazing games together, alongside teens in 50+ cities
           worldwide in an event coordinated by Hack Club and locally organised
@@ -88,6 +95,37 @@ import Card1 from "../components/UI_components/card1.astro";
       </div>
     </Card1>
   </Grid1>
+  <Grid2>
+	<Card2>
+		<div class="wrapper">
+			<img src="https://www.raspberrypi.org/assets/components/site/header/foundation-logo-b0f19781e462be54d3371c3da03431bb6dc407fca9f36820d27a7ff4e673406e.svg" style="max-width: 100%; height: auto;" />
+		</div>
+	</Card2>
+	<Card2>
+		<div class="wrapper">
+			<img src="https://www.nandos.co.uk/sites/all/themes/nandos/nandos-2015-styleguide-dist/images/layout/barci.svg" style="max-height: 100%; width: auto;" />
+		</div>
+	</Card2>
+	<Card2>
+		<div class="wrapper">
+			<img src="https://cdn.prod.website-files.com/63bdb69059affa4dff18aac4/63bdc4aa984c7459a757513e_black-logo.png" style="max-height: 100%; width: auto;" />
+		</div>
+	</Card2>
+	<Card2>
+		<div class="wrapper">
+			<img src="https://www.yubico.com/wp-content/themes/yubicool/img/logos/logo.svg" style="max-height: 100%; width: auto;" />
+		</div>
+	</Card2>
+	<Card2>
+		<div class="wrapper" style="background-color: #b44143">
+			<img src="https://images.squarespace-cdn.com/content/v1/58f9da0e9f7456dd4588cfe3/1596709094677-SE8RU9SV26CFM7OZPDBH/aromi-cucina-white.png?format=1500w" style="max-height: 100%; width: auto" />
+		</div>
+	</Card2>
+	<Card2>
+		<div class="wrapper" style="background-color: #000000">
+			<img src="https://s4d-mth-prd-01-fir-uk-ecom-cms-cdne.azureedge.net/ecom-cms/assets/Fire_Away_Logo_7e73d72de3.png" style="max-width: 100%; height: auto;" />
+		</div>
+  </Grid2>
   <style>
     /*
     * {
