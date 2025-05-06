@@ -1,17 +1,21 @@
 ---
 const { image_path = "" } = Astro.props;
+const { text = "" } = Astro.props;
 import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
 ---
 
 <div class="container">
-  <img class="image" src={image_path} style="width: 100%;" />
-  <img class="arrow" src={hero_arrow.src} />
+  <img class="image" src={image_path} />
+  <div class="text_container">
+    <p>{text}</p>
+  </div>
+  <div class="arrow_container"><img class="arrow" src={hero_arrow.src} /></div>
 </div>
 
 <style>
   .container {
     width: 100vw;
-    height: auto;
+    height: 100vh;
 
     position: relative;
     top: 0;
@@ -24,7 +28,7 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
   }
   .arrow {
     position: absolute;
-    bottom: 2em; /* Adjust as needed */
+    /*bottom: 2em; /* Adjust as needed */
     left: 50%;
     transform: translateX(-50%);
     height: 10vh;
@@ -35,9 +39,27 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     width: 100vw;
     position: relative;
     top: -20%;
-    left: 50%;
-    width: 50vw;
+    /*left: 50%;*/
+    width: 100vw;
     align-self: center;
     z-index: 1;
+  }
+
+  .text_container {
+    width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    text-align: center;
+  }
+
+  .text_container p {
+    font-family: "Atkinson Hyperlegible", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    font-size: 10em;
   }
 </style>
