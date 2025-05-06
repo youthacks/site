@@ -1,9 +1,9 @@
 ---
-
+const { text = "" } = Astro.props;
 ---
 
 <html>
-  <h1>Past projects</h1>
+  <h1>{text}</h1>
   <div class="container">
     <slot />
   </div>
@@ -22,6 +22,13 @@
     h1 {
       font-family: "Atkinson Hyperlegible", sans-serif;
       font-weight: 600;
+      font-style: normal;
+      margin-left: 1.5em;
+      margin-top: 4em;
+    }
+    .container :global(p) {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+      font-weight: 400;
       font-style: normal;
       margin-left: 1.5em;
     }
