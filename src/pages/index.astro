@@ -1,6 +1,7 @@
 ---
 // Import default layout
 import Default from "../layouts/default.astro";
+import { Image } from "astro:assets";
 
 // Import images
 import HeroBanner from "../components/shared/hero_banner.astro";
@@ -47,7 +48,7 @@ import UpcomingCard from "../components/UI_components/upcoming_card.astro";
     </div>
     <div class="image">
       <div class="image_container">
-        <img alt="Scrapyard Cambridge Participants" src={ScrapyardCambridge1.src} style="max-width: 100%; height: 100%;" />
+        <Image alt="Scrapyard Cambridge Participants" src={ScrapyardCambridge1} style="max-width: 100%; height: 100%;" />
         <p>Scrapyard Cambridge @ Raspberry Pi Foundation</p>
       </div>
     </div>

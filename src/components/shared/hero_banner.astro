@@ -1,11 +1,12 @@
 ---
 const { image_path = "" } = Astro.props;
 const { text = "" } = Astro.props;
+import { Image } from "astro:assets";
 import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
 ---
 
 <div class="container">
-  <img class="image" src={image_path} />
+  <img class="image" src={image_path} alt="Our banner."/>
   <div class="text_container">
     <p>{text}</p>
   </div>
@@ -29,6 +30,20 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     height: inherit;
     object-fit: cover;
   }
+  @media only screen and (max-width: 900px) {
+    .container {
+      width: 100vw;
+      height: auto;
+      position: relative;
+      top: 0;
+      z-index: -1;
+    }
+    .container .image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
   .arrow {
     position: absolute;
     /*bottom: 2em; /* Adjust as needed */
@@ -37,7 +52,7 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     height: 10vh;
     width: 10vh;
   }
-  
+
   .arrow_container {
     width: 100vw;
     position: relative;
