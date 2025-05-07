@@ -30,20 +30,6 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     height: inherit;
     object-fit: cover;
   }
-  @media only screen and (max-width: 900px) {
-    .container {
-      width: 100vw;
-      height: auto;
-      position: relative;
-      top: 0;
-      z-index: -1;
-    }
-    .container .image {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-  }
   .arrow {
     position: absolute;
     /*bottom: 2em; /* Adjust as needed */
@@ -82,9 +68,9 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
   }
 
   /*MOBILE*/
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 900px) {
     .container {
-      height: 50vh;
+      height: 35vh;
     }
     .container .image {
       width: 100%;
