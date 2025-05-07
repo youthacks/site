@@ -1,13 +1,5 @@
----
-// Create prop for handling navbar title at top of page
-const { navbar_title = "" } = Astro.props;
----
-
 <html>
   <div class="container">
-    <div>
-      <h2>{navbar_title}</h2>
-    </div>
 
     <div class="links">
       <a href="/">Home</a>
@@ -34,7 +26,7 @@ const { navbar_title = "" } = Astro.props;
       align-items: center;
       justify-content: right;
       display: flex;
-      width: 50vw;
+      width: 100vw;
       padding-right: 2em;
     }
     .links a {
@@ -48,6 +40,12 @@ const { navbar_title = "" } = Astro.props;
     }
     .links a:hover {
       text-decoration: underline;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .links {
+        justify-content: center;
+      }
     }
   </style>
 

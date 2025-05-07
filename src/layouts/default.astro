@@ -4,8 +4,7 @@ import Footer from "../components/shared/footer.astro";
 import Head from "../components/shared/head.astro";
 import Navbar from "../components/shared/navbar.astro";
 
-// Create props for handling tab and navbar titles on different pages
-const { navbar_title = "" } = Astro.props;
+// Create props for handling tab titles on different pages
 const { tab_title = "" } = Astro.props;
 ---
 
@@ -16,7 +15,7 @@ const { tab_title = "" } = Astro.props;
   </head>
 
   <body>
-    <Navbar navbar_title={navbar_title} />
+    <Navbar />
     <slot />
     <Footer />
   </body>
