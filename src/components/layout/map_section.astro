@@ -1,0 +1,207 @@
+---
+const { title = "Our Global Presence" } = Astro.props;
+const { locations = [
+  { name: "Cambridge HQ", lat: 52.2053, lng: 0.1218, isMain: true },
+  { name: "Chandigarh", lat: 30.7333, lng: 76.7794, isMain: false },
+  { name: "Tokyo", lat: 35.6762, lng: 139.6503, isMain: false },
+  { name: "São Paulo", lat: -23.5505, lng: -46.6333, isMain: false },
+  { name: "Cape Town", lat: -33.9249, lng: 18.4241, isMain: false },
+  { name: "Sydney", lat: -33.8688, lng: 151.2093, isMain: false },
+  { name: "New York", lat: 40.7128, lng: -74.0060, isMain: false }
+]} = Astro.props;
+const { zoom = 2 } = Astro.props;
+const { mainLocation = "Cambridge, UK" } = Astro.props;
+---
+
+<section class="map-section">
+  <div class="container">
+    <h1>{title}</h1>
+    <div class="map-container">
+      <div id="custom-map"></div>
+      <div class="location-info">
+        <p>YouthHacks is headquartered in {mainLocation}</p>
+        <p>However, our community spans a much wider area!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+
+<script is:inline define:vars={{ locations, zoom }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the map
+    const map = L.map('custom-map').setView([20, 0], zoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    const mainLocation = locations.find(loc => loc.isMain) || locations[0];
+    locations.forEach(location => {
+      const marker = L.marker([location.lat, location.lng]).addTo(map);
+      marker.bindPopup(`<b>${location.name}</b>${location.isMain ? ' (Main HQ)' : ''}`);
+    });
+    locations.forEach(location => {
+      if (!location.isMain && mainLocation) {
+        const latlngs = [];
+        const start = [mainLocation.lat, mainLocation.lng];
+        const end = [location.lat, location.lng];
+        const distance = map.distance(
+          [mainLocation.lat, mainLocation.lng],
+          [location.lat, location.lng]
+        );
+        const marker = L.marker([location.lat, location.lng], {
+            icon: L.divIcon({
+            className: 'custom-pulse-marker',
+            html: `<div class="pulse-circle ${location.isMain ? 'main' : 'branch'}"></div>`,
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            })
+        }).addTo(map);
+        marker.bindPopup(`<b>${location.name}</b>${location.isMain ? ' (Main HQ)' : ''}`);
+
+        const midLat = (start[0] + end[0]) / 2;
+        const midLng = (start[1] + end[1]) / 2;
+        const vx = end[0] - start[0];
+        const vy = end[1] - start[1];
+        const curveFactor = Math.min(0.2, Math.max(0.05, distance / 40000000));
+        const perpX = -vy * curveFactor;
+        const perpY = vx * curveFactor;
+        const ctrlLat = midLat + perpX;
+        const ctrlLng = midLng + perpY;
+        for (let t = 0; t <= 1; t += 0.01) {
+          const lat = Math.pow(1-t, 2) * start[0] + 
+                      2 * (1-t) * t * ctrlLat + 
+                      Math.pow(t, 2) * end[0];
+          const lng = Math.pow(1-t, 2) * start[1] + 
+                      2 * (1-t) * t * ctrlLng + 
+                      Math.pow(t, 2) * end[1];
+          
+          latlngs.push([lat, lng]);
+        }
+        const curvedLine = L.polyline(latlngs, {
+          color: '#000000',
+          weight: 0.8,
+          opacity: 0.7,
+        }).addTo(map);
+      }
+    });
+    const bounds = L.latLngBounds(locations.map(loc => [loc.lat, loc.lng]));
+    map.fitBounds(bounds.pad(0.1));
+  });
+</script>
+
+<style>
+  .map-section {
+    padding: 2rem 0;
+    margin: 4rem 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  h1 {
+    font-family: "Atkinson Hyperlegible", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 1.5rem;
+  }
+  
+  .map-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 8px 8px 36px 0px rgba(0, 0, 0, 0.15);
+  }
+  
+  #custom-map {
+    width: 100%;
+    height: 450px;
+    border: none;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f0f4f9, #ffffff);
+    border-radius: 0 20px 20px 0;
+  }
+  
+  .location-info p {
+    font-family: "Atkinson Hyperlegible", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .main-marker, .branch-marker {
+    background: none;
+    border: none;
+  }
+  
+  
+  
+  .custom-pulse-marker {
+  pointer-events: none;
+}
+
+.pulse-circle {
+  width: 20px;
+  height: 20px;
+  background-color: magenta;
+  border-radius: 50%;
+  position: relative;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 0 0 magenta;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 magenta;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+    box-shadow: 0 0 0 10px magenta;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+    box-shadow: 0 0 0 0 magenta;
+  }
+}
+
+  /* Add a glowing effect to the lines */
+  .glowing-line {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .map-container {
+      grid-template-columns: 1fr;
+    }
+    
+    #custom-map {
+      border-radius: 20px 20px 0 0;
+      height: 350px;
+    }
+    
+    .location-info {
+      border-radius: 0 0 20px 20px;
+    }
+  }
+</style>
