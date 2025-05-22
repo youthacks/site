@@ -1,16 +1,7 @@
 ---
+import locations from "../../assets/sensetive_data/community_locations/locations.json" 
 const { title = "Our Global Presence" } = Astro.props;
-const { locations = [
-  { name: "Cambridge HQ", lat: 52.2053, lng: 0.1218, isMain: true },
-  { name: "Chandigarh", lat: 30.7333, lng: 76.7794, isMain: false },
-  { name: "Tokyo", lat: 35.6762, lng: 139.6503, isMain: false },
-  { name: "São Paulo", lat: -23.5505, lng: -46.6333, isMain: false },
-  { name: "Cape Town", lat: -33.9249, lng: 18.4241, isMain: false },
-  { name: "Sydney", lat: -33.8688, lng: 151.2093, isMain: false },
-  { name: "New York", lat: 40.7128, lng: -74.0060, isMain: false }
-]} = Astro.props;
-const { zoom = 2 } = Astro.props;
-const { mainLocation = "Cambridge, UK" } = Astro.props;
+const { zoom = 2 } = Astro.props; 
 ---
 
 <section class="map-section">
@@ -19,7 +10,7 @@ const { mainLocation = "Cambridge, UK" } = Astro.props;
     <div class="map-container">
       <div id="custom-map"></div>
       <div class="location-info">
-        <p>YouthHacks is based in {mainLocation}</p>
+        <p>YouthHacks is based in Cambridge, UK</p>
         <p>However, our community spans the world!</p>
       </div>
     </div>
@@ -29,7 +20,7 @@ const { mainLocation = "Cambridge, UK" } = Astro.props;
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 
-<script is:inline define:vars={{ locations, zoom }}>
+<script is:inline define:vars={{ locations: locations.data, zoom }}>
   document.addEventListener('DOMContentLoaded', () => {
     // Initialize the map
     const map = L.map('custom-map').setView([20, 0], zoom);
