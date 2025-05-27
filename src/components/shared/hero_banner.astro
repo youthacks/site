@@ -1,11 +1,12 @@
 ---
 const { image_path = "" } = Astro.props;
 const { text = "" } = Astro.props;
+import { Image } from "astro:assets";
 import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
 ---
 
 <div class="container">
-  <img class="image" src={image_path} />
+  <img class="image" src={image_path} alt="Our banner."/>
   <div class="text_container">
     <p>{text}</p>
   </div>
@@ -17,6 +18,9 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     width: 100vw;
     height: 100vh;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
     top: 0;
     z-index: -1;
@@ -44,7 +48,7 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     align-self: center;
     z-index: 1;
   }
-
+  
   .text_container {
     width: 100vw;
     position: absolute;
@@ -54,12 +58,26 @@ import hero_arrow from "../../../public/hero_banners/hero_arrow.svg";
     z-index: 2;
     text-align: center;
   }
-
+  
   .text_container p {
     font-family: "Atkinson Hyperlegible", sans-serif;
-    font-weight: 400;
+    font-weight: 800;
     font-style: normal;
     color: white;
     font-size: 10em;
+  }
+
+  /*MOBILE*/
+  @media only screen and (max-width: 900px) {
+    .container {
+      height: 35vh;
+    }
+    .container .image {
+      width: 100%;
+    }
+
+    .text_container p {
+      font-size: 3em;
+    }
   }
 </style>
