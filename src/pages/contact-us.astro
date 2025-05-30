@@ -1,6 +1,7 @@
 ---
 // Import default layout
 import Default from "../layouts/default.astro";
+import { Image } from "astro:assets";
 
 // Import images
 import HeroBanner from "../components/shared/hero_banner.astro";
@@ -18,19 +19,37 @@ import TextButton from "../components/UI_components/text_button.astro";
 
 <Default>
     <HeroBanner image_path={ScrapyardLondon1.src} text="< Contact Us >" />
-    <TextDescription1>
-        <h1>
-            For Parents
-        </h1>
-        <p>
-            Have a specific query about an event your child wants to go to? <br> Check our "For Parents" page 
-            for more information, or send us an email directly at <a href="mailto:hello@youthacks.org">hello@youthacks.org</a>
-        </p>
-        <p>
-            More information for parents can be found <a href="/for-parents">here</a>
-        </p>
-    </TextDescription1>
-    <TextDescription1>
+    <ImageDescription1>
+        <div class="description">
+            <div class="text_wrapper">
+            <h1>
+                For Parents
+            </h1>
+            <p>
+                Have a specific query about an event your child wants to go to? <br> Check our "For Parents" page 
+                for more information, or send us an email directly at <a href="mailto:hello@youthacks.org">hello@youthacks.org</a>
+            </p>
+            <p>
+                More information for parents can be found <a href="/for-parents">here</a>
+            </p>
+        </div>
+    </div>
+    <div class="image">
+        <div class="image_container">
+          <Image alt="Scrapyard Cambridge Participants" src={ScrapyardCambridge1} style="max-width: 100%; height: 100%;" />
+          
+        </div>
+    </div>
+    </ImageDescription1>
+    <ImageDescription1>
+        <div class="image">
+            <div class="image_container">
+              <Image alt="Scrapyard Cambridge Participants" src={ScrapyardCambridge1} style="max-width: 100%; height: 100%;" />
+              
+            </div>
+        </div>
+        <div class="description">
+            <div class="text_wrapper">
         <h1>
             For Companies
         </h1>
@@ -40,7 +59,9 @@ import TextButton from "../components/UI_components/text_button.astro";
         <p>
             Curious about what your support could do? See our <a href="/events">events page!</a>
         </p>
-    </TextDescription1>
+    </div>
+    </div>
+    </ImageDescription1>
     <TextDescription1>
         <h1>
             Data Protection
