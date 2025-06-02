@@ -1,21 +1,13 @@
 ---
 import Defualt from '../layouts/default.astro';
-import { Image } from "astro:assets";
 import HeroBanner from "../components/shared/hero_banner.astro";
-import HeroBannerImage from "../../public/hero_banners/coolashack1.jpg"; // Bit pixellated I need to go back and get the high res version
-import CoolAsHack1 from "../../public/images/coolashack3.jpg";
-import CoolAsHack2 from "../../public/images/coolashack5.jpg";
-import ImageDescription1 from "../components/layout/image_description_1.astro"
-
+import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.png";
 ---
 
 <Defualt tab_title="Donate - Youthacks">
-    <HeroBanner image_path={HeroBannerImage.src} text="<Support Us>"/>
+    <HeroBanner image_path={HeroBannerImage.src} />
     <section class="donate-page">
         <div class="container">
-        <ImageDescription1>
-        <div class="description">
-        <div class="text_wrapper">
             <h1>Support YouthHacks</h1>
             <p>
                 At YouthHacks, we are dedicated to empowering the next generation of innovators and problem-solvers. Your support helps us provide resources, organize events, and create opportunities for young minds to thrive in the world of technology.
@@ -23,32 +15,13 @@ import ImageDescription1 from "../components/layout/image_description_1.astro"
             <p>
                 Whether you're an individual looking to make a difference or a company interested in sponsoring our initiatives, we welcome your contributions.
             </p>
-        </div>
-        </div>
-        <div class="image">
-            <div class="image_container">
-              <Image alt="Scrapyard Cambridge Participants" src={CoolAsHack1} style="max-width: 100%; height: 100%;" />
-            </div>
-        </div>
-        </ImageDescription1>
-        <ImageDescription1>
-            <div class="image">
-                <div class="image_container">
-                  <Image alt="Scrapyard Cambridge Participants" src={CoolAsHack2} style="max-width: 100%; height: 100%;" />
-                </div>
-            </div>
-            <div class="description">
-            <div class="text_wrapper">
-            <h1>How to Donate or Sponsor</h1>
+            <h2>How to Donate or Sponsor</h2>
             <p>
                 Please reach out to us at <a href="mailto:donate@youthacks.org">donate@youthacks.org</a> to discuss how you can support our mission. Every contribution, big or small, makes a meaningful impact.
             </p>
             <p>
                 Thank you for helping us inspire and empower the next generation of tech leaders!
             </p>
-            </div>
-            </div>
-        </ImageDescription1>
         </div>
     </section>
 
@@ -58,7 +31,7 @@ import ImageDescription1 from "../components/layout/image_description_1.astro"
             text-align: center;
         }
         .donate-page .container {
-            max-width: 95%;
+            max-width: 800px;
             margin: 0 auto;
         }
         .donate-page h1 {

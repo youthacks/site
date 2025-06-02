@@ -8,8 +8,6 @@ import HeroBannerImage from "../../public/hero_banners/sy_london_youthacks_logo.
 import ScrapyardCambridge1 from "../../public/images/scrapyard_cambridge_1.jpg";
 import ScrapyardLondon1 from "../../public/images/scrapyard_london_1.jpg";
 import ScrapyardCambridge2 from "../../public/images/scrapyard_cambridge_2.jpg";
-import Grid1 from "../components/layout/grid1.astro";
-import Card1 from "../components/UI_components/card1.astro";
 import CounterspellCambridge1 from "../../public/images/counterspell_cambridge_1.jpg";
 
 // Import components
@@ -19,12 +17,11 @@ import TextButton from "../components/UI_components/text_button.astro";
 ---
 
 <Default>
-    <HeroBanner image_path={CounterspellCambridge1.src} text="<For Parents>" />
-        <Grid1>
-        <Card1>
-            <h2>
+    <HeroBanner image_path={CounterspellCambridge1.src} text="< For Parents >" />
+        <TextDescription1>
+            <h1>
                 Child Safeguarding
-            </h2>
+            </h1>
             <p>
                 At Youthacks we are committed to ensuring that all young people attending our events are properly
                 safe and protected from harm throughout the event's entire duration.
@@ -34,37 +31,36 @@ import TextButton from "../components/UI_components/text_button.astro";
                 <br>
                 You can find details of our previous successful events on our <a href="/">Home Page</a>.
             </p>
-        </Card1>
-        <Card1>
-            <h2>
+        </TextDescription1>
+        <TextDescription1>
+            <h1>
                 I have a concern about a specific event!
-            </h2>
+            </h1>
             <p>
                 More information about specific events can be found on our <a href="/events">Events Page</a>.
                 Or, if more convenient, send us an email to <a href="mailto:hello@youthacks.org">hello@youthacks.org</a>
                 and we'll be happy to help you!
             </p>
-        </Card1>
-        <Card1>
-            <h2>
+        </TextDescription1>
+        <TextDescription1>
+            <h1>
                 How can I stay up-to-date on what my child is doing during the day?
-            </h2>
+            </h1>
             <p>
                 Our social media accounts are regularly updated throughout events! Feel free to follow us on
                 <a href="https://www.instagram.com/youthacks/">Instagram</a> and
                 <a href="https://www.facebook.com/people/Youthacks/61575504317362/">Facebook</a>.
 
             </p>
-        </Card1>
-        <Card1>
-            <h2>
+        </TextDescription1>
+        <TextDescription1>
+            <h1>
                 Any Questions?
-            </h2>
+            </h1>
             <p>
                 We'd love to hear from you! <br> Feel free to send us an email directly at 
                 <a href="mailto:hello@youthacks.org">hello@youthacks.org</a>, or see our 
                 <a href="/contact-us">Contact Us</a> page for more details on how to get in touch.
             </p>
-        </Card1>
-    </Grid1>
+        </TextDescription1>
 </Default>
