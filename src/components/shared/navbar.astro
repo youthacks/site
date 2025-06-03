@@ -1,6 +1,5 @@
 <html>
   <div class="container">
-
     <div class="links">
       <a href="/">Home</a>
       <a href="/donate">Support</a>
@@ -15,13 +14,16 @@
       height: 10vh;
       position: fixed;
       width: 100%;
-
       align-content: space-between;
+      z-index: 10;
+      transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
     }
+
 
     div {
       width: 50vw;
     }
+    
     .links {
       align-items: center;
       justify-content: right;
@@ -29,15 +31,21 @@
       width: 100vw;
       padding-right: 2em;
     }
+    
+    .links.scrolled a {
+      color: black !important; 
+    }
+
     .links a {
       font-family: "Atkinson Hyperlegible", sans-serif;
       font-weight: 400;
       font-style: normal;
-
       padding-left: 2em;
       text-decoration: none;
       color: white;
+      transition: color 0.3s ease;
     }
+    
     .links a:hover {
       text-decoration: underline;
     }
@@ -49,5 +57,21 @@
     }
   </style>
 
+  <script>
+    document.addEventListener('astro:page-load', function() {
+      const links = document.querySelector('.links');
 
+      function handleScroll() {
+        const hero = window.innerHeight;
+        if (window.scrollY > hero * 0.9) { 
+          links.classList.add('scrolled');
+        } else {
+          links.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+    });
+
+  </script>
 </html>
