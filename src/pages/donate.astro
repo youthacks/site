@@ -1,5 +1,5 @@
 ---
-import Defualt from '../layouts/default.astro';
+import Default from '../layouts/default.astro';
 import { Image } from "astro:assets";
 import HeroBanner from "../components/shared/hero_banner.astro";
 import HeroBannerImage from "../../public/hero_banners/coolashack1.jpg"; 
@@ -9,7 +9,7 @@ import ImageDescription1 from "../components/layout/image_description_1.astro"
 
 ---
 
-<Defualt tab_title="Donate - Youthacks">
+<Default tab_title="Donate - Youthacks">
     <HeroBanner image_path={HeroBannerImage.src} text="<Support Us>"/>
     <section class="donate-page">
         <div class="container">
@@ -49,7 +49,13 @@ import ImageDescription1 from "../components/layout/image_description_1.astro"
             </div>
             </div>
         </ImageDescription1>
+        
         </div>
+        <h1>More Information about Sponsoring</h1>
+        <div class = "container">
+            <embed src= "/sponsor_prospectus.pdf" height = "500vh" width = "100%">
+        </div>
+        
     </section>
 
     <style>
@@ -64,6 +70,9 @@ import ImageDescription1 from "../components/layout/image_description_1.astro"
         .donate-page h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            font-family: "Atkinson Hyperlegible", sans-serif;
+            font-weight: 600;
+            font-style: normal;
         }
         .donate-page p {
             font-size: 1.2rem;
