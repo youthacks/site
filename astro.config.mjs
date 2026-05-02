@@ -81,6 +81,7 @@ export default defineConfig({
       projectId: "77myuhjy",
       dataset: "production",
       studioBasePath: "/studio",
+      studioRouterHistory: "hash",
     }),
     react(),
   ],
