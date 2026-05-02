@@ -13,9 +13,9 @@
   import { expoIn, expoOut } from "svelte/easing";
 
   const NAVBAR_LINKS = [
-    { label: "Events", href: "/events" },
-    { label: "About us", href: "/about" },
-    { label: "Support us", href: "/donate" },
+    { label: "Events", href: "/v1/events" },
+    { label: "About us", href: "/v1/about" },
+    { label: "Support us", href: "/v1/donate" },
     { label: "Contact", href: "#contact" },
   ];
 
@@ -70,7 +70,7 @@
         !showNavBg ? "border-black/10" : "border-transparent",
       ]}
     >
-      <a href="/">
+      <a href="/v1/">
         <img
           src={logo}
           alt=""
@@ -145,7 +145,7 @@
             showNavBg ? "h-18" : "h-20",
           ]}
         >
-          <a href="/">
+          <a href="/v1/">
             <img src={logo} alt="" class="h-7 w-auto" />
             <span class="sr-only">Home</span>
           </a>
