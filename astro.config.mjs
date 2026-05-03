@@ -55,10 +55,10 @@ export default defineConfig({
         ],
       },
       {
-        provider: fontProviders.fontshare(),
-        name: "Satoshi",
+        provider: fontProviders.google(),
+        name: "Instrument Sans",
         cssVariable: "--font-satoshi",
-        weights: ["700", "900"],
+        weights: ["700"],
         subsets: ["latin"],
       },
       {
@@ -81,7 +81,7 @@ export default defineConfig({
       projectId: "77myuhjy",
       dataset: "production",
       studioBasePath: "/studio",
-      studioRouterHistory: "hash",
+      // studioRouterHistory: "hash",
     }),
     react(),
   ],

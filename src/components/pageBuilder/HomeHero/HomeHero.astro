@@ -1,0 +1,57 @@
+---
+import type { HomeHero } from "sanity.types";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "~/components/SanityImage.astro";
+import HomeHeroButton from "./HomeHeroButton.astro";
+
+interface Props {
+  data: HomeHero;
+}
+const { data } = Astro.props;
+---
+
+<div class="relative isolate">
+  {
+    data.image && (
+      <SanityImage
+        src={data.image}
+        widths={[480, 720, 960, 1280, 1600, 1920]}
+        sizes="100vw"
+        class="absolute inset-0 -z-10 size-full object-cover"
+      />
+    )
+  }
+  <div class="bg-linear-to-t from-black/80 text-white">
+    <div class="mx-auto flex max-w-7xl flex-col p-8 pt-96">
+      <h1 class="font-satoshi max-w-3xl text-6xl font-bold text-balance">
+        {
+          (data.title?.[0].children || []).map((child) =>
+            child.marks?.includes("strong") ? (
+              <>
+                <strong class="text-yellow-300">{child.text}</strong>
+              </>
+            ) : (
+              child.text
+            ),
+          )
+        }
+      </h1>
+      {
+        data.description && (
+          <div class="mt-4 max-w-4xl text-xl text-balance">
+            <PortableText value={data.description || []} />
+          </div>
+        )
+      }
+      {
+        data.buttons && (
+          <div class="mt-4 flex gap-4">
+            {data.buttons.map((button) => (
+              <HomeHeroButton data={button} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</div>

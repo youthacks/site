@@ -2,9 +2,6 @@
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
-import { sanityClient } from "sanity:client";
-import { LAYOUT_QUERY } from "~/queries";
-
 import "../styles/global.css";
 
 interface Props {
@@ -12,8 +9,6 @@ interface Props {
   description?: string;
 }
 const { pageTitle, description } = Astro.props;
-
-const result = await sanityClient.fetch(LAYOUT_QUERY);
 ---
 
 <!doctype html>
@@ -24,9 +19,7 @@ const result = await sanityClient.fetch(LAYOUT_QUERY);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>
-      {pageTitle ? `${pageTitle} - ${result?.siteName}` : result?.siteName}
-    </title>
+    <title>{pageTitle ? `${pageTitle} | Youthacks` : "Youthacks"}</title>
     <meta
       name="description"
       content={description ||

@@ -1,1 +1,15 @@
-<p>Hello world!</p>
+---
+import { sanityClient } from "sanity:client";
+import { INDEX_QUERY } from "~/queries";
+import Layout from "~/layouts/Layout.astro";
+import PageBuilder from "~/components/pageBuilder/PageBuilder.astro";
+
+const result = await sanityClient.fetch(INDEX_QUERY);
+if (!result?.indexPage) {
+  return Astro.rewrite("/404");
+}
+---
+
+<Layout pageTitle={result.indexPage.title}>
+  <PageBuilder sections={result.indexPage.sections || []} />
+</Layout>

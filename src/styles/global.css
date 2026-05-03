@@ -34,7 +34,7 @@
     font-feature-settings: "ss03";
   }
 
-  body > * {
+  body * {
     /* set per-element, because letter-spacing uses em units */
     @apply tracking-tight;
   }
@@ -100,4 +100,8 @@
       transform: scale(1);
     }
   }
+}
+
+strong {
+  font-weight: 600;
 }

@@ -1,0 +1,72 @@
+---
+import type { Hero } from "sanity.types";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "~/components/SanityImage.astro";
+
+interface Props {
+  data: Hero;
+}
+const { data } = Astro.props;
+
+const textColor = {
+  red: "text-red-800",
+  yellow: "text-yellow-800",
+  blue: "text-cyan-800",
+  grey: "text-neutral-600",
+}[data.color || "red"];
+---
+
+<div class="mx-auto max-w-7xl p-8 pt-32">
+  <div class="flex items-end gap-8">
+    <div class="min-w-0 flex-1">
+      <p class:list={["mb-2 text-xl font-semibold", textColor]}>
+        {data.subtitle}
+      </p>
+      <h1 class="font-satoshi max-w-3xl text-6xl font-bold text-balance">
+        {
+          (data.title?.[0].children || []).map((child) =>
+            child.marks?.includes("strong") ? (
+              <>
+                <strong class:list={[textColor]}>{child.text}</strong>
+              </>
+            ) : (
+              child.text
+            ),
+          )
+        }
+      </h1>
+      {
+        data.description && (
+          <div class="mt-4 max-w-4xl text-xl">
+            <PortableText value={data.description || []} />
+          </div>
+        )
+      }
+    </div>
+    <div class:list={["grid grid-cols-2 grid-rows-2 gap-2", textColor]}>
+      <div></div>
+      <div class="size-3 rounded-full bg-current/50"></div>
+      <div class="size-3 rounded-full bg-current/50"></div>
+      <div class="size-3 rounded-full bg-current"></div>
+    </div>
+  </div>
+  {
+    data.image && (
+      <div class="relative mt-8">
+        <SanityImage
+          src={data.image}
+          widths={[480, 720, 960, 1280]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          class="h-96 w-full rounded-xl object-cover shadow-sm"
+        />
+        {data.image.caption && (
+          <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
+            <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
+              <p class="text-sm text-white">{data.image.caption}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+</div>
