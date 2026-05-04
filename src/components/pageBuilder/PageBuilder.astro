@@ -2,6 +2,8 @@
 import type { PageBuilder } from "sanity.types";
 import Hero from "./Hero/Hero.astro";
 import HomeHero from "./HomeHero/HomeHero.astro";
+import HomeMission from "./HomeMission/HomeMission.astro";
+import Content from "./Content/Content.astro";
 
 interface Props {
   sections: PageBuilder;
@@ -10,18 +12,29 @@ const { sections } = Astro.props;
 
 const sectionsMap: Record<PageBuilder[number]["_type"], (props: any) => any> = {
   hero: Hero,
+  content: Content,
+
   homeHero: HomeHero,
-}
+  homeMission: HomeMission,
+};
 ---
 
 {
   sections.map((section) => {
     const Component = sectionsMap[section._type];
     if (!Component) {
-      console.error(`Component not found for page builder type ${section._type}`);
-      return <></>
+      console.error(
+        `Component not found for page builder type ${section._type}`,
+      );
+      return null;
     }
 
-    return <Component data={section} />
+    return <Component data={section} />;
   })
 }
+
+<style is:global>
+  [data-transparent] + [data-transparent] {
+    padding-top: 0 !important;
+  }
+</style>

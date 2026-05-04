@@ -1,0 +1,34 @@
+---
+import { PortableText as BasePortableText } from "astro-portabletext";
+import type { PortableTextProps } from "astro-portabletext/types";
+import Link from "./Link.astro";
+import InternalLink from "./InternalLink.astro";
+
+export type Color = "red" | "yellow" | "blue" | "grey" | "white";
+
+interface Props {
+  value: PortableTextProps["value"];
+  color?: Color;
+}
+const { value, color } = Astro.props;
+---
+
+<BasePortableText
+  value={value}
+  components={{
+    mark: {
+      link: Link,
+      internalLink: InternalLink,
+    },
+  }}
+>
+  <fragment slot="mark"
+    >{
+      ({ Component, props, children }: any) => (
+        <Component {...props} color={color}>
+          {children}
+        </Component>
+      )
+    }</fragment
+  >
+</BasePortableText>

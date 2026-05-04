@@ -15,14 +15,62 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity.schema.json
-export type PageBuilder = Array<
+export type PageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "page";
+};
+
+export type ContentBlock = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "script";
+      listItem?: never;
+      markDefs?: Array<
+        | {
+            href?: string;
+            _type: "link";
+            _key: string;
+          }
+        | {
+            reference?: PageReference;
+            _type: "internalLink";
+            _key: string;
+          }
+      >;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
   | ({
       _key: string;
-    } & Hero)
+    } & GalleryBlock)
   | ({
       _key: string;
-    } & HomeHero)
+    } & SponsorGridBlock)
 >;
+
+export type SponsorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sponsor";
+};
+
+export type SponsorGridBlock = {
+  _type: "sponsorGridBlock";
+  pick?: Array<
+    {
+      _key: string;
+    } & SponsorReference
+  >;
+};
 
 export type SanityImageAssetReference = {
   _ref: string;
@@ -31,11 +79,86 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type PageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "page";
+export type GalleryBlock = {
+  _type: "galleryBlock";
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
+export type PageBuilder = Array<
+  | ({
+      _key: string;
+    } & Hero)
+  | ({
+      _key: string;
+    } & Events)
+  | ({
+      _key: string;
+    } & Content)
+  | ({
+      _key: string;
+    } & HomeHero)
+  | ({
+      _key: string;
+    } & HomeMission)
+  | ({
+      _key: string;
+    } & HomeImpact)
+  | ({
+      _key: string;
+    } & HomeEvents)
+  | ({
+      _key: string;
+    } & HomeContent)
+>;
+
+export type HomeContent = {
+  _type: "homeContent";
+  title?: string;
+  content?: ContentBlock;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type HomeEvents = {
+  _type: "homeEvents";
+  title?: string;
+  noOfEvents?: number;
+  viewMore?: string;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type HomeImpact = {
+  _type: "homeImpact";
+  title?: string;
+  statistics?: Array<{
+    number?: string;
+    label?: string;
+    _type: "homeImpactStatistic";
+    _key: string;
+  }>;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type HomeMission = {
+  _type: "homeMission";
+  title?: string;
+  content?: ContentBlock;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  color?: "red" | "yellow" | "blue" | "grey";
 };
 
 export type HomeHero = {
@@ -83,6 +206,17 @@ export type HomeHero = {
     _type: "homeHeroButton";
     _key: string;
   }>;
+};
+
+export type Content = {
+  _type: "content";
+  content?: ContentBlock;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type Events = {
+  _type: "events";
+  color?: "red" | "yellow" | "blue" | "grey";
 };
 
 export type Hero = {
@@ -341,10 +475,20 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | PageBuilder
-  | SanityImageAssetReference
   | PageReference
+  | ContentBlock
+  | SponsorReference
+  | SponsorGridBlock
+  | SanityImageAssetReference
+  | GalleryBlock
+  | PageBuilder
+  | HomeContent
+  | HomeEvents
+  | HomeImpact
+  | HomeMission
   | HomeHero
+  | Content
+  | Events
   | Hero
   | Footer
   | SiteSettings

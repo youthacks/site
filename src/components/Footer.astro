@@ -9,7 +9,7 @@ import SiTiktok from "~/assets/icons/SiTiktok.svg";
 import SiGithub from "~/assets/icons/SiGithub.svg";
 import type { SvgComponent } from "astro/types";
 import SanityImage from "./SanityImage.astro";
-import { PortableText } from "astro-portabletext";
+import PortableText from "~/components/content/PortableText.astro";
 
 const socialIcons: Record<string, SvgComponent> = {
   "facebook.com": SiFacebook,
@@ -93,7 +93,7 @@ const { data } = Astro.props;
     {data.logo && <SanityImage src={data.logo} alt="" class="h-10 w-auto" />}
     <p class="font-heading mt-2 text-xl font-bold">We are makers.</p>
     <div class="mt-2 space-y-2 text-sm text-neutral-500">
-      <PortableText value={data.copyright || []} />
+      <PortableText value={data.copyright || []} color="white" />
     </div>
   </div>
 </footer>
