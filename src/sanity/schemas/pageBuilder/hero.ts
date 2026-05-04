@@ -85,7 +85,7 @@ export default defineType({
 
       return {
         title: titleText,
-        subtitle: "Home Hero",
+        subtitle: "Hero",
         media,
       };
     },

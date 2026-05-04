@@ -1,3 +1,4 @@
+import contentBlocks from "./contentBlock";
 import event from "./event";
 import footer from "./footer";
 import page from "./page";
@@ -11,5 +12,7 @@ export const schemaTypes = [
   page,
   siteSettings,
   footer,
+
   ...pageBuilder,
+  ...contentBlocks,
 ];

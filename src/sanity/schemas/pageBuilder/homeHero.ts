@@ -2,7 +2,6 @@ import {
   defineArrayMember,
   defineField,
   defineType,
-  type PortableTextBlock,
   type PortableTextTextBlock,
 } from "sanity";
 
