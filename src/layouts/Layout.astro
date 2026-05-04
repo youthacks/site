@@ -6,6 +6,7 @@ import { sanityClient } from "sanity:client";
 import { LAYOUT_QUERY } from "~/queries";
 
 import "../styles/global.css";
+import Footer from "~/components/Footer.astro";
 
 interface Props {
   pageTitle?: string;
@@ -47,5 +48,7 @@ const result = await sanityClient.fetch(LAYOUT_QUERY);
   </head>
   <body>
     <slot />
+
+    {result?.footer && <Footer data={result.footer} />}
   </body>
 </html>

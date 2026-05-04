@@ -363,18 +363,19 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: src/components/pageBuilder/HomeHero/queries.ts
-// Variable: HOMEHERO_BUTTON_QUERY
-// Query: *[_type == "page" && _id == $id][0] {slug}
-export type HOMEHERO_BUTTON_QUERY_RESULT = {
+// Source: src/lib/internalLink.ts
+// Variable: INTERNAL_LINK_QUERY
+// Query: *[_type == "page" && _id == $id][0] { slug }
+export type INTERNAL_LINK_QUERY_RESULT = {
   slug: Slug | null;
 } | null;
 
 // Source: src/queries/index.ts
 // Variable: LAYOUT_QUERY
-// Query: *[_type == "siteSettings"][0] { siteName }
+// Query: *[_type == "siteSettings"][0] { siteName, footer }
 export type LAYOUT_QUERY_RESULT = {
   siteName: string | null;
+  footer: Footer | null;
 } | null;
 
 // Source: src/queries/index.ts
@@ -411,8 +412,8 @@ export type PAGE_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "page" && _id == $id][0] {slug}': HOMEHERO_BUTTON_QUERY_RESULT;
-    '*[_type == "siteSettings"][0] { siteName }': LAYOUT_QUERY_RESULT;
+    '*[_type == "page" && _id == $id][0] { slug }': INTERNAL_LINK_QUERY_RESULT;
+    '*[_type == "siteSettings"][0] { siteName, footer }': LAYOUT_QUERY_RESULT;
     '*[_type == "siteSettings"][0] {\n  indexPage->\n}': INDEX_QUERY_RESULT;
     '*[_type == "page" && slug.current == $slug][0]': PAGE_QUERY_RESULT;
   }

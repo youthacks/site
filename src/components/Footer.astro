@@ -1,0 +1,99 @@
+---
+import type { Footer } from "sanity.types";
+import resolveInternalLink from "~/lib/internalLink";
+
+import SiFacebook from "~/assets/icons/SiFacebook.svg";
+import SiX from "~/assets/icons/SiX.svg";
+import SiInstagram from "~/assets/icons/SiInstagram.svg";
+import SiTiktok from "~/assets/icons/SiTiktok.svg";
+import SiGithub from "~/assets/icons/SiGithub.svg";
+import type { SvgComponent } from "astro/types";
+import SanityImage from "./SanityImage.astro";
+import { PortableText } from "astro-portabletext";
+
+const socialIcons: Record<string, SvgComponent> = {
+  "facebook.com": SiFacebook,
+  "twitter.com": SiX,
+  "x.com": SiX,
+  "instagram.com": SiInstagram,
+  "tiktok.com": SiTiktok,
+  "github.com": SiGithub,
+};
+
+interface Props {
+  data: Footer;
+}
+const { data } = Astro.props;
+---
+
+<footer class="bg-neutral-950 text-white">
+  <div class="mx-auto max-w-7xl p-8">
+    <div class="grid grid-cols-3">
+      <div>
+        <h2 class="font-heading text-3xl font-bold">{data.sitemapTitle}</h2>
+        <div class="mt-2 space-y-1">
+          {
+            (data.sitemap || []).map(async (item) => (
+              <a
+                href={await resolveInternalLink(item.link)}
+                class="block max-w-fit text-lg text-neutral-400 underline-offset-2 transition hover:text-white hover:underline"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div>
+        <h2 class="font-heading text-3xl font-bold">{data.socialsTitle}</h2>
+        <div class="mt-2 flex flex-wrap gap-2">
+          {
+            (data.socials || []).map(async (link) => {
+              const Icon =
+                socialIcons[new URL(link).hostname.replace("www.", "")];
+              if (!Icon) return null;
+
+              return (
+                <a
+                  href={link}
+                  target="_blank"
+                  class="grid size-10 place-items-center rounded-full border border-neutral-700 transition hover:border-neutral-600 hover:bg-white/10"
+                >
+                  <Icon class="size-4 text-white" />
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+      <div>
+        <h2 class="font-heading text-3xl font-bold">
+          {data.contactTitle}
+        </h2>
+        <div class="mt-2 space-y-3">
+          {
+            (data.contact || []).map(async (item) => (
+              <div>
+                <p class="text-neutral-400">{item.label}</p>
+                <a
+                  href={`mailto:${item.email}`}
+                  class="block max-w-fit underline-offset-2 hover:underline"
+                >
+                  {item.email}
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-8 border-neutral-900" />
+
+    {data.logo && <SanityImage src={data.logo} alt="" class="h-10 w-auto" />}
+    <p class="font-heading mt-2 text-xl font-bold">We are makers.</p>
+    <div class="mt-2 space-y-2 text-sm text-neutral-500">
+      <PortableText value={data.copyright || []} />
+    </div>
+  </div>
+</footer>
