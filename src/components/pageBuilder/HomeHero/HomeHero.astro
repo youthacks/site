@@ -22,33 +22,42 @@ const { data } = Astro.props;
     )
   }
   <div class="bg-linear-to-t from-black/80 text-white">
-    <div class="mx-auto flex max-w-7xl flex-col p-8 pt-96">
-      <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
+    <div class="mx-auto flex max-w-7xl items-end gap-8 p-8 pt-96">
+      <div class="min-w-0 flex-1">
+        <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
+          {
+            (data.title?.[0].children || []).map((child) =>
+              child.marks?.includes("strong") ? (
+                <>
+                  <strong class="text-yellow-300">{child.text}</strong>
+                </>
+              ) : (
+                child.text
+              ),
+            )
+          }
+        </h1>
         {
-          (data.title?.[0].children || []).map((child) =>
-            child.marks?.includes("strong") ? (
-              <>
-                <strong class="text-yellow-300">{child.text}</strong>
-              </>
-            ) : (
-              child.text
-            ),
+          data.description && (
+            <div class="mt-4 max-w-4xl text-xl text-balance">
+              <PortableText value={data.description || []} />
+            </div>
           )
         }
-      </h1>
+        {
+          data.buttons && (
+            <div class="mt-4 flex gap-4">
+              {data.buttons.map((button) => (
+                <HomeHeroButton data={button} />
+              ))}
+            </div>
+          )
+        }
+      </div>
       {
-        data.description && (
-          <div class="mt-4 max-w-4xl text-xl text-balance">
-            <PortableText value={data.description || []} />
-          </div>
-        )
-      }
-      {
-        data.buttons && (
-          <div class="mt-4 flex gap-4">
-            {data.buttons.map((button) => (
-              <HomeHeroButton data={button} />
-            ))}
+        data.image?.caption && (
+          <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
+            <p class="text-sm text-white">{data.image.caption}</p>
           </div>
         )
       }
