@@ -112,7 +112,7 @@
           </span>
         </button>
 
-        <h3 class="font-satoshi truncate text-3xl font-semibold">Contact us</h3>
+        <h3 class="font-heading truncate text-3xl font-semibold">Contact us</h3>
 
         <ul class="mt-4">
           {#each EMAILS as { label, email }}

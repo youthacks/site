@@ -57,7 +57,7 @@ export default defineConfig({
       {
         provider: fontProviders.google(),
         name: "Instrument Sans",
-        cssVariable: "--font-satoshi",
+        cssVariable: "--font-heading",
         weights: ["700"],
         subsets: ["latin"],
       },

@@ -22,7 +22,7 @@ const textColor = {
       <p class:list={["mb-2 text-xl font-semibold", textColor]}>
         {data.subtitle}
       </p>
-      <h1 class="font-satoshi max-w-3xl text-6xl font-bold text-balance">
+      <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
         {
           (data.title?.[0].children || []).map((child) =>
             child.marks?.includes("strong") ? (

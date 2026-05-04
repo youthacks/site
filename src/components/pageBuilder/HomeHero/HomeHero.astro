@@ -23,7 +23,7 @@ const { data } = Astro.props;
   }
   <div class="bg-linear-to-t from-black/80 text-white">
     <div class="mx-auto flex max-w-7xl flex-col p-8 pt-96">
-      <h1 class="font-satoshi max-w-3xl text-6xl font-bold text-balance">
+      <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
         {
           (data.title?.[0].children || []).map((child) =>
             child.marks?.includes("strong") ? (

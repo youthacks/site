@@ -3,7 +3,7 @@
 
 @theme inline {
   --font-sans: var(--font-sans);
-  --font-satoshi: var(--font-satoshi);
+  --font-heading: var(--font-heading);
   --font-cursive: var(--font-cursive);
 
   --animate-blink: blink 1.5s step-start infinite;
@@ -28,10 +28,7 @@
     /* ss06: single-storey 'a' */
     font-feature-settings: "ss01";
   }
-  .font-satoshi {
-    /* ss01: single-storey 'a' */
-    /* ss03: 't' with tail */
-    font-feature-settings: "ss03";
+  .font-heading {
   }
 
   body * {
