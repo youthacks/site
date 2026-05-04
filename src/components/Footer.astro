@@ -92,8 +92,10 @@ const { data } = Astro.props;
 
     {data.logo && <SanityImage src={data.logo} alt="" class="h-10 w-auto" />}
     <p class="font-heading mt-2 text-xl font-bold">We are makers.</p>
-    <div class="mt-2 space-y-2 text-sm text-neutral-500">
-      <PortableText value={data.copyright || []} color="white" />
-    </div>
+    <PortableText
+      value={data.copyright || []}
+      color="white"
+      class="mt-2 space-y-2 text-sm text-neutral-500"
+    />
   </div>
 </footer>

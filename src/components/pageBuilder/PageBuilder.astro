@@ -4,6 +4,9 @@ import Hero from "./Hero/Hero.astro";
 import HomeHero from "./HomeHero/HomeHero.astro";
 import HomeMission from "./HomeMission/HomeMission.astro";
 import Content from "./Content/Content.astro";
+import HomeImpact from "./HomeImpact/HomeImpact.astro";
+import HomeEvents from "./HomeEvents/HomeEvents.astro";
+import HomeContent from "./HomeContent/HomeContent.astro";
 
 interface Props {
   sections: PageBuilder;
@@ -16,6 +19,9 @@ const sectionsMap: Record<PageBuilder[number]["_type"], (props: any) => any> = {
 
   homeHero: HomeHero,
   homeMission: HomeMission,
+  homeImpact: HomeImpact,
+  homeEvents: HomeEvents,
+  homeContent: HomeContent,
 };
 ---
 

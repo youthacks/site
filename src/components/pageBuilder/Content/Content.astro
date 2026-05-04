@@ -9,7 +9,9 @@ const { data } = Astro.props;
 ---
 
 <div class="mx-auto max-w-7xl p-8" data-transparent>
-  <div class="max-w-4xl space-y-4 text-xl text-neutral-900">
-    <PortableText value={data.content || []} color={data.color} />
-  </div>
+  <PortableText
+    value={data.content || []}
+    color={data.color}
+    class="max-w-4xl space-y-4 text-xl text-neutral-900"
+  />
 </div>

@@ -9,7 +9,6 @@ export default async function resolveInternalLink(
   ref: { _ref: string } | null | undefined,
 ) {
   if (!ref) return "/";
-  console.log(ref);
 
   const result = await sanityClient.fetch(INTERNAL_LINK_QUERY, {
     id: ref._ref,
