@@ -21,6 +21,7 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    /* font-size: clamp(16px, 1.25vw, 20px); */
   }
   body,
   .font-sans {
