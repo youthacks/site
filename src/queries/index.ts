@@ -1,7 +1,7 @@
 import { defineQuery } from "groq";
 
 export const LAYOUT_QUERY = defineQuery(
-  `*[_type == "siteSettings"][0] { siteName, footer }`,
+  `*[_type == "siteSettings"][0] { siteName, navbar, footer }`,
 );
 
 export const INDEX_QUERY = defineQuery(`*[_type == "siteSettings"][0] {

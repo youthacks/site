@@ -535,9 +535,10 @@ export type INTERNAL_LINK_QUERY_RESULT = {
 
 // Source: src/queries/index.ts
 // Variable: LAYOUT_QUERY
-// Query: *[_type == "siteSettings"][0] { siteName, footer }
+// Query: *[_type == "siteSettings"][0] { siteName, navbar, footer }
 export type LAYOUT_QUERY_RESULT = {
   siteName: string | null;
+  navbar: Navbar | null;
   footer: Footer | null;
 } | null;
 
@@ -596,7 +597,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "page" && _id == $id][0] { slug }': INTERNAL_LINK_QUERY_RESULT;
-    '*[_type == "siteSettings"][0] { siteName, footer }': LAYOUT_QUERY_RESULT;
+    '*[_type == "siteSettings"][0] { siteName, navbar, footer }': LAYOUT_QUERY_RESULT;
     '*[_type == "siteSettings"][0] {\n  indexPage->\n}': INDEX_QUERY_RESULT;
     '*[_type == "page" && slug.current == $slug][0]': PAGE_QUERY_RESULT;
     '*[_type == "sponsor"]': SPONSORS_QUERY_RESULT;

@@ -3,12 +3,15 @@ import type { HomeHero } from "sanity.types";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
 import HomeHeroButton from "./HomeHeroButton.astro";
+import Navbar from "~/components/Navbar.astro";
 
 interface Props {
   data: HomeHero;
 }
 const { data } = Astro.props;
 ---
+
+<Navbar color="white" />
 
 <div class="relative isolate">
   {

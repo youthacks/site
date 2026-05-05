@@ -2,6 +2,7 @@
 import type { Hero } from "sanity.types";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
+import Navbar from "~/components/Navbar.astro";
 
 interface Props {
   data: Hero;
@@ -15,6 +16,8 @@ const textColor = {
   grey: "text-neutral-600",
 }[data.color || "red"];
 ---
+
+<Navbar />
 
 <div class="mx-auto max-w-7xl p-8 pt-32" data-transparent>
   <div class="flex items-end gap-8">
