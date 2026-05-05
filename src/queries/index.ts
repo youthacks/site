@@ -11,3 +11,5 @@ export const INDEX_QUERY = defineQuery(`*[_type == "siteSettings"][0] {
 export const PAGE_QUERY = defineQuery(
   `*[_type == "page" && slug.current == $slug][0]`,
 );
+
+export const SPONSORS_QUERY = defineQuery(`*[_type == "sponsor"]`);

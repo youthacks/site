@@ -552,6 +552,26 @@ export type PAGE_QUERY_RESULT = {
   sections?: PageBuilder;
 } | null;
 
+// Source: src/queries/index.ts
+// Variable: SPONSORS_QUERY
+// Query: *[_type == "sponsor"]
+export type SPONSORS_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "sponsor";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  image?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  url?: string;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -560,5 +580,6 @@ declare module "@sanity/client" {
     '*[_type == "siteSettings"][0] { siteName, footer }': LAYOUT_QUERY_RESULT;
     '*[_type == "siteSettings"][0] {\n  indexPage->\n}': INDEX_QUERY_RESULT;
     '*[_type == "page" && slug.current == $slug][0]': PAGE_QUERY_RESULT;
+    '*[_type == "sponsor"]': SPONSORS_QUERY_RESULT;
   }
 }

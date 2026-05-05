@@ -1,0 +1,40 @@
+---
+import type { Props as TypeProps } from "astro-portabletext/types";
+import type { SponsorGridBlock } from "sanity.types";
+import { sanityClient } from "sanity:client";
+import { SPONSORS_QUERY } from "~/queries";
+import SanityImage from "../SanityImage.astro";
+
+interface Props extends TypeProps<SponsorGridBlock> {}
+const { node } = Astro.props as Props;
+
+const result = await sanityClient.fetch(SPONSORS_QUERY);
+const sponsors = result.filter((sponsor) => {
+  if (!node.pick || node.pick.length === 0) return true;
+  return !!node.pick.find((pick) => pick._ref === sponsor._id);
+});
+---
+
+<div class="grid grid-cols-5 border-t border-l border-neutral-300">
+  {
+    sponsors.map((sponsor) => {
+      if (!sponsor.image) return null;
+      return (
+        <div class="pointer-events-none border-r border-b border-inherit">
+          <a
+            href={sponsor.url}
+            title={sponsor.title}
+            target="_blank"
+            class="pointer-events-auto block p-4 ring-neutral-400 transition hover:bg-neutral-50 hover:ring-1"
+          >
+            <SanityImage
+              src={sponsor.image.asset}
+              widths={[200]}
+              class="mx-auto w-full max-w-50"
+            />
+          </a>
+        </div>
+      );
+    })
+  }
+</div>

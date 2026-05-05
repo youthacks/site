@@ -4,6 +4,7 @@ import type { PortableTextProps } from "astro-portabletext/types";
 import Link from "./Link.astro";
 import InternalLink from "./InternalLink.astro";
 import type { HTMLAttributes } from "astro/types";
+import SponsorGrid from "./SponsorGrid.astro";
 
 export type Color = "red" | "yellow" | "blue" | "grey" | "white";
 
@@ -21,6 +22,9 @@ const { value, color, ...props } = Astro.props;
       mark: {
         link: Link,
         internalLink: InternalLink,
+      },
+      type: {
+        sponsorGridBlock: SponsorGrid,
       },
     }}
   >
@@ -41,6 +45,9 @@ const { value, color, ...props } = Astro.props;
   [data-content] {
     h2 {
       @apply font-heading mt-8 text-3xl font-bold;
+    }
+    p {
+      @apply max-w-4xl;
     }
   }
 </style>
