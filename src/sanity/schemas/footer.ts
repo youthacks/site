@@ -104,6 +104,7 @@ export default defineType({
     defineField({
       type: "image",
       name: "logo",
+      validation: (rule) => rule.required(),
       group: "outro",
     }),
     defineField({

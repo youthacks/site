@@ -16,8 +16,14 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      type: "navbar",
+      name: "navbar",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       type: "footer",
       name: "footer",
+      validation: (rule) => rule.required(),
     }),
   ],
 });

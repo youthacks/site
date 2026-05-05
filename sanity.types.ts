@@ -307,6 +307,23 @@ export type Footer = {
   }>;
 };
 
+export type Navbar = {
+  _type: "navbar";
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  links?: Array<{
+    label?: string;
+    link?: PageReference;
+    _type: "navbarLink";
+    _key: string;
+  }>;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -315,6 +332,7 @@ export type SiteSettings = {
   _rev: string;
   siteName?: string;
   indexPage?: PageReference;
+  navbar?: Navbar;
   footer?: Footer;
 };
 
@@ -491,6 +509,7 @@ export type AllSanitySchemaTypes =
   | Events
   | Hero
   | Footer
+  | Navbar
   | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
