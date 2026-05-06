@@ -30,6 +30,11 @@ export default defineType({
     }),
     defineField({
       type: "image",
+      name: "logo",
+      validation: (rule) => rule.required().assetRequired(),
+    }),
+    defineField({
+      type: "image",
       name: "cover",
       validation: (rule) => rule.required().assetRequired(),
     }),

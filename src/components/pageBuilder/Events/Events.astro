@@ -1,0 +1,17 @@
+---
+import type { HomeEvents } from "sanity.types";
+import { sanityClient } from "sanity:client";
+import { EVENTS_QUERY } from "~/queries";
+import EventCard from "./EventCard.astro";
+
+interface Props {
+  data: HomeEvents;
+}
+const { data } = Astro.props;
+
+const events = await sanityClient.fetch(EVENTS_QUERY);
+---
+
+<div class="mx-auto max-w-7xl space-y-4 p-8" data-transparent>
+  {events.map((event) => <EventCard data={event} color={data.color} />)}
+</div>

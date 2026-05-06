@@ -352,6 +352,33 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type Event = {
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  startDate?: string;
+  logo?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  cover?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  sections?: PageBuilder;
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -367,15 +394,6 @@ export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
-};
-
-export type Event = {
-  _id: string;
-  _type: "event";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
 };
 
 export type Sponsor = {
@@ -513,9 +531,9 @@ export type AllSanitySchemaTypes =
   | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
+  | Event
   | Page
   | Slug
-  | Event
   | Sponsor
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -573,6 +591,36 @@ export type PAGE_QUERY_RESULT = {
 } | null;
 
 // Source: src/queries/index.ts
+// Variable: EVENT_PAGE_QUERY
+// Query: *[_type == "event" && slug.current == $slug][0]
+export type EVENT_PAGE_QUERY_RESULT = {
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  startDate?: string;
+  logo?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  cover?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  sections?: PageBuilder;
+} | null;
+
+// Source: src/queries/index.ts
 // Variable: SPONSORS_QUERY
 // Query: *[_type == "sponsor"]
 export type SPONSORS_QUERY_RESULT = Array<{
@@ -592,6 +640,36 @@ export type SPONSORS_QUERY_RESULT = Array<{
   url?: string;
 }>;
 
+// Source: src/queries/index.ts
+// Variable: EVENTS_QUERY
+// Query: *[_type == "event"] | order(startDate desc)
+export type EVENTS_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "event";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+  startDate?: string;
+  logo?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  cover?: {
+    asset: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  sections?: PageBuilder;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -600,6 +678,8 @@ declare module "@sanity/client" {
     '*[_type == "siteSettings"][0] { siteName, navbar, footer }': LAYOUT_QUERY_RESULT;
     '*[_type == "siteSettings"][0] {\n  indexPage->\n}': INDEX_QUERY_RESULT;
     '*[_type == "page" && slug.current == $slug][0]': PAGE_QUERY_RESULT;
+    '*[_type == "event" && slug.current == $slug][0]': EVENT_PAGE_QUERY_RESULT;
     '*[_type == "sponsor"]': SPONSORS_QUERY_RESULT;
+    '*[_type == "event"] | order(startDate desc)': EVENTS_QUERY_RESULT;
   }
 }

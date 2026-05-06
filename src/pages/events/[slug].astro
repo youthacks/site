@@ -1,0 +1,19 @@
+---
+import { sanityClient } from "sanity:client";
+import PageBuilder from "~/components/pageBuilder/PageBuilder.astro";
+import Layout from "~/layouts/Layout.astro";
+import { EVENT_PAGE_QUERY } from "~/queries";
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+
+const result = await sanityClient.fetch(EVENT_PAGE_QUERY, { slug });
+if (!result) {
+  return Astro.rewrite("/404");
+}
+---
+
+<Layout pageTitle={result.title}>
+  <PageBuilder sections={result.sections || []} />
+</Layout>

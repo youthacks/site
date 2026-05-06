@@ -1,0 +1,57 @@
+---
+import type { Event } from "sanity.types";
+import SanityImage from "~/components/SanityImage.astro";
+
+interface Props {
+  data: Event;
+  color?: "red" | "yellow" | "blue" | "grey";
+}
+const { data, color } = Astro.props;
+
+const linkColor = {
+  red: "text-red-800 group-hover:text-red-950",
+  yellow: "text-yellow-800 group-hover:text-yellow-950",
+  blue: "text-cyan-800 group-hover:text-cyan-950",
+  grey: "text-neutral-600 group-hover:text-neutral-800",
+}[color || "red"];
+---
+
+<a
+  href={`/events/${data.slug?.current}`}
+  class="group flex gap-2 overflow-clip rounded-xl border border-neutral-300 bg-white p-2 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100"
+>
+  <div class="min-w-0 flex-1 p-4">
+    {
+      data.logo && (
+        <SanityImage
+          src={data.logo.asset}
+          widths={[360, 540]}
+          class="mb-4 h-16 w-auto drop-shadow-sm"
+        />
+      )
+    }
+    <p class="font-heading text-2xl font-bold">{data.title}</p>
+    <p class="mt-2 text-lg text-pretty text-neutral-900">
+      {data.description}
+    </p>
+    <p
+      class:list={[
+        "mt-2 text-lg font-semibold underline-offset-2 group-hover:underline",
+        linkColor,
+      ]}
+    >
+      Read more →
+    </p>
+  </div>
+  {
+    data.cover && (
+      <div class="w-2/5 min-w-96 flex-none overflow-clip rounded-md contain-size">
+        <SanityImage
+          src={data.cover.asset}
+          widths={[540, 720]}
+          class="size-full object-cover transition duration-500 ease-in-out group-hover:scale-110"
+        />
+      </div>
+    )
+  }
+</a>

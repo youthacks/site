@@ -12,4 +12,12 @@ export const PAGE_QUERY = defineQuery(
   `*[_type == "page" && slug.current == $slug][0]`,
 );
 
+export const EVENT_PAGE_QUERY = defineQuery(
+  `*[_type == "event" && slug.current == $slug][0]`,
+);
+
 export const SPONSORS_QUERY = defineQuery(`*[_type == "sponsor"]`);
+
+export const EVENTS_QUERY = defineQuery(
+  `*[_type == "event"] | order(startDate desc)`,
+);

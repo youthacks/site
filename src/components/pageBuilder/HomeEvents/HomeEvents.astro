@@ -1,10 +1,16 @@
 ---
 import type { HomeEvents } from "sanity.types";
+import { sanityClient } from "sanity:client";
+import SanityImage from "~/components/SanityImage.astro";
+import { EVENTS_QUERY } from "~/queries";
+import EventCard from "../Events/EventCard.astro";
 
 interface Props {
   data: HomeEvents;
 }
 const { data } = Astro.props;
+
+const events = await sanityClient.fetch(EVENTS_QUERY);
 
 const bgColor = {
   red: "bg-red-200",
@@ -19,6 +25,13 @@ const textColor = {
   blue: "text-cyan-800",
   grey: "text-neutral-600",
 }[data.color || "red"];
+
+const linkColor = {
+  red: "text-red-800 hover:text-red-950",
+  yellow: "text-yellow-800 hover:text-yellow-950",
+  blue: "text-cyan-800 hover:text-cyan-950",
+  grey: "text-neutral-600 hover:text-neutral-800",
+}[data.color || "red"];
 ---
 
 <div class={bgColor}>
@@ -26,6 +39,13 @@ const textColor = {
     <div class="flex items-center gap-3">
       <div class:list={["size-7 rounded-full bg-current", textColor]}></div>
       <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
+    </div>
+    <div class="mt-6 space-y-4">
+      {
+        events
+          .slice(0, data.noOfEvents || 3)
+          .map((event) => <EventCard data={event} color={data.color} />)
+      }
     </div>
   </div>
 </div>
