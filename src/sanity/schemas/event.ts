@@ -9,5 +9,45 @@ export default defineType({
       name: "title",
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      type: "slug",
+      name: "slug",
+      options: {
+        source: "title",
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      type: "string",
+      name: "description",
+      description: "A short description",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      type: "date",
+      name: "startDate",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      type: "image",
+      name: "cover",
+      validation: (rule) => rule.required().assetRequired(),
+    }),
+    defineField({
+      type: "pageBuilder",
+      name: "sections",
+    }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      slug: "slug",
+    },
+    prepare({ title, slug }) {
+      return {
+        title,
+        subtitle: `/events/${slug?.current || ""}`,
+      };
+    },
+  },
 });
