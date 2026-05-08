@@ -9,6 +9,13 @@ interface Props {
 }
 const { data } = Astro.props;
 
+const bgColor = {
+  red: "bg-red-200",
+  yellow: "bg-yellow-200",
+  blue: "bg-cyan-200",
+  grey: "bg-neutral-200",
+}[data.color || "red"];
+
 const textColor = {
   red: "text-red-800",
   yellow: "text-yellow-800",
@@ -19,57 +26,64 @@ const textColor = {
 
 <Navbar />
 
-<div class="mx-auto max-w-7xl p-8 pt-32" data-transparent>
-  <div class="flex items-end gap-8">
-    <div class="min-w-0 flex-1">
-      <p class:list={["mb-2 text-xl font-semibold", textColor]}>
-        {data.subtitle}
-      </p>
-      <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
+<div class={bgColor}>
+  <div class="mx-auto max-w-7xl p-8 pt-32">
+    <div class="flex items-end gap-8">
+      <div class="min-w-0 flex-1">
+        <p class:list={["mb-2 text-xl font-semibold", textColor]}>
+          {data.subtitle}
+        </p>
+        <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
+          {
+            (data.title?.[0].children || []).map((child) =>
+              child.marks?.includes("strong") ? (
+                <>
+                  <strong class:list={[textColor]}>{child.text}</strong>
+                </>
+              ) : (
+                child.text
+              ),
+            )
+          }
+        </h1>
         {
-          (data.title?.[0].children || []).map((child) =>
-            child.marks?.includes("strong") ? (
-              <>
-                <strong class:list={[textColor]}>{child.text}</strong>
-              </>
-            ) : (
-              child.text
-            ),
+          data.description && (
+            <div class="mt-4 max-w-4xl text-xl">
+              <PortableText value={data.description || []} />
+            </div>
           )
         }
-      </h1>
-      {
-        data.description && (
-          <div class="mt-4 max-w-4xl text-xl">
-            <PortableText value={data.description || []} />
-          </div>
-        )
-      }
-    </div>
-    <div class:list={["grid grid-cols-2 grid-rows-2 gap-2", textColor]}>
-      <div></div>
-      <div class="size-3 rounded-full bg-current/50"></div>
-      <div class="size-3 rounded-full bg-current/50"></div>
-      <div class="size-3 rounded-full bg-current"></div>
+      </div>
+      <div class:list={["grid grid-cols-2 grid-rows-2 gap-2", textColor]}>
+        <div></div>
+        <div class="size-3 rounded-full bg-current/50"></div>
+        <div class="size-3 rounded-full bg-current/50"></div>
+        <div class="size-3 rounded-full bg-current"></div>
+      </div>
     </div>
   </div>
-  {
-    data.image && (
-      <div class="relative mt-8">
-        <SanityImage
-          src={data.image}
-          widths={[480, 720, 960, 1280]}
-          sizes="(min-width: 1280px) 1280px, 100vw"
-          class="h-96 w-full rounded-xl object-cover shadow-sm"
-        />
-        {data.image.caption && (
-          <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
-            <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
-              <p class="text-sm text-white">{data.image.caption}</p>
-            </div>
-          </div>
-        )}
-      </div>
-    )
-  }
 </div>
+{
+  data.image && (
+    <div class={bgColor}>
+      <div class="mx-auto max-w-7xl px-8">
+        <div class="relative -mb-12">
+          <SanityImage
+            src={data.image}
+            widths={[480, 720, 960, 1280]}
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            class="h-96 w-full rounded-xl object-cover shadow-sm"
+          />
+          {data.image.caption && (
+            <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
+              <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
+                <p class="text-sm text-white">{data.image.caption}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div class="h-12 bg-white" />
+    </div>
+  )
+}
