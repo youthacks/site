@@ -17,61 +17,30 @@ export default defineConfig({
     "/contact-us": "/",
   },
 
-  experimental: {
-    fonts: [
-      {
-        provider: "local",
-        name: "Work Sans",
-        cssVariable: "--font-sans",
-        variants: [
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-Regular.woff2"],
-            weight: "400",
-            style: "normal",
-          },
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-Italic.woff2"],
-            weight: "400",
-            style: "italic",
-          },
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-SemiBold.woff2"],
-            weight: "600",
-            style: "normal",
-          },
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-SemiBoldItalic.woff2"],
-            weight: "600",
-            style: "italic",
-          },
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-Bold.woff2"],
-            weight: "700",
-            style: "normal",
-          },
-          {
-            src: ["./src/assets/fonts/WorkSans/WorkSans-BoldItalic.woff2"],
-            weight: "700",
-            style: "italic",
-          },
-        ],
-      },
-      {
-        provider: fontProviders.google(),
-        name: "Instrument Sans",
-        cssVariable: "--font-heading",
-        weights: ["700"],
-        subsets: ["latin"],
-      },
-      {
-        provider: fontProviders.google(),
-        name: "Homemade Apple",
-        cssVariable: "--font-cursive",
-        weights: ["400"],
-        subsets: ["latin"],
-      },
-    ],
-  },
+  fonts: [
+    {
+      provider: fontProviders.fontshare(),
+      name: "Work Sans",
+      cssVariable: "--font-sans",
+      weights: ["400 700"],
+      styles: ["normal", "italic"],
+      subsets: ["latin"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Instrument Sans",
+      cssVariable: "--font-heading",
+      weights: ["700"],
+      subsets: ["latin"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Homemade Apple",
+      cssVariable: "--font-cursive",
+      weights: ["400"],
+      subsets: ["latin"],
+    },
+  ],
 
   vite: {
     plugins: [tailwindcss()],

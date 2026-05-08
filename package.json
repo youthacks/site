@@ -13,7 +13,7 @@
   "dependencies": {
     "@astrojs/node": "^10.1.0",
     "@astrojs/react": "^5.0.4",
-    "@astrojs/svelte": "^7.2.5",
+    "@astrojs/svelte": "^8.1.0",
     "@sanity/astro": "^3.3.1",
     "@sanity/client": "^7.22.0",
     "@sanity/image-url": "^2.1.1",
@@ -22,7 +22,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@unpic/astro": "^1.0.2",
-    "astro": "^5.16.11",
+    "astro": "^6.3.1",
     "astro-portabletext": "^0.13.0",
     "cva": "1.0.0-beta.4",
     "dayjs": "^1.11.19",
