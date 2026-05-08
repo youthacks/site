@@ -62,28 +62,29 @@ const textColor = {
       </div>
     </div>
   </div>
-</div>
-{
-  data.image && (
-    <div class={bgColor}>
-      <div class="mx-auto max-w-7xl px-8">
-        <div class="relative -mb-12">
-          <SanityImage
-            src={data.image}
-            widths={[480, 720, 960, 1280]}
-            sizes="(min-width: 1280px) 1280px, 100vw"
-            class="h-96 w-full rounded-xl object-cover shadow-sm"
-          />
-          {data.image.caption && (
-            <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
-              <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
-                <p class="text-sm text-white">{data.image.caption}</p>
+
+  {
+    data.image && (
+      <>
+        <div class="mx-auto max-w-7xl px-8">
+          <div class="relative -mb-12">
+            <SanityImage
+              src={data.image}
+              widths={[480, 720, 960, 1280]}
+              sizes="(min-width: 1280px) 1280px, 100vw"
+              class="h-96 w-full rounded-xl object-cover shadow-sm"
+            />
+            {data.image.caption && (
+              <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
+                <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
+                  <p class="text-sm text-white">{data.image.caption}</p>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-      <div class="h-12 bg-white" />
-    </div>
-  )
-}
+        <div class="h-12 bg-white" />
+      </>
+    )
+  }
+</div>
