@@ -11,6 +11,7 @@
     "sanity:typegen": "sanity typegen generate"
   },
   "dependencies": {
+    "@astrojs/node": "^10.1.0",
     "@astrojs/react": "^5.0.4",
     "@astrojs/svelte": "^7.2.5",
     "@sanity/astro": "^3.3.1",

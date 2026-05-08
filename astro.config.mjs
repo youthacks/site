@@ -8,6 +8,8 @@ import svelte from "@astrojs/svelte";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
@@ -85,4 +87,8 @@ export default defineConfig({
     }),
     react(),
   ],
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });
