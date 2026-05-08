@@ -5,6 +5,7 @@ import Link from "./Link.astro";
 import InternalLink from "./InternalLink.astro";
 import type { HTMLAttributes } from "astro/types";
 import SponsorGrid from "./SponsorGrid.astro";
+import Gallery from "./Gallery.astro";
 
 export type Color = "red" | "yellow" | "blue" | "grey" | "white";
 
@@ -25,6 +26,7 @@ const { value, color, ...props } = Astro.props;
       },
       type: {
         sponsorGridBlock: SponsorGrid,
+        galleryBlock: Gallery,
       },
     }}
   >

@@ -1,0 +1,28 @@
+---
+import type { Props as TypeProps } from "astro-portabletext/types";
+import type { GalleryBlock } from "sanity.types";
+import SanityImage from "../SanityImage.astro";
+import GalleryClient from "./GalleryClient.svelte";
+
+interface Props extends TypeProps<GalleryBlock> {}
+const { node } = Astro.props as Props;
+---
+
+<GalleryClient
+  images={(node.images || []).map(({ caption }) => ({ caption }))}
+  client:load
+>
+  <>
+    {
+      (node.images || []).map((image) => (
+        <SanityImage
+          src={image.asset!}
+          alt=""
+          widths={[480, 720, 960, 1280]}
+          sizes="(min-width: 1280px) 1280px, 100vw"
+          class="h-full flex-[0_0_100%] object-contain"
+        />
+      ))
+    }
+  </>
+</GalleryClient>
