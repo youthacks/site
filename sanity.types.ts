@@ -22,39 +22,32 @@ export type PageReference = {
   [internalGroqTypeReferenceTo]?: "page";
 };
 
-export type ContentBlock = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h2" | "script";
-      listItem?: never;
-      markDefs?: Array<
-        | {
-            href?: string;
-            _type: "link";
-            _key: string;
-          }
-        | {
-            reference?: PageReference;
-            _type: "internalLink";
-            _key: string;
-          }
-      >;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | ({
-      _key: string;
-    } & GalleryBlock)
-  | ({
-      _key: string;
-    } & SponsorGridBlock)
->;
+export type ContentBlock = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h2" | "script";
+  listItem?: never;
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  } | {
+    reference?: PageReference;
+    _type: "internalLink";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  _key: string;
+} & GalleryBlock | {
+  _key: string;
+} & SponsorGridBlock>;
 
 export type SponsorReference = {
   _ref: string;
@@ -65,11 +58,9 @@ export type SponsorReference = {
 
 export type SponsorGridBlock = {
   _type: "sponsorGridBlock";
-  pick?: Array<
-    {
-      _key: string;
-    } & SponsorReference
-  >;
+  pick?: Array<{
+    _key: string;
+  } & SponsorReference>;
 };
 
 export type SanityImageAssetReference = {
@@ -92,32 +83,23 @@ export type GalleryBlock = {
   }>;
 };
 
-export type PageBuilder = Array<
-  | ({
-      _key: string;
-    } & Hero)
-  | ({
-      _key: string;
-    } & Events)
-  | ({
-      _key: string;
-    } & Content)
-  | ({
-      _key: string;
-    } & HomeHero)
-  | ({
-      _key: string;
-    } & HomeMission)
-  | ({
-      _key: string;
-    } & HomeImpact)
-  | ({
-      _key: string;
-    } & HomeEvents)
-  | ({
-      _key: string;
-    } & HomeContent)
->;
+export type PageBuilder = Array<{
+  _key: string;
+} & Hero | {
+  _key: string;
+} & Events | {
+  _key: string;
+} & Content | {
+  _key: string;
+} & HomeHero | {
+  _key: string;
+} & HomeMission | {
+  _key: string;
+} & HomeImpact | {
+  _key: string;
+} & HomeEvents | {
+  _key: string;
+} & HomeContent>;
 
 export type HomeContent = {
   _type: "homeContent";
@@ -510,48 +492,16 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes =
-  | PageReference
-  | ContentBlock
-  | SponsorReference
-  | SponsorGridBlock
-  | SanityImageAssetReference
-  | GalleryBlock
-  | PageBuilder
-  | HomeContent
-  | HomeEvents
-  | HomeImpact
-  | HomeMission
-  | HomeHero
-  | Content
-  | Events
-  | Hero
-  | Footer
-  | Navbar
-  | SiteSettings
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Event
-  | Page
-  | Slug
-  | Sponsor
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityImageMetadata
-  | SanityFileAsset
-  | SanityAssetSourceData
-  | SanityImageAsset
-  | Geopoint;
+export type AllSanitySchemaTypes = PageReference | ContentBlock | SponsorReference | SponsorGridBlock | SanityImageAssetReference | GalleryBlock | PageBuilder | HomeContent | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
-// Source: src/lib/internalLink.ts
+// Source: ../src/lib/internalLink.ts
 // Variable: INTERNAL_LINK_QUERY
 // Query: *[_type == "page" && _id == $id][0] { slug }
 export type INTERNAL_LINK_QUERY_RESULT = {
   slug: Slug | null;
 } | null;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: LAYOUT_QUERY
 // Query: *[_type == "siteSettings"][0] { siteName, navbar, footer }
 export type LAYOUT_QUERY_RESULT = {
@@ -560,7 +510,7 @@ export type LAYOUT_QUERY_RESULT = {
   footer: Footer | null;
 } | null;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: INDEX_QUERY
 // Query: *[_type == "siteSettings"][0] {  indexPage->}
 export type INDEX_QUERY_RESULT = {
@@ -576,7 +526,7 @@ export type INDEX_QUERY_RESULT = {
   } | null;
 } | null;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0]
 export type PAGE_QUERY_RESULT = {
@@ -590,7 +540,7 @@ export type PAGE_QUERY_RESULT = {
   sections?: PageBuilder;
 } | null;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: EVENT_PAGE_QUERY
 // Query: *[_type == "event" && slug.current == $slug][0]
 export type EVENT_PAGE_QUERY_RESULT = {
@@ -620,7 +570,7 @@ export type EVENT_PAGE_QUERY_RESULT = {
   sections?: PageBuilder;
 } | null;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: SPONSORS_QUERY
 // Query: *[_type == "sponsor"]
 export type SPONSORS_QUERY_RESULT = Array<{
@@ -640,7 +590,7 @@ export type SPONSORS_QUERY_RESULT = Array<{
   url?: string;
 }>;
 
-// Source: src/queries/index.ts
+// Source: ../src/queries/index.ts
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] | order(startDate desc)
 export type EVENTS_QUERY_RESULT = Array<{
@@ -674,12 +624,13 @@ export type EVENTS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "page" && _id == $id][0] { slug }': INTERNAL_LINK_QUERY_RESULT;
-    '*[_type == "siteSettings"][0] { siteName, navbar, footer }': LAYOUT_QUERY_RESULT;
-    '*[_type == "siteSettings"][0] {\n  indexPage->\n}': INDEX_QUERY_RESULT;
-    '*[_type == "page" && slug.current == $slug][0]': PAGE_QUERY_RESULT;
-    '*[_type == "event" && slug.current == $slug][0]': EVENT_PAGE_QUERY_RESULT;
-    '*[_type == "sponsor"]': SPONSORS_QUERY_RESULT;
-    '*[_type == "event"] | order(startDate desc)': EVENTS_QUERY_RESULT;
+    "*[_type == \"page\" && _id == $id][0] { slug }": INTERNAL_LINK_QUERY_RESULT;
+    "*[_type == \"siteSettings\"][0] { siteName, navbar, footer }": LAYOUT_QUERY_RESULT;
+    "*[_type == \"siteSettings\"][0] {\n  indexPage->\n}": INDEX_QUERY_RESULT;
+    "*[_type == \"page\" && slug.current == $slug][0]": PAGE_QUERY_RESULT;
+    "*[_type == \"event\" && slug.current == $slug][0]": EVENT_PAGE_QUERY_RESULT;
+    "*[_type == \"sponsor\"]": SPONSORS_QUERY_RESULT;
+    "*[_type == \"event\"] | order(startDate desc)": EVENTS_QUERY_RESULT;
   }
 }
+

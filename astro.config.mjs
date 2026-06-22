@@ -6,7 +6,6 @@ import tailwindcss from "@tailwindcss/vite";
 import svelte from "@astrojs/svelte";
 
 import sanity from "@sanity/astro";
-import react from "@astrojs/react";
 
 import node from "@astrojs/node";
 
@@ -51,10 +50,7 @@ export default defineConfig({
     sanity({
       projectId: "77myuhjy",
       dataset: "production",
-      studioBasePath: "/studio",
-      // studioRouterHistory: "hash",
     }),
-    react(),
   ],
 
   adapter: node({
