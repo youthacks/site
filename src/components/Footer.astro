@@ -27,7 +27,7 @@ const { data } = Astro.props;
 ---
 
 <footer class="bg-neutral-950 text-white">
-  <div class="mx-auto max-w-7xl p-8">
+  <div class="mx-auto max-w-7xl p-12">
     <div class="gap-8 space-y-8 *:break-inside-avoid md:columns-2 lg:columns-3">
       <div>
         <h2 class="font-heading text-3xl font-bold">{data.sitemapTitle}</h2>
@@ -88,7 +88,7 @@ const { data } = Astro.props;
       </div>
     </div>
 
-    <hr class="my-8 border-neutral-900" />
+    <hr class="my-12 border-neutral-900" />
 
     {data.logo && <SanityImage src={data.logo} alt="" class="h-10 w-auto" />}
     <p class="font-heading mt-2 text-xl font-bold">We are makers.</p>

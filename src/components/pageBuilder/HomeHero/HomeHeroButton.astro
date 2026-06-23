@@ -11,10 +11,10 @@ const { data } = Astro.props;
 <a
   href={await resolveInternalLink(data.link)}
   class:list={[
-    "flex h-12 items-center rounded-full px-6 text-lg font-semibold text-white",
+    "flex h-12 items-center rounded-full px-6 text-lg font-semibold",
     data.isPrimary
-      ? "bg-red-800 shadow-sm transition hover:bg-red-900"
-      : "border border-white/50 transition hover:bg-white/10",
+      ? "bg-rose-700 text-white shadow-sm transition hover:bg-rose-900"
+      : "border border-black/25 transition hover:border-black/50 hover:bg-black/10",
   ]}
 >
   {data.label} →

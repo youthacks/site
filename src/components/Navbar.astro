@@ -4,11 +4,6 @@ import { LAYOUT_QUERY } from "~/queries";
 import SanityImage from "./SanityImage.astro";
 import resolveInternalLink from "~/lib/internalLink";
 
-interface Props {
-  color?: "black" | "white";
-}
-const { color = "black" } = Astro.props;
-
 const result = await sanityClient.fetch(LAYOUT_QUERY);
 
 const links = await Promise.all(
@@ -22,45 +17,49 @@ const links = await Promise.all(
 );
 ---
 
-<header id="header" class="group fixed inset-x-0 top-0 z-20">
-  <div class="mx-auto max-w-7xl p-2">
-    <div class="relative isolate flex h-18 items-center px-6">
-      <div
-        class="absolute inset-0 -z-10 scale-98 rounded-xl bg-white opacity-0 shadow-xl transition group-data-open:scale-100 group-data-open:opacity-100"
-      >
-      </div>
+<header id="header" class="group fixed inset-x-0 top-0 isolate z-20">
+  <div
+    class="absolute inset-0 -z-10 h-0 bg-white transition-[height,box-shadow] group-data-open:h-full group-data-open:shadow-lg"
+  >
+  </div>
+  <div
+    class="mx-auto flex h-20 max-w-7xl items-center px-12 transition-[height]"
+  >
+    {
+      result?.navbar?.logo && (
+        <a href="/">
+          <SanityImage src={result.navbar.logo} class="h-8" />
+        </a>
+      )
+    }
+    <div class="flex-1"></div>
+    <nav class="flex items-center gap-3">
       {
-        result?.navbar?.logo && (
-          <a href="/">
-            <SanityImage src={result.navbar.logo} class="h-8" />
-          </a>
-        )
+        links.map((link, idx) => (
+          <>
+            {idx > 0 && <span class="text-current/50">/</span>}
+            <a
+              href={link.href}
+              class="text-lg font-semibold underline-offset-2 hover:underline"
+            >
+              {link.label}
+            </a>
+          </>
+        ))
       }
-      <div class="flex-1"></div>
-      <nav
-        class:list={[
-          "flex items-center gap-3",
-          color === "white" &&
-            "-mx-5 rounded-full bg-white px-5 py-2 transition-shadow not-group-data-open:shadow-xl",
-        ]}
-      >
-        {
-          links.map((link, idx) => (
-            <>
-              {idx > 0 && <span class="text-current/50">/</span>}
-              <a
-                href={link.href}
-                class="text-lg font-semibold underline-offset-2 hover:underline"
-              >
-                {link.label}
-              </a>
-            </>
-          ))
-        }
-      </nav>
-    </div>
+    </nav>
   </div>
 </header>
+
+<style>
+  .clip-header {
+    clip-path: inset(0 0 100% 0);
+
+    #header[data-open] & {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+</style>
 
 <script>
   function onScroll() {

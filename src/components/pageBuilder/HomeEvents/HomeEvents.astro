@@ -13,33 +13,16 @@ const { data } = Astro.props;
 const events = await sanityClient.fetch(EVENTS_QUERY);
 
 const bgColor = {
-  red: "bg-red-200",
+  red: "bg-rose-200",
   yellow: "bg-yellow-200",
   blue: "bg-cyan-200",
   grey: "bg-neutral-100",
 }[data.color || "red"];
-
-const textColor = {
-  red: "text-red-800",
-  yellow: "text-yellow-800",
-  blue: "text-cyan-800",
-  grey: "text-neutral-600",
-}[data.color || "red"];
-
-const linkColor = {
-  red: "text-red-800 hover:text-red-950",
-  yellow: "text-yellow-800 hover:text-yellow-950",
-  blue: "text-cyan-800 hover:text-cyan-950",
-  grey: "text-neutral-600 hover:text-neutral-800",
-}[data.color || "red"];
 ---
 
-<div class={bgColor}>
-  <div class="mx-auto max-w-7xl p-8">
-    <div class="flex items-center gap-3">
-      <div class:list={["size-7 rounded-full bg-current", textColor]}></div>
-      <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
-    </div>
+<div class:list={[bgColor, "bg-noise"]}>
+  <div class="mx-auto max-w-7xl p-12">
+    <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
     <div class="mt-6 space-y-4">
       {
         events

@@ -9,9 +9,9 @@ interface Props extends MarkProps<{ href: string }> {
 const { color, node, internal = false } = Astro.props;
 
 const linkColor = {
-  red: "text-red-800 hover:text-red-950",
-  yellow: "text-yellow-800 hover:text-yellow-950",
-  blue: "text-cyan-800 hover:text-cyan-950",
+  red: "text-rose-700 hover:text-rose-900",
+  yellow: "text-yellow-700 hover:text-yellow-900",
+  blue: "text-cyan-700 hover:text-cyan-900",
   grey: "text-neutral-600 hover:text-neutral-800",
   white: "hover:text-white",
 }[color || "red"];
@@ -26,7 +26,7 @@ const label = await Astro.slots.render("default");
 >
   <span class="underline-offset-2 group-hover/link:underline"
     >{label.trim()}</span
-  >
+  >{" "}
   <span
     class:list={[
       "inline-block transition-transform",

@@ -9,7 +9,7 @@ interface Props {
 const { data, color } = Astro.props;
 
 const linkColor = {
-  red: "text-red-800 group-hover:text-red-950",
+  red: "text-rose-800 group-hover:text-rose-950",
   yellow: "text-yellow-800 group-hover:text-yellow-950",
   blue: "text-cyan-800 group-hover:text-cyan-950",
   grey: "text-neutral-600 group-hover:text-neutral-800",
@@ -18,15 +18,26 @@ const linkColor = {
 
 <a
   href={`/events/${data.slug?.current}`}
-  class="group flex gap-2 overflow-clip rounded-xl border border-neutral-300 bg-white p-2 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100"
+  class="group flex gap-6 overflow-clip border border-neutral-300 bg-white p-6 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100"
 >
-  <div class="min-w-0 flex-1 p-4">
+  {
+    data.cover && (
+      <div class="w-2/5 min-w-96 flex-none rotate-1 overflow-clip contain-size group-even:-rotate-1">
+        <SanityImage
+          src={data.cover.asset}
+          widths={[540, 720]}
+          class="size-full object-cover transition duration-500 ease-in-out group-hover:scale-110"
+        />
+      </div>
+    )
+  }
+  <div class="min-w-0 flex-1">
     {
       data.logo && (
         <SanityImage
           src={data.logo.asset}
           widths={[360, 540]}
-          class="mb-4 h-16 w-auto drop-shadow-sm"
+          class="mb-4 h-20 w-auto drop-shadow-sm"
         />
       )
     }
@@ -43,15 +54,4 @@ const linkColor = {
       Read more →
     </p>
   </div>
-  {
-    data.cover && (
-      <div class="w-2/5 min-w-96 flex-none overflow-clip rounded-md contain-size">
-        <SanityImage
-          src={data.cover.asset}
-          widths={[540, 720]}
-          class="size-full object-cover transition duration-500 ease-in-out group-hover:scale-110"
-        />
-      </div>
-    )
-  }
 </a>

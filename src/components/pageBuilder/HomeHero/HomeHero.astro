@@ -5,67 +5,61 @@ import SanityImage from "~/components/SanityImage.astro";
 import HomeHeroButton from "./HomeHeroButton.astro";
 import Navbar from "~/components/Navbar.astro";
 
+import { Image } from "astro:assets";
+import background from "~/assets/images/hero-bg.svg";
+import Scribble from "~/assets/images/hero-scribble.svg";
+
 interface Props {
   data: HomeHero;
 }
 const { data } = Astro.props;
 ---
 
-<Navbar color="white" />
+<Navbar />
 
 <div class="relative isolate">
-  {
-    data.image && (
-      <SanityImage
-        src={data.image}
-        widths={[480, 720, 960, 1280, 1600, 1920]}
-        sizes="100vw"
-        class="absolute inset-0 -z-10 size-full object-cover"
-      />
-    )
-  }
-  <div class="bg-linear-to-t from-black/90 text-white">
-    <div class="mx-auto flex max-w-7xl items-end gap-8 p-8 pt-96">
-      <div class="min-w-0 flex-1">
-        <h1
-          class="font-heading max-w-3xl text-6xl font-bold text-balance text-shadow-sm"
-        >
-          {
-            (data.title?.[0].children || []).map((child) =>
-              child.marks?.includes("strong") ? (
-                <>
-                  <strong class="text-yellow-300">{child.text}</strong>
-                </>
-              ) : (
-                child.text
-              ),
-            )
-          }
-        </h1>
-        {
-          data.description && (
-            <div class="mt-4 max-w-4xl text-xl text-balance text-shadow-sm">
-              <PortableText value={data.description || []} />
-            </div>
-          )
-        }
-        {
-          data.buttons && (
-            <div class="mt-4 flex gap-4">
-              {data.buttons.map((button) => (
-                <HomeHeroButton data={button} />
-              ))}
-            </div>
-          )
-        }
-      </div>
-      {
-        data.image?.caption && (
-          <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
-            <p class="text-sm text-white">{data.image.caption}</p>
-          </div>
-        )
-      }
+  <div class="absolute inset-0 -z-10 mb-12">
+    <Image src={background} alt="" class="size-full object-cover" />
+    <div class="bg-noise absolute inset-0"></div>
+    <div class="absolute inset-0 mx-auto max-w-7xl">
+      <Scribble class="absolute -top-26 -right-34 opacity-50" />
     </div>
+  </div>
+  <div class:list={["mx-auto max-w-7xl p-12 pt-32", data.image && "pb-0"]}>
+    <h1 class="font-heading text-7xl font-bold">
+      We create the
+      <br />
+      <span class="text-rose-700">makers</span> of the future_
+    </h1>
+    {
+      data.description && (
+        <div class="mt-4 max-w-4xl text-xl text-balance">
+          <PortableText value={data.description || []} />
+        </div>
+      )
+    }
+    {
+      data.buttons && (
+        <div class="mt-4 flex gap-4">
+          {data.buttons.map((button) => (
+            <HomeHeroButton data={button} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      data.image && (
+        <div class="-mx-2 mt-12 -rotate-1 space-y-4 bg-white p-4 shadow-md">
+          <SanityImage
+            src={data.image}
+            widths={[480, 720, 960, 1280, 1600, 1920]}
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            class="h-96 w-full object-cover"
+          />
+          <p class="font-cursive text-center text-sm">{data.image.caption}</p>
+        </div>
+      )
+    }
   </div>
 </div>

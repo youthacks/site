@@ -3,6 +3,7 @@ import type { Hero } from "sanity.types";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
 import Navbar from "~/components/Navbar.astro";
+import type { fromRoutingStrategy } from "node_modules/astro/dist/core/app/common";
 
 interface Props {
   data: Hero;
@@ -10,14 +11,14 @@ interface Props {
 const { data } = Astro.props;
 
 const bgColor = {
-  red: "bg-red-200",
+  red: "bg-rose-200",
   yellow: "bg-yellow-200",
   blue: "bg-cyan-200",
   grey: "bg-neutral-200",
 }[data.color || "red"];
 
 const textColor = {
-  red: "text-red-800",
+  red: "text-rose-800",
   yellow: "text-yellow-800",
   blue: "text-cyan-800",
   grey: "text-neutral-600",
@@ -27,7 +28,7 @@ const textColor = {
 <Navbar />
 
 <div class={bgColor}>
-  <div class="mx-auto max-w-7xl p-8 pt-32">
+  <div class="mx-auto max-w-7xl p-12 pt-32">
     <div class="flex items-end gap-8">
       <div class="min-w-0 flex-1">
         <p class:list={["mb-2 text-xl font-semibold", textColor]}>
@@ -66,7 +67,7 @@ const textColor = {
   {
     data.image && (
       <>
-        <div class="mx-auto max-w-7xl px-8">
+        <div class="mx-auto max-w-7xl px-12">
           <div class="relative -mb-12">
             <SanityImage
               src={data.image}

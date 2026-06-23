@@ -38,6 +38,13 @@
   }
 }
 
+@utility bg-noise {
+  background-image: url("/patterns/noise.png");
+  background-size: auto auto;
+  background-position: center;
+  background-repeat: repeat;
+}
+
 /* instead of HeroBackground, you can use this class */
 @utility bg-dots {
   background-image: url("/patterns/dots.svg");

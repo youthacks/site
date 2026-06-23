@@ -6,20 +6,10 @@ interface Props {
   data: HomeMission;
 }
 const { data } = Astro.props;
-
-const textColor = {
-  red: "text-red-800",
-  yellow: "text-yellow-800",
-  blue: "text-cyan-800",
-  grey: "text-neutral-600",
-}[data.color || "red"];
 ---
 
-<div class="mx-auto max-w-7xl p-8" data-transparent>
-  <div class="flex items-center gap-3">
-    <div class:list={["size-7 rounded-full bg-current", textColor]}></div>
-    <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
-  </div>
+<div class="mx-auto max-w-7xl p-12" data-transparent>
+  <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
   <PortableText
     value={data.content || []}
     color={data.color}
