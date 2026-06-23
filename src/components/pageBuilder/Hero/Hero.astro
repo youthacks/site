@@ -3,7 +3,7 @@ import type { Hero } from "sanity.types";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
 import Navbar from "~/components/Navbar.astro";
-import type { fromRoutingStrategy } from "node_modules/astro/dist/core/app/common";
+import Scribble from "~/assets/images/hero-scribble.svg";
 
 interface Props {
   data: Hero;
@@ -27,65 +27,57 @@ const textColor = {
 
 <Navbar />
 
-<div class={bgColor}>
-  <div class="mx-auto max-w-7xl p-12 pt-32">
-    <div class="flex items-end gap-8">
-      <div class="min-w-0 flex-1">
-        <p class:list={["mb-2 text-xl font-semibold", textColor]}>
-          {data.subtitle}
-        </p>
-        <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
-          {
-            (data.title?.[0].children || []).map((child) =>
-              child.marks?.includes("strong") ? (
-                <>
-                  <strong class:list={[textColor]}>{child.text}</strong>
-                </>
-              ) : (
-                child.text
-              ),
-            )
-          }
-        </h1>
-        {
-          data.description && (
-            <div class="mt-4 max-w-4xl text-xl">
-              <PortableText value={data.description || []} />
-            </div>
-          )
-        }
-      </div>
-      <div class:list={["grid grid-cols-2 grid-rows-2 gap-2", textColor]}>
-        <div></div>
-        <div class="size-3 rounded-full bg-current/50"></div>
-        <div class="size-3 rounded-full bg-current/50"></div>
-        <div class="size-3 rounded-full bg-current"></div>
-      </div>
+<div class="relative isolate">
+  <div
+    class:list={[
+      "bg-noise absolute inset-0 -z-10",
+      bgColor,
+      data.image && "mb-12",
+    ]}
+  >
+    <div class="absolute inset-0 mx-auto max-w-7xl">
+      <Scribble class="absolute -top-26 -right-34 opacity-50" />
     </div>
+  </div>
+  <div class="mx-auto max-w-7xl p-12 pt-32">
+    <p class:list={["mb-2 text-xl font-semibold", textColor]}>
+      {data.subtitle}
+    </p>
+    <h1 class="font-heading max-w-3xl text-6xl font-bold text-balance">
+      {
+        (data.title?.[0].children || []).map((child) =>
+          child.marks?.includes("strong") ? (
+            <>
+              <strong class:list={[textColor]}>{child.text}</strong>
+            </>
+          ) : (
+            child.text
+          ),
+        )
+      }
+    </h1>
+    {
+      data.description && (
+        <div class="mt-4 max-w-4xl text-xl">
+          <PortableText value={data.description || []} />
+        </div>
+      )
+    }
   </div>
 
   {
     data.image && (
-      <>
-        <div class="mx-auto max-w-7xl px-12">
-          <div class="relative -mb-12">
-            <SanityImage
-              src={data.image}
-              widths={[480, 720, 960, 1280]}
-              sizes="(min-width: 1280px) 1280px, 100vw"
-              class="h-96 w-full rounded-xl object-cover shadow-sm"
-            />
-            {data.image.caption && (
-              <div class="absolute inset-x-0 bottom-0 flex justify-end px-4 pb-4">
-                <div class="rounded-md border border-white/10 bg-black/60 px-2.5 py-1 backdrop-blur-xs">
-                  <p class="text-sm text-white">{data.image.caption}</p>
-                </div>
-              </div>
-            )}
-          </div>
+      <div class="mx-auto max-w-7xl px-12">
+        <div class="-mx-2 -rotate-1 space-y-4 bg-white p-4 shadow-md">
+          <SanityImage
+            src={data.image}
+            widths={[480, 720, 960, 1280, 1600, 1920]}
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            class="h-96 w-full object-cover"
+          />
+          <p class="font-cursive text-center text-sm">{data.image.caption}</p>
         </div>
-        <div class="h-12 bg-white" />
-      </>
+      </div>
     )
   }
 </div>
