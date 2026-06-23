@@ -13,30 +13,30 @@
   "dependencies": {
     "@astrojs/node": "^10.1.0",
     "@astrojs/svelte": "^8.1.0",
-    "@sanity/astro": "^3.3.1",
-    "@sanity/client": "^7.22.0",
+    "@sanity/astro": "^3.4.1",
+    "@sanity/client": "^7.23.0",
     "@sanity/image-url": "^2.1.1",
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.3.1",
     "@unpic/astro": "^1.0.2",
     "astro": "^6.3.1",
     "astro-portabletext": "^0.13.0",
     "cva": "1.0.0-beta.4",
-    "dayjs": "^1.11.19",
+    "dayjs": "^1.11.21",
     "embla-carousel": "^8.6.0",
-    "groq": "^5.23.0",
-    "motion": "^12.26.2",
-    "svelte": "^5.46.4",
+    "groq": "^6.1.0",
+    "motion": "^12.41.0",
+    "svelte": "^5.56.3",
     "svelte-portal": "^2.2.1",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3"
   },
   "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad",
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
-    "prettier": "^3.8.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "prettier": "^3.8.4",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-svelte": "^3.4.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "sharp": "^0.34.5"
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "sharp": "^0.35.2"
   }
 }
