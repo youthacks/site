@@ -241,6 +241,7 @@ export type Hero = {
     _type: "image";
   };
   color?: "red" | "yellow" | "blue" | "grey";
+  transparent?: boolean;
 };
 
 export type Footer = {

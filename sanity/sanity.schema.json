@@ -1649,6 +1649,13 @@
             ]
           },
           "optional": true
+        },
+        "transparent": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         }
       }
     }

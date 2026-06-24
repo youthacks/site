@@ -28,17 +28,22 @@ const textColor = {
 <Navbar />
 
 <div class="relative isolate">
-  <div
-    class:list={[
-      "bg-noise absolute inset-0 -z-10",
-      bgColor,
-      data.image && "mb-12",
-    ]}
-  >
-    <div class="absolute inset-0 mx-auto max-w-7xl">
-      <Scribble class="absolute -top-26 -right-34 opacity-50" />
-    </div>
-  </div>
+  {
+    !data.transparent && (
+      <div
+        class:list={[
+          "bg-noise absolute inset-0 -z-10",
+          bgColor,
+          data.image && "mb-12",
+        ]}
+      >
+        <div class="absolute inset-0 mx-auto max-w-7xl">
+          <Scribble class="absolute -top-26 -right-34 opacity-50" />
+        </div>
+      </div>
+    )
+  }
+
   <div class="mx-auto max-w-7xl p-12 pt-32">
     <p class:list={["mb-2 text-xl font-semibold", textColor]}>
       {data.subtitle}
@@ -68,7 +73,7 @@ const textColor = {
   {
     data.image && (
       <div class="mx-auto max-w-7xl px-12">
-        <div class="-mx-2 -rotate-1 space-y-4 bg-white p-4 shadow-md">
+        <div class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md">
           <SanityImage
             src={data.image}
             widths={[480, 720, 960, 1280, 1600, 1920]}
