@@ -8,6 +8,7 @@ import HomeImpact from "./HomeImpact/HomeImpact.astro";
 import HomeEvents from "./HomeEvents/HomeEvents.astro";
 import HomeContent from "./HomeContent/HomeContent.astro";
 import Events from "./Events/Events.astro";
+import HomeSupport from "./HomeSupport/HomeSupport.astro";
 
 interface Props {
   sections: PageBuilder;
@@ -23,6 +24,7 @@ const sectionsMap: Record<PageBuilder[number]["_type"], (props: any) => any> = {
   homeMission: HomeMission,
   homeImpact: HomeImpact,
   homeEvents: HomeEvents,
+  homeSupport: HomeSupport,
   homeContent: HomeContent,
 };
 ---

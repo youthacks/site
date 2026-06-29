@@ -99,12 +99,29 @@ export type PageBuilder = Array<{
   _key: string;
 } & HomeEvents | {
   _key: string;
+} & HomeSupport | {
+  _key: string;
 } & HomeContent>;
 
 export type HomeContent = {
   _type: "homeContent";
   title?: string;
   content?: ContentBlock;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type HomeSupport = {
+  _type: "homeSupport";
+  title?: string;
+  content?: ContentBlock;
+  images?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
   color?: "red" | "yellow" | "blue" | "grey";
 };
 
@@ -493,7 +510,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = PageReference | ContentBlock | SponsorReference | SponsorGridBlock | SanityImageAssetReference | GalleryBlock | PageBuilder | HomeContent | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = PageReference | ContentBlock | SponsorReference | SponsorGridBlock | SanityImageAssetReference | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../src/lib/internalLink.ts
 // Variable: INTERNAL_LINK_QUERY
@@ -573,7 +590,7 @@ export type EVENT_PAGE_QUERY_RESULT = {
 
 // Source: ../src/queries/index.ts
 // Variable: SPONSORS_QUERY
-// Query: *[_type == "sponsor"]
+// Query: *[_type == "sponsor"] | order(lower(title) asc)
 export type SPONSORS_QUERY_RESULT = Array<{
   _id: string;
   _type: "sponsor";
@@ -630,7 +647,7 @@ declare module "@sanity/client" {
     "*[_type == \"siteSettings\"][0] {\n  indexPage->\n}": INDEX_QUERY_RESULT;
     "*[_type == \"page\" && slug.current == $slug][0]": PAGE_QUERY_RESULT;
     "*[_type == \"event\" && slug.current == $slug][0]": EVENT_PAGE_QUERY_RESULT;
-    "*[_type == \"sponsor\"]": SPONSORS_QUERY_RESULT;
+    "*[_type == \"sponsor\"] | order(lower(title) asc)": SPONSORS_QUERY_RESULT;
     "*[_type == \"event\"] | order(startDate desc)": EVENTS_QUERY_RESULT;
   }
 }
