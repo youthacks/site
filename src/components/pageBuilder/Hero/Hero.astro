@@ -80,7 +80,9 @@ const textColor = {
             sizes="(max-width: 1280px) 100vw, 1280px"
             class="h-96 w-full object-cover"
           />
-          <p class="font-cursive text-center text-sm">{data.image.caption}</p>
+          {data.image.caption && (
+            <p class="font-cursive text-center text-sm">{data.image.caption}</p>
+          )}
         </div>
       </div>
     )
