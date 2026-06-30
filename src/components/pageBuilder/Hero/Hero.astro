@@ -76,9 +76,10 @@ const textColor = {
         <div class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md">
           <SanityImage
             src={data.image}
-            widths={[480, 720, 960, 1280, 1600, 1920]}
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            width={1280}
+            layout="constrained"
             class="h-96 w-full object-cover"
+            priority
           />
           {data.image.caption && (
             <p class="font-cursive text-center text-sm">{data.image.caption}</p>

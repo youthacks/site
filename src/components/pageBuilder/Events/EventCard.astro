@@ -25,7 +25,9 @@ const linkColor = {
       <div class="w-2/5 min-w-96 flex-none rotate-1 overflow-clip contain-size group-even:-rotate-1">
         <SanityImage
           src={data.cover.asset}
-          widths={[540, 720]}
+          width={540}
+          widths={[360, 540]}
+          sizes="(min-width: 1280px) 540px, 40vw"
           class="size-full object-cover transition duration-500 ease-in-out group-hover:scale-110"
         />
       </div>
@@ -36,7 +38,7 @@ const linkColor = {
       data.logo && (
         <SanityImage
           src={data.logo.asset}
-          widths={[360, 540]}
+          height={80}
           class="mb-4 h-20 w-auto drop-shadow-sm"
         />
       )

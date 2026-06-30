@@ -1,32 +1,32 @@
 ---
-import type {
-  ImageUrlBuilderOptionsWithAliases,
-  SanityImageSource,
-} from "@sanity/image-url";
 import type { HTMLAttributes } from "astro/types";
-import imageBuilder from "~/lib/imageBuilder";
+import type { Merge } from "type-fest";
+import { getSanityImage, type SanityImageTransform } from "~/lib/assets/sanity";
 
-interface Props extends Omit<HTMLAttributes<"img">, "src"> {
-  src: SanityImageSource;
-  priority?: boolean;
-  widths?: number[];
-  opts?: ImageUrlBuilderOptionsWithAliases;
-}
-const { src, priority = false, widths, opts = {}, ...props } = Astro.props;
+interface Props extends Merge<HTMLAttributes<"img">, SanityImageTransform> {}
+const {
+  src,
+  width,
+  widths,
+  sizes,
+  height,
+  quality,
+  format,
+  layout,
+  priority,
+  ...props
+} = Astro.props;
 
-const image = imageBuilder.image(src).withOptions({
-  quality: 80,
-  ...opts,
+const { attributes } = getSanityImage({
+  src,
+  width,
+  widths,
+  sizes,
+  height,
+  quality,
+  format,
+  layout,
 });
 ---
 
-<img
-  {...props}
-  src={image.url()}
-  {...widths && {
-    srcset: widths.map((w) => `${image.width(w).url()} ${w}w`).join(", "),
-  }}
-  {...priority
-    ? { fetchpriority: "high", loading: "eager" }
-    : { loading: "lazy", decoding: "async" }}
-/>
+<img {...props} {...attributes} />
