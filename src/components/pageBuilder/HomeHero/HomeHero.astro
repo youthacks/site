@@ -2,6 +2,7 @@
 import type { HomeHero } from "sanity.types";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
+import HomeHeroTitle from "./HomeHeroTitle.svelte";
 import HomeHeroButton from "./HomeHeroButton.astro";
 import Navbar from "~/components/Navbar.astro";
 
@@ -26,11 +27,7 @@ const { data } = Astro.props;
     </div>
   </div>
   <div class:list={["mx-auto max-w-7xl p-12 pt-32", data.image && "pb-0"]}>
-    <h1 class="font-heading text-7xl font-bold">
-      We create the
-      <br />
-      <span class="text-rose-700">makers</span> of the future_
-    </h1>
+    <HomeHeroTitle client:idle />
     {
       data.description && (
         <div class="mt-4 max-w-4xl text-xl text-balance">

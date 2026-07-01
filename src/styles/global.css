@@ -7,6 +7,8 @@
   --font-cursive: var(--font-cursive);
 
   --animate-blink: blink 1.5s step-start infinite;
+
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 @keyframes blink {
   0%,
