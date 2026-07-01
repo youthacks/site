@@ -15,9 +15,9 @@ const sponsors = result.filter((sponsor) => {
 });
 ---
 
-<div>
+<div class="@container">
   <div
-    class="grid grid-cols-2 border-l border-neutral-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+    class="grid grid-cols-2 border-l border-neutral-300 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-5 @4xl:grid-cols-6"
   >
     <div
       class="border-t border-inherit"
@@ -28,7 +28,7 @@ const sponsors = result.filter((sponsor) => {
     </div>
   </div>
   <div
-    class="grid grid-cols-2 border-l border-neutral-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+    class="grid grid-cols-2 border-l border-neutral-300 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-5 @4xl:grid-cols-6"
   >
     {
       sponsors.map((sponsor) => {
@@ -43,8 +43,8 @@ const sponsors = result.filter((sponsor) => {
             >
               <SanityImage
                 src={sponsor.image.asset}
-                widths={[200]}
-                class="mx-auto w-full max-w-50"
+                height={80}
+                class="mx-auto w-full max-w-40"
               />
             </a>
           </div>
