@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { onMount, type Snippet } from "svelte";
+  import { onMount } from "svelte";
   import EmblaCarousel, { type EmblaCarouselType } from "embla-carousel";
+  import type { SanityImageAssetReference } from "sanity.types";
+  import { getSanityImage } from "~/lib/assets/sanity";
 
-  const {
-    images,
-    children,
-  }: { images: { caption?: string }[]; children?: Snippet } = $props();
+  const { images }: { images: { asset: SanityImageAssetReference }[] } =
+    $props();
 
   let emblaNode: HTMLElement;
   let embla: EmblaCarouselType | null = null;
@@ -15,7 +15,7 @@
   onMount(() => {
     const instance = EmblaCarousel(emblaNode, {
       loop: true,
-      slides: emblaNode.querySelectorAll("img"),
+      slides: emblaNode.querySelectorAll("[data-slide]"),
     });
     embla = instance;
 
@@ -31,45 +31,55 @@
 
 <div
   bind:this={emblaNode}
-  class="relative aspect-video overflow-clip rounded-xl bg-neutral-950 text-base shadow-sm select-none"
+  class="relative aspect-video p-10 pb-20 overflow-clip border border-neutral-300 bg-white bg-noise text-base select-none"
 >
   <div class="flex h-full">
-    {@render children?.()}
-  </div>
-  <div
-    class="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-neutral-950/50 via-transparent p-6 text-white"
-  >
-    <div class="flex items-end gap-4">
+    {#each images as image}
+      {@const { attributes } = getSanityImage({
+        src: image.asset,
+      })}
+
       <div
-        class="flex h-12 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-1 backdrop-blur-sm"
+        class="h-full @container flex justify-center mr-16 group flex-[0_0_100%] relative isolate"
+        data-slide
       >
-        <button
-          onclick={() => embla?.scrollPrev()}
-          class="grid size-10 place-items-center rounded-full transition hover:bg-white/20"
+        <div
+          class="rotate-1 group-even:-rotate-1 h-full w-max max-w-[100cqw] p-4 shadow-md bg-white border border-neutral-300"
         >
-          <span class="text-lg font-semibold">←</span>
-          <span class="sr-only">Previous</span>
-        </button>
-        <p class="tabular-nums">
-          <span class="font-semibold">
-            {index + 1}
-          </span>
-          <span class="">
-            of {images.length}
-          </span>
-        </p>
-        <button
-          onclick={() => embla?.scrollNext()}
-          class="grid size-10 place-items-center rounded-full transition hover:bg-white/20"
-        >
-          <span class="text-lg font-semibold">→</span>
-          <span class="sr-only">Next</span>
-        </button>
+          <img
+            {...attributes}
+            alt=""
+            class="h-full w-max max-w-full object-cover"
+          />
+        </div>
       </div>
-      <div class="flex-1"></div>
-      <p class="-mb-1 text-right text-sm text-current/80">
-        {images[index].caption}
+    {/each}
+  </div>
+  <div class="absolute inset-0 flex flex-col items-center p-3">
+    <div class="flex-1 min-h-0"></div>
+    <div class="flex gap-3 items-center">
+      <button
+        onclick={() => embla?.scrollPrev()}
+        class="grid size-10 border border-neutral-300 place-items-center rounded-full transition hover:bg-neutral-200 bg-neutral-100"
+      >
+        <span class="text-lg font-semibold">←</span>
+        <span class="sr-only">Previous</span>
+      </button>
+      <p class="tabular-nums">
+        <span class="font-semibold">
+          {index + 1}
+        </span>
+        <span class="">
+          of {images.length}
+        </span>
       </p>
+      <button
+        onclick={() => embla?.scrollNext()}
+        class="grid size-10 border border-neutral-300 place-items-center rounded-full transition hover:bg-neutral-200 bg-neutral-100"
+      >
+        <span class="text-lg font-semibold">→</span>
+        <span class="sr-only">Next</span>
+      </button>
     </div>
   </div>
 </div>
