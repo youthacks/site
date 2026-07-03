@@ -73,7 +73,7 @@ export function getTargetDimensions(
   } else if (width && !height) {
     // If we have a width but no height, use width to calculate the height
     height = Math.round(width / aspectRatio);
-  } else {
+  } else if (!width && !height) {
     // If we have neither width or height, use the original image's dimensions
     width = original.width;
     height = original.height;
