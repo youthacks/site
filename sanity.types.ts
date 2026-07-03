@@ -15,6 +15,22 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity.schema.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type Photo = {
+  asset?: SanityImageAssetReference;
+  media?: unknown // Unable to locate the referenced type "photo.media" in schema
+;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
+
 export type PageReference = {
   _ref: string;
   _type: "reference";
@@ -63,13 +79,6 @@ export type SponsorGridBlock = {
   } & SponsorReference>;
 };
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
 export type GalleryBlock = {
   _type: "galleryBlock";
   images?: Array<{
@@ -88,6 +97,8 @@ export type PageBuilder = Array<{
 } & Hero | {
   _key: string;
 } & Events | {
+  _key: string;
+} & Team | {
   _key: string;
 } & Content | {
   _key: string;
@@ -210,6 +221,19 @@ export type HomeHero = {
 export type Content = {
   _type: "content";
   content?: ContentBlock;
+  color?: "red" | "yellow" | "blue" | "grey";
+};
+
+export type Team = {
+  _type: "team";
+  title?: string;
+  members?: Array<{
+    name?: string;
+    role?: string;
+    photo?: Photo;
+    _type: "teamMember";
+    _key: string;
+  }>;
   color?: "red" | "yellow" | "blue" | "grey";
 };
 
@@ -510,7 +534,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = PageReference | ContentBlock | SponsorReference | SponsorGridBlock | SanityImageAssetReference | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = SanityImageAssetReference | Photo | PageReference | ContentBlock | SponsorReference | SponsorGridBlock | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Team | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../src/lib/internalLink.ts
 // Variable: INTERNAL_LINK_QUERY

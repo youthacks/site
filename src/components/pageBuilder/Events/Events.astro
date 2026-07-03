@@ -1,11 +1,11 @@
 ---
-import type { HomeEvents } from "sanity.types";
+import type { Events } from "sanity.types";
 import { sanityClient } from "sanity:client";
 import { EVENTS_QUERY } from "~/queries";
 import EventCard from "./EventCard.astro";
 
 interface Props {
-  data: HomeEvents;
+  data: Events;
 }
 const { data } = Astro.props;
 

@@ -1,0 +1,25 @@
+---
+import type { Team } from "sanity.types";
+import TeamGrid from "./TeamGrid.svelte";
+
+interface Props {
+  data: Team;
+}
+const { data } = Astro.props;
+
+const bgColor = {
+  red: "bg-red-200",
+  yellow: "bg-yellow-200",
+  blue: "bg-cyan-200",
+  grey: "bg-neutral-100",
+}[data.color || "red"];
+---
+
+<div class:list={[bgColor, "bg-noise"]}>
+  <div class="mx-auto max-w-7xl p-12">
+    <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
+    <div class="mt-6">
+      <TeamGrid members={data.members || []} />
+    </div>
+  </div>
+</div>

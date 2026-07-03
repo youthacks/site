@@ -9,15 +9,23 @@ import HomeEvents from "./HomeEvents/HomeEvents.astro";
 import HomeContent from "./HomeContent/HomeContent.astro";
 import Events from "./Events/Events.astro";
 import HomeSupport from "./HomeSupport/HomeSupport.astro";
+import Team from "./Team/Team.astro";
 
 interface Props {
   sections: PageBuilder;
 }
 const { sections } = Astro.props;
 
-const sectionsMap: Record<PageBuilder[number]["_type"], (props: any) => any> = {
+type SectionsMap = {
+  [K in PageBuilder[number]["_type"]]: (props: {
+    data: Extract<PageBuilder[number], { _type: K }>;
+  }) => any;
+};
+
+const sectionsMap: SectionsMap = {
   hero: Hero,
   events: Events,
+  team: Team,
   content: Content,
 
   homeHero: HomeHero,
@@ -31,7 +39,7 @@ const sectionsMap: Record<PageBuilder[number]["_type"], (props: any) => any> = {
 
 {
   sections.map((section) => {
-    const Component = sectionsMap[section._type];
+    const Component = sectionsMap[section._type] as (props: any) => any;
     if (!Component) {
       console.error(
         `Component not found for page builder type ${section._type}`,

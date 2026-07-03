@@ -8,6 +8,7 @@ import homeEvents from './homeEvents'
 import homeContent from './homeContent'
 import events from './events'
 import homeSupport from './homeSupport'
+import team from './team'
 
 const pageBuilder = defineType({
   type: 'array',
@@ -15,6 +16,7 @@ const pageBuilder = defineType({
   of: [
     {type: 'hero'},
     {type: 'events'},
+    {type: 'team'},
     {type: 'content'},
     {type: 'homeHero'},
     {type: 'homeMission'},
@@ -28,6 +30,7 @@ const pageBuilder = defineType({
 export default [
   hero,
   events,
+  team,
   content,
   homeHero,
   homeMission,
