@@ -73,7 +73,7 @@
     {#each words as word, idx}
       <span
         aria-hidden="true"
-        class="w-max"
+        class="w-max block"
         bind:offsetWidth={offsetWidths[idx]}
       >
         {word}
