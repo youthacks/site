@@ -19,7 +19,7 @@ const bgColor = {
   <div class="mx-auto max-w-7xl p-12">
     <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
     <div class="mt-6">
-      <TeamGrid members={data.members || []} />
+      <TeamGrid members={data.members || []} color={data.color} client:load />
     </div>
   </div>
 </div>

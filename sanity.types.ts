@@ -231,6 +231,9 @@ export type Team = {
     name?: string;
     role?: string;
     photo?: Photo;
+    bio?: string;
+    github?: string;
+    website?: string;
     _type: "teamMember";
     _key: string;
   }>;

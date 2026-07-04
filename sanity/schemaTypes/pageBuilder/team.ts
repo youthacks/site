@@ -32,6 +32,20 @@ export default defineType({
               type: 'image',
               name: 'photo',
             }),
+            defineField({
+              type: 'text',
+              name: 'bio',
+              rows: 3,
+            }),
+            defineField({
+              type: 'string',
+              name: 'github',
+              title: 'GitHub Username',
+            }),
+            defineField({
+              type: 'url',
+              name: 'website',
+            }),
           ],
           preview: {
             select: {
