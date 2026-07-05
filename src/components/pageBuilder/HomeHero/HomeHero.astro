@@ -47,7 +47,7 @@ const { data } = Astro.props;
 
     {
       data.image && (
-        <div class="-mx-2 mt-12 -rotate-1 space-y-4 bg-white p-4 shadow-md">
+        <figure class="-mx-2 mt-12 -rotate-1 space-y-4 bg-white p-4 shadow-md">
           <SanityImage
             src={data.image}
             width={1280}
@@ -55,10 +55,10 @@ const { data } = Astro.props;
             class="h-96 w-full object-cover"
             priority
           />
-          <p class="text-center font-serif leading-tight italic">
+          <figcaption class="text-center font-serif leading-tight italic">
             {data.image.caption}
-          </p>
-        </div>
+          </figcaption>
+        </figure>
       )
     }
   </div>

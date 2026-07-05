@@ -73,7 +73,7 @@ const textColor = {
   {
     data.image && (
       <div class="mx-auto max-w-7xl px-12">
-        <div class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md">
+        <figure class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md">
           <SanityImage
             src={data.image}
             width={1280}
@@ -82,11 +82,11 @@ const textColor = {
             priority
           />
           {data.image.caption && (
-            <p class="text-center font-serif leading-tight italic">
+            <figcaption class="text-center font-serif leading-tight italic">
               {data.image.caption}
-            </p>
+            </figcaption>
           )}
-        </div>
+        </figure>
       </div>
     )
   }
