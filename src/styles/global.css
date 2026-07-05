@@ -4,6 +4,7 @@
 @theme inline {
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
+  --font-serif: var(--font-serif);
   --font-cursive: var(--font-cursive);
 
   --animate-blink: blink 1.5s step-start infinite;
@@ -37,6 +38,10 @@
   body * {
     /* set per-element, because letter-spacing uses em units */
     @apply tracking-tight;
+  }
+  .font-serif,
+  .font-serif * {
+    @apply tracking-normal;
   }
 
   img {

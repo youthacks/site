@@ -34,6 +34,14 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
+      name: "Instrument Serif",
+      cssVariable: "--font-serif",
+      weights: ["400"],
+      styles: ["normal", "italic"],
+      subsets: ["latin"],
+    },
+    {
+      provider: fontProviders.google(),
       name: "Homemade Apple",
       cssVariable: "--font-cursive",
       weights: ["400"],
