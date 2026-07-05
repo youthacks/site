@@ -4,7 +4,6 @@ import { PortableText } from "astro-portabletext";
 import SanityImage from "~/components/SanityImage.astro";
 import HomeHeroTitle from "./HomeHeroTitle.svelte";
 import HomeHeroButton from "./HomeHeroButton.astro";
-import Navbar from "~/components/Navbar.astro";
 
 import { Image } from "astro:assets";
 import background from "~/assets/images/hero-bg.svg";
@@ -15,8 +14,6 @@ interface Props {
 }
 const { data } = Astro.props;
 ---
-
-<Navbar />
 
 <div class="relative isolate">
   <div class="absolute inset-0 -z-10 mb-12 overflow-x-clip">

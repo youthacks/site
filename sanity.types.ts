@@ -547,15 +547,6 @@ export type INTERNAL_LINK_QUERY_RESULT = {
 } | null;
 
 // Source: ../src/queries/index.ts
-// Variable: LAYOUT_QUERY
-// Query: *[_type == "siteSettings"][0] { siteName, navbar, footer }
-export type LAYOUT_QUERY_RESULT = {
-  siteName: string | null;
-  navbar: Navbar | null;
-  footer: Footer | null;
-} | null;
-
-// Source: ../src/queries/index.ts
 // Variable: INDEX_QUERY
 // Query: *[_type == "siteSettings"][0] {  indexPage->}
 export type INDEX_QUERY_RESULT = {
@@ -665,17 +656,39 @@ export type EVENTS_QUERY_RESULT = Array<{
   sections?: PageBuilder;
 }>;
 
+// Source: ../src/queries/layout.ts
+// Variable: LAYOUT_QUERY
+// Query: *[_type == "siteSettings"][0] {    siteName,    navbar {      ...,      links[] {        label,        "slug": link->slug.current      }    },    footer  }
+export type LAYOUT_QUERY_RESULT = {
+  siteName: string | null;
+  navbar: {
+    _type: "navbar";
+    logo?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    links: Array<{
+      label: string | null;
+      slug: string | null;
+    }> | null;
+  } | null;
+  footer: Footer | null;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"page\" && _id == $id][0] { slug }": INTERNAL_LINK_QUERY_RESULT;
-    "*[_type == \"siteSettings\"][0] { siteName, navbar, footer }": LAYOUT_QUERY_RESULT;
     "*[_type == \"siteSettings\"][0] {\n  indexPage->\n}": INDEX_QUERY_RESULT;
     "*[_type == \"page\" && slug.current == $slug][0]": PAGE_QUERY_RESULT;
     "*[_type == \"event\" && slug.current == $slug][0]": EVENT_PAGE_QUERY_RESULT;
     "*[_type == \"sponsor\"] | order(lower(title) asc)": SPONSORS_QUERY_RESULT;
     "*[_type == \"event\"] | order(startDate desc)": EVENTS_QUERY_RESULT;
+    "*[_type == \"siteSettings\"][0] {\n    siteName,\n    navbar {\n      ...,\n      links[] {\n        label,\n        \"slug\": link->slug.current\n      }\n    },\n    footer\n  }": LAYOUT_QUERY_RESULT;
   }
 }
 

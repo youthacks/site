@@ -16,7 +16,10 @@ import type { ImageLayout } from "node_modules/astro/dist/assets/types";
 import type { HTMLImgAttributes } from "svelte/elements";
 import imageBuilder from "~/lib/imageBuilder";
 
-type SanityImageSource = SanityAsset | SanityReference | SanityImageObject;
+export type SanityImageSource =
+  | SanityAsset
+  | SanityReference
+  | SanityImageObject;
 
 export type SanityImageTransform = {
   src: SanityImageSource;

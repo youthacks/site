@@ -3,10 +3,12 @@ import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
 import { sanityClient } from "sanity:client";
-import { LAYOUT_QUERY } from "~/queries";
+import { LAYOUT_QUERY } from "~/queries/layout";
 
 import "../styles/global.css";
+import Navbar from "~/components/Navbar.svelte";
 import Footer from "~/components/Footer.astro";
+import resolveInternalLink from "~/lib/internalLink";
 
 interface Props {
   pageTitle?: string;
@@ -48,6 +50,15 @@ const result = await sanityClient.fetch(LAYOUT_QUERY);
       async></script>
   </head>
   <body>
+    <Navbar
+      client:load
+      logo={result?.navbar?.logo}
+      links={(result?.navbar?.links || []).map(({ label, slug }) => ({
+        label,
+        slug,
+      }))}
+    />
+
     <slot />
 
     {result?.footer && <Footer data={result.footer} />}
