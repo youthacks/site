@@ -51,7 +51,7 @@ const { data } = Astro.props;
             src={data.image}
             width={1280}
             layout="constrained"
-            class="h-96 w-full object-cover"
+            class="aspect-3/2 max-h-96 w-full object-cover"
             priority
           />
           <figcaption class="text-center font-serif leading-tight italic">
