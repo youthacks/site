@@ -36,14 +36,14 @@ const sponsors = await sanityClient.fetch(SPONSORS_QUERY);
               title={sponsor.title}
               target="_blank"
               rel="noopener"
-              class="pointer-events-auto w-max flex-none px-2 transition not-focus:not-hover:opacity-50 not-focus:not-hover:grayscale group-has-hover:not-hover:not-focus:opacity-25 group-has-focus:not-focus:not-hover:opacity-25 hover:scale-105 focus:scale-105"
+              class="pointer-events-auto w-max flex-none px-1.5 transition not-focus:not-hover:opacity-50 not-focus:not-hover:grayscale group-has-hover:not-hover:not-focus:opacity-25 group-has-focus:not-focus:not-hover:opacity-25 hover:scale-105 focus:scale-105 md:px-2"
               {...(idx !== 0 ? { tabIndex: -1 } : {})}
             >
               <SanityImage
                 src={sponsor.image!.asset!}
                 alt={sponsor.title}
                 height={80}
-                class="h-20"
+                class="h-16 md:h-20"
               />
             </a>
           ))}
