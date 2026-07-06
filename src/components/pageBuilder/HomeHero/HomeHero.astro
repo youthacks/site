@@ -17,7 +17,12 @@ const { data } = Astro.props;
 
 <div class="relative isolate">
   <div class="absolute inset-0 -z-10 mb-12 overflow-x-clip">
-    <Image src={background} alt="" class="size-full object-cover" />
+    <Image
+      src={background}
+      alt=""
+      class="size-full bg-rose-200 object-cover"
+      priority
+    />
     <div class="absolute inset-0 bg-noise"></div>
     <div class="absolute inset-0 mx-auto max-w-7xl overflow-y-clip">
       <Scribble class="absolute -top-26 -right-34 opacity-50" />
