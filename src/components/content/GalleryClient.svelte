@@ -31,9 +31,9 @@
 
 <div
   bind:this={emblaNode}
-  class="relative aspect-video p-6 md:p-10 md:pb-20 pb-16 overflow-clip border border-neutral-300 bg-white bg-noise text-base select-none"
+  class="relative w-full p-6 md:p-10 pb-20! overflow-clip border border-neutral-300 bg-white bg-noise text-base select-none"
 >
-  <div class="flex h-full">
+  <div class="flex w-full aspect-video max-md:aspect-3/2 max-md:max-h-80">
     {#each images as image}
       {@const { attributes } = getSanityImage({
         src: image.asset,
@@ -44,7 +44,7 @@
         data-slide
       >
         <div
-          class="rotate-1 group-even:-rotate-1 h-full w-max max-w-[100cqw] p-4 shadow-md bg-white border border-neutral-300"
+          class="rotate-1 group-even:-rotate-1 h-full w-max max-w-[100cqw] p-3 md:p-4 shadow-md bg-white border border-neutral-300"
         >
           <img
             {...attributes}
