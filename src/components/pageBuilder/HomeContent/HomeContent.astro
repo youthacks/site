@@ -8,11 +8,11 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<div class="mx-auto max-w-7xl p-12" data-transparent>
+<div class="mx-auto max-w-7xl p-8 md:p-12" data-transparent>
   <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
   <PortableText
     value={data.content || []}
     color={data.color}
-    class="mt-4 space-y-4 text-xl text-neutral-900"
+    class="mt-4 space-y-4 text-lg text-neutral-900 md:text-xl"
   />
 </div>

@@ -45,7 +45,7 @@
     ]}
   ></div>
   <div
-    class="mx-auto flex h-20 max-w-7xl items-center px-12 transition-[height]"
+    class="mx-auto flex h-20 max-w-7xl items-center px-8 md:px-12 transition-[height]"
   >
     {#if logo}
       {@const { attributes } = getSanityImage({
@@ -94,7 +94,7 @@
     out:wipe={{ easing: expoIn }}
     class="fixed top-0 inset-x-0 h-auto z-20 max-h-full bg-white"
   >
-    <div class="h-20 flex px-12 items-center">
+    <div class="h-20 flex px-8 items-center">
       {#if logo}
         {@const { attributes } = getSanityImage({
           src: logo,
@@ -116,7 +116,7 @@
         <span class="sr-only">Close navigation</span>
       </button>
     </div>
-    <nav class="p-8 px-12 pt-0">
+    <nav class="p-8 pt-0">
       <hr class="mb-8 border-neutral-200" />
       <div class="space-y-2">
         {#each links as link}

@@ -13,12 +13,12 @@ const { data } = Astro.props;
 const sponsors = await sanityClient.fetch(SPONSORS_QUERY);
 ---
 
-<div class="mx-auto max-w-7xl overflow-clip p-12 pb-0">
-  <h2 class="font-heading text-4xl font-bold">{data.title}</h2>
+<div class="mx-auto max-w-7xl overflow-clip p-8 pb-0! md:p-12">
+  <h2 class="font-heading text-3xl font-bold md:text-4xl">{data.title}</h2>
   <PortableText
     value={data.content || []}
     color={data.color}
-    class="mt-4 space-y-4 text-xl text-neutral-900"
+    class="mt-4 space-y-4 text-lg text-neutral-900 md:text-xl"
   />
   <div
     class="mask-marquee group mt-6 flex overflow-hidden py-2"

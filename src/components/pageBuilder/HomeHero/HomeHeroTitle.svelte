@@ -50,7 +50,7 @@
   });
 </script>
 
-<h1 class="font-heading text-6xl lg:text-7xl font-bold">
+<h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold">
   We create the
   <br />
   <span
@@ -67,7 +67,8 @@
       </span>
     {/key}
   </span>
-  of the future_
+  of <br class="sm:hidden" />
+  the future_
 
   <span class="absolute top-0 left-0 size-0 overflow-clip invisible">
     {#each words as word, idx}

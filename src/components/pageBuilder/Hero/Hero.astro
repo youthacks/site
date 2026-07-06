@@ -41,11 +41,13 @@ const textColor = {
     )
   }
 
-  <div class="mx-auto max-w-7xl p-12 pt-32">
-    <p class:list={["mb-2 text-xl font-semibold", textColor]}>
+  <div class="mx-auto max-w-7xl p-8 pt-32! md:p-12">
+    <p class:list={["mb-2 text-lg font-semibold md:text-xl", textColor]}>
       {data.subtitle}
     </p>
-    <h1 class="max-w-3xl font-heading text-6xl font-bold text-balance">
+    <h1
+      class="max-w-3xl font-heading text-5xl font-bold text-balance md:text-6xl"
+    >
       {
         (data.title?.[0].children || []).map((child) =>
           child.marks?.includes("strong") ? (
@@ -60,7 +62,7 @@ const textColor = {
     </h1>
     {
       data.description && (
-        <div class="mt-4 max-w-4xl text-xl">
+        <div class="mt-4 max-w-4xl text-lg leading-snug md:text-xl">
           <PortableText value={data.description || []} />
         </div>
       )
@@ -69,7 +71,7 @@ const textColor = {
 
   {
     data.image && (
-      <div class="mx-auto max-w-7xl px-12">
+      <div class="mx-auto max-w-7xl px-8 md:px-12">
         <figure class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md">
           <SanityImage
             src={data.image}

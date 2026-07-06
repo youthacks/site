@@ -12,6 +12,6 @@ const { data } = Astro.props;
 const events = await sanityClient.fetch(EVENTS_QUERY);
 ---
 
-<div class="mx-auto max-w-7xl space-y-4 p-8" data-transparent>
+<div class="mx-auto max-w-7xl space-y-4 p-8 md:p-12" data-transparent>
   {events.map((event) => <EventCard data={event} color={data.color} />)}
 </div>

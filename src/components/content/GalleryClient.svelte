@@ -31,7 +31,7 @@
 
 <div
   bind:this={emblaNode}
-  class="relative aspect-video p-10 pb-20 overflow-clip border border-neutral-300 bg-white bg-noise text-base select-none"
+  class="relative aspect-video p-6 md:p-10 md:pb-20 pb-16 overflow-clip border border-neutral-300 bg-white bg-noise text-base select-none"
 >
   <div class="flex h-full">
     {#each images as image}
