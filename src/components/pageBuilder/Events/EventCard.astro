@@ -1,6 +1,7 @@
 ---
 import type { Event } from "sanity.types";
 import SanityImage from "~/components/SanityImage.astro";
+import Stamp from "~/assets/stamp.svg";
 
 interface Props {
   data: Event;
@@ -18,8 +19,9 @@ const linkColor = {
 
 <a
   href={`/events/${data.slug?.current}`}
-  class="group flex gap-6 overflow-clip border border-neutral-300 bg-white p-6 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100 max-lg:flex-col"
+  class="group relative flex gap-6 overflow-clip border border-neutral-300 bg-white p-6 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100 max-lg:flex-col"
 >
+  <Stamp class:list={["absolute top-6 right-6 h-7", linkColor]} />
   {
     data.cover && (
       <div class="flex-none rotate-1 overflow-clip group-even:-rotate-1 max-lg:order-last max-lg:aspect-3/2 max-lg:max-h-64 lg:w-2/5 lg:min-w-96 lg:contain-size">
