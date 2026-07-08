@@ -9,6 +9,8 @@ import sanity from "@sanity/astro";
 
 import node from "@astrojs/node";
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
@@ -61,7 +63,7 @@ export default defineConfig({
     }),
   ],
 
-  adapter: node({
-    mode: "standalone",
+  adapter: cloudflare({
+    imageService: "compile",
   }),
 });

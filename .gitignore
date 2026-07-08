@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # unlighthouse
 .unlighthouse/
+
+# cloudflare
+.wrangler/
