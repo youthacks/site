@@ -6,7 +6,7 @@ import HomeHeroTitle from "./HomeHeroTitle.svelte";
 import HomeHeroButton from "./HomeHeroButton.astro";
 
 import { Image } from "astro:assets";
-import background from "~/assets/images/hero-bg.svg";
+import Background from "~/assets/images/hero-bg.svg";
 import Scribble from "~/assets/images/hero-scribble.svg";
 
 interface Props {
@@ -17,12 +17,7 @@ const { data } = Astro.props;
 
 <div class="relative isolate">
   <div class="absolute inset-0 -z-10 mb-12 overflow-x-clip">
-    <Image
-      src={background}
-      alt=""
-      class="size-full bg-rose-200 object-cover"
-      priority
-    />
+    <Background class="size-full" preserveAspectRatio="xMidYMid slice" />
     <div class="absolute inset-0 bg-noise"></div>
     <div class="absolute inset-0 mx-auto max-w-7xl overflow-y-clip">
       <Scribble class="absolute -top-26 -right-34 opacity-50" />
