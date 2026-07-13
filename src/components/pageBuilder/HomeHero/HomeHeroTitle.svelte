@@ -14,12 +14,15 @@
       duration?: number;
       easing?: (t: number) => number;
     } = {},
+    options: { direction: 'in' | 'out' | 'both' }
   ): TransitionConfig {
+    if(options.direction === "both") throw new Error("Direction not specified");
+
     return {
       delay: params.delay || 0,
       duration: params.duration || 500,
       easing: params.easing || expoInOut,
-      css: (t, u) => `clip-path: inset(0 ${u * 100}% 0 0)`,
+      css: (t, u) => options.direction === "in" ? `clip-path: inset(0 ${u * 100}% 0 0)` : `clip-path: inset(0 0 0 ${u * 100}%)`,
     };
   }
 
