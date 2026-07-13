@@ -52,6 +52,7 @@ const result = await sanityClient.fetch(LAYOUT_QUERY);
   <body>
     <Navbar
       client:load
+      transition:persist
       logo={result?.navbar?.logo}
       links={(result?.navbar?.links || []).map(({ label, slug }) => ({
         label,

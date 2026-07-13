@@ -102,7 +102,10 @@
           height: 32,
           priority: true,
         })}
-        <a href="/">
+        <a
+          href="/"
+          onclick={() => (mobileMenuOpenUser = false)}
+        >
           <img {...attributes} class="h-8" />
           <span class="sr-only">Home</span>
         </a>
@@ -123,6 +126,7 @@
         {#each links as link}
           <a
             href={"/" + (link.slug || "")}
+            onclick={() => (mobileMenuOpenUser = false)}
             class="text-3xl font-heading block max-w-fit font-semibold underline-offset-2 hover:underline"
           >
             {link.label}
