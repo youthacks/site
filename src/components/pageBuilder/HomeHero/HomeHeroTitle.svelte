@@ -6,6 +6,9 @@
   const words = ["makers", "builders", "dreamers", "innovators"];
   let offsetWidths = $state<number[]>([]);
   let index = $state(0);
+  let hasTransitioned = $state(false);
+
+  let mounted = $derived(offsetWidths.length > 0)
 
   function wipe(
     node: HTMLElement,
@@ -39,6 +42,7 @@
       if (delta > 5000) {
         index = (index + 1) % words.length;
         delta = 0;
+        hasTransitioned = true;
       }
 
       lastTime = time;
@@ -58,7 +62,7 @@
   <br />
   <span
     class="text-rose-700 inline-grid items-center justify-items-start transition-[width] ease-in-out-expo duration-750 delay-250"
-    style:width={offsetWidths[index] + "px"}
+    class:w-0={mounted}
   >
     {#key index}
       <span
@@ -70,8 +74,12 @@
       </span>
     {/key}
   </span>
-  of <br class="sm:hidden" />
-  the future_
+  <span class={["inline-block", hasTransitioned && "transition-transform ease-in-out-expo duration-750 delay-250"]} style:translate={offsetWidths[index] + "px"}>
+    of
+    <span class="max-sm:hidden">the future_</span>
+  </span>
+  <br class="sm:hidden" />
+  <span class="sm:hidden">the future_</span>
 
   <span class="absolute top-0 left-0 size-0 overflow-clip invisible">
     {#each words as word, idx}
