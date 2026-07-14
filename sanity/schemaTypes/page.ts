@@ -21,6 +21,11 @@ export default defineType({
       type: "pageBuilder",
       name: "sections",
     }),
+    defineField({
+      type: "seo",
+      name: "seo",
+      title: "SEO",
+    }),
   ],
   preview: {
     select: {

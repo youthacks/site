@@ -288,6 +288,19 @@ export type Hero = {
   transparent?: boolean;
 };
 
+export type Seo = {
+  _type: "seo";
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  noIndex?: boolean;
+};
+
 export type Footer = {
   _type: "footer";
   sitemapTitle?: string;
@@ -337,7 +350,7 @@ export type Footer = {
 export type Navbar = {
   _type: "navbar";
   logo?: {
-    asset?: SanityImageAssetReference;
+    asset: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -361,6 +374,16 @@ export type SiteSettings = {
   indexPage?: PageReference;
   navbar?: Navbar;
   footer?: Footer;
+  globalSeo?: {
+    description?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  };
 };
 
 export type SanityImageCrop = {
@@ -404,6 +427,7 @@ export type Event = {
     _type: "image";
   };
   sections?: PageBuilder;
+  seo?: Seo;
 };
 
 export type Page = {
@@ -415,6 +439,7 @@ export type Page = {
   title?: string;
   slug?: Slug;
   sections?: PageBuilder;
+  seo?: Seo;
 };
 
 export type Slug = {
@@ -537,7 +562,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImageAssetReference | Photo | PageReference | ContentBlock | SponsorReference | SponsorGridBlock | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Team | Events | Hero | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = SanityImageAssetReference | Photo | PageReference | ContentBlock | SponsorReference | SponsorGridBlock | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Team | Events | Hero | Seo | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../src/lib/internalLink.ts
 // Variable: INTERNAL_LINK_QUERY
@@ -559,6 +584,7 @@ export type INDEX_QUERY_RESULT = {
     title?: string;
     slug?: Slug;
     sections?: PageBuilder;
+    seo?: Seo;
   } | null;
 } | null;
 
@@ -574,6 +600,7 @@ export type PAGE_QUERY_RESULT = {
   title?: string;
   slug?: Slug;
   sections?: PageBuilder;
+  seo?: Seo;
 } | null;
 
 // Source: ../src/queries/index.ts
@@ -604,6 +631,7 @@ export type EVENT_PAGE_QUERY_RESULT = {
     _type: "image";
   };
   sections?: PageBuilder;
+  seo?: Seo;
 } | null;
 
 // Source: ../src/queries/index.ts
@@ -654,6 +682,7 @@ export type EVENTS_QUERY_RESULT = Array<{
     _type: "image";
   };
   sections?: PageBuilder;
+  seo?: Seo;
 }>;
 
 // Source: ../src/queries/layout.ts
@@ -664,7 +693,7 @@ export type LAYOUT_QUERY_RESULT = {
   navbar: {
     _type: "navbar";
     logo?: {
-      asset?: SanityImageAssetReference;
+      asset: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;

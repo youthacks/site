@@ -1,5 +1,4 @@
 import {
-  ALL_FIELDS_GROUP,
   defineArrayMember,
   defineField,
   defineType,
@@ -13,7 +12,7 @@ export default defineType({
     defineField({
       type: "image",
       name: "logo",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().assetRequired(),
     }),
 
     defineField({
