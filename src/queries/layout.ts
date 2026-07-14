@@ -10,6 +10,7 @@ export const LAYOUT_QUERY = defineQuery(
         "slug": link->slug.current
       }
     },
-    footer
+    footer,
+    globalSeo
   }`,
 );

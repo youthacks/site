@@ -687,7 +687,7 @@ export type EVENTS_QUERY_RESULT = Array<{
 
 // Source: ../src/queries/layout.ts
 // Variable: LAYOUT_QUERY
-// Query: *[_type == "siteSettings"][0] {    siteName,    navbar {      ...,      links[] {        label,        "slug": link->slug.current      }    },    footer  }
+// Query: *[_type == "siteSettings"][0] {    siteName,    navbar {      ...,      links[] {        label,        "slug": link->slug.current      }    },    footer,    globalSeo  }
 export type LAYOUT_QUERY_RESULT = {
   siteName: string | null;
   navbar: {
@@ -705,6 +705,16 @@ export type LAYOUT_QUERY_RESULT = {
     }> | null;
   } | null;
   footer: Footer | null;
+  globalSeo: {
+    description?: string;
+    image?: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
 } | null;
 
 // Query TypeMap
@@ -717,7 +727,7 @@ declare module "@sanity/client" {
     "*[_type == \"event\" && slug.current == $slug][0]": EVENT_PAGE_QUERY_RESULT;
     "*[_type == \"sponsor\"] | order(lower(title) asc)": SPONSORS_QUERY_RESULT;
     "*[_type == \"event\"] | order(startDate desc)": EVENTS_QUERY_RESULT;
-    "*[_type == \"siteSettings\"][0] {\n    siteName,\n    navbar {\n      ...,\n      links[] {\n        label,\n        \"slug\": link->slug.current\n      }\n    },\n    footer\n  }": LAYOUT_QUERY_RESULT;
+    "*[_type == \"siteSettings\"][0] {\n    siteName,\n    navbar {\n      ...,\n      links[] {\n        label,\n        \"slug\": link->slug.current\n      }\n    },\n    footer,\n    globalSeo\n  }": LAYOUT_QUERY_RESULT;
   }
 }
 

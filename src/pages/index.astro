@@ -10,6 +10,6 @@ if (!result?.indexPage) {
 }
 ---
 
-<Layout pageTitle={result.indexPage.title}>
+<Layout title={result.indexPage.title} seo={result.indexPage.seo}>
   <PageBuilder sections={result.indexPage.sections || []} />
 </Layout>
