@@ -19,6 +19,7 @@ export default defineType({
     defineField({
       type: "image",
       name: "image",
+      description: "1200x630, appears in social media previews.",
     }),
     defineField({
       type: "boolean",
