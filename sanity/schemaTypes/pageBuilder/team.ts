@@ -1,4 +1,5 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { UserIcon } from '@sanity/icons/User'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
   type: 'object',
@@ -17,6 +18,7 @@ export default defineType({
         defineArrayMember({
           type: 'object',
           name: 'teamMember',
+          icon: UserIcon,
           fields: [
             defineField({
               type: 'string',

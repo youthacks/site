@@ -1,8 +1,10 @@
+import {ThLargeIcon} from '@sanity/icons/ThLarge'
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
   type: "object",
   name: "sponsorGridBlock",
+  icon: ThLargeIcon,
   fields: [
     defineField({
       type: "array",

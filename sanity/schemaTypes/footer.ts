@@ -1,3 +1,4 @@
+import { LinkIcon } from '@sanity/icons/Link'
 import {
   ALL_FIELDS_GROUP,
   defineArrayMember,
@@ -31,6 +32,7 @@ export default defineType({
         defineArrayMember({
           type: "object",
           name: "footerLink",
+          icon: LinkIcon,
           fields: [
             defineField({
               type: "string",

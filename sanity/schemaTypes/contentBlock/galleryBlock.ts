@@ -1,8 +1,10 @@
+import {ImagesIcon} from '@sanity/icons/Images'
 import { defineArrayMember, defineField, defineType } from "sanity";
 
 export default defineType({
   type: "object",
   name: "galleryBlock",
+  icon: ImagesIcon,
   validation: (rule) => rule.required(),
   fields: [
     defineField({

@@ -1,7 +1,8 @@
-import {visionTool} from '@sanity/vision'
-import {defineConfig} from 'sanity'
-import {type StructureBuilder, structureTool} from 'sanity/structure'
-import {schemaTypes} from './schemaTypes'
+import { CogIcon } from '@sanity/icons/Cog'
+import { visionTool } from '@sanity/vision'
+import { defineConfig } from 'sanity'
+import { type StructureBuilder, structureTool } from 'sanity/structure'
+import { schemaTypes } from './schemaTypes'
 
 const singletonTypes = new Set(['siteSettings'])
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
@@ -30,7 +31,7 @@ export default defineConfig({
               (listItem) => !singletonTypes.has(listItem.getId()!),
             ),
             S.divider(),
-            singletonListItem(S, 'siteSettings', 'Site Settings'),
+            singletonListItem(S, 'siteSettings', 'Site Settings').icon(CogIcon),
           ]),
     }),
     visionTool(),
