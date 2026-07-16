@@ -1,10 +1,11 @@
 import { CogIcon } from '@sanity/icons/Cog'
+import { UnknownIcon } from '@sanity/icons/Unknown'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { type StructureBuilder, structureTool } from 'sanity/structure'
 import { schemaTypes } from './schemaTypes'
 
-const singletonTypes = new Set(['siteSettings'])
+const singletonTypes = new Set(['siteSettings', 'notFoundPage'])
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 
 const singletonListItem = (S: StructureBuilder, typeName: string, title?: string) =>
@@ -32,6 +33,7 @@ export default defineConfig({
             ),
             S.divider(),
             singletonListItem(S, 'siteSettings', 'Site Settings').icon(CogIcon),
+            singletonListItem(S, 'notFoundPage', 'Not Found Page').icon(UnknownIcon),
           ]),
     }),
     visionTool(),

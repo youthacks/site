@@ -1,0 +1,70 @@
+---
+import { sanityClient } from "sanity:client";
+import PortableText from "~/components/content/PortableText.astro";
+import SanityImage from "~/components/SanityImage.astro";
+import Layout from "~/layouts/Layout.astro";
+import { NOT_FOUND_QUERY } from "~/queries/notFound";
+
+export const prerender = false;
+
+const result = await sanityClient.fetch(NOT_FOUND_QUERY);
+---
+
+<Layout title={"Not Found"}>
+  <div class="mx-auto max-w-7xl p-8 pt-32! md:p-12">
+    <p
+      data-part="subtitle"
+      class="mb-2 text-lg font-semibold text-rose-700 md:text-xl"
+    >
+      {result?.subtitle}
+    </p>
+    <h1
+      class="max-w-3xl font-heading text-5xl font-bold text-balance md:text-6xl"
+    >
+      {result?.title}
+    </h1>
+
+    {
+      result?.description && (
+        <div class="mt-4 max-w-4xl">
+          <PortableText
+            value={result.description || []}
+            class="space-y-4 text-lg text-neutral-900 md:text-xl"
+          />
+        </div>
+      )
+    }
+    <a
+      href="/"
+      class:list={[
+        "mt-4 flex h-10 max-w-fit items-center rounded-full px-5 font-semibold sm:h-12 sm:px-6 sm:text-lg",
+        "bg-rose-700 text-white shadow-sm transition hover:bg-rose-900",
+      ]}
+    >
+      {result?.backButtonLabel} →
+    </a>
+  </div>
+  {
+    result?.image && (
+      <div class="mx-auto max-w-7xl p-8 pt-0! md:p-12">
+        <figure
+          data-part="figure"
+          class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md"
+        >
+          <SanityImage
+            src={result.image}
+            width={1280}
+            layout="constrained"
+            class="aspect-3/2 max-h-96 w-full object-cover"
+            priority
+          />
+          {result.image.caption && (
+            <figcaption class="text-center font-serif leading-tight italic">
+              {result.image.caption}
+            </figcaption>
+          )}
+        </figure>
+      </div>
+    )
+  }
+</Layout>

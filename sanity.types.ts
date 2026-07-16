@@ -364,6 +364,55 @@ export type Navbar = {
   }>;
 };
 
+export type NotFoundPage = {
+  _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  subtitle?: string;
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  backButtonLabel?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "image";
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type SiteSettings = {
   _id: string;
   _type: "siteSettings";
@@ -384,22 +433,6 @@ export type SiteSettings = {
       _type: "image";
     };
   };
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Event = {
@@ -562,7 +595,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImageAssetReference | Photo | PageReference | ContentBlock | SponsorReference | SponsorGridBlock | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Team | Events | Hero | Seo | Footer | Navbar | SiteSettings | SanityImageCrop | SanityImageHotspot | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = SanityImageAssetReference | Photo | PageReference | ContentBlock | SponsorReference | SponsorGridBlock | GalleryBlock | PageBuilder | HomeContent | HomeSupport | HomeEvents | HomeImpact | HomeMission | HomeHero | Content | Team | Events | Hero | Seo | Footer | Navbar | NotFoundPage | SanityImageCrop | SanityImageHotspot | SiteSettings | Event | Page | Slug | Sponsor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../src/lib/internalLink.ts
 // Variable: INTERNAL_LINK_QUERY
@@ -717,6 +750,42 @@ export type LAYOUT_QUERY_RESULT = {
   } | null;
 } | null;
 
+// Source: ../src/queries/notFound.ts
+// Variable: NOT_FOUND_QUERY
+// Query: *[_type == "notFoundPage"][0]
+export type NOT_FOUND_QUERY_RESULT = {
+  _id: string;
+  _type: "notFoundPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  subtitle?: string;
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  backButtonLabel?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    caption?: string;
+    _type: "image";
+  };
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -728,6 +797,7 @@ declare module "@sanity/client" {
     "*[_type == \"sponsor\"] | order(lower(title) asc)": SPONSORS_QUERY_RESULT;
     "*[_type == \"event\"] | order(startDate desc)": EVENTS_QUERY_RESULT;
     "*[_type == \"siteSettings\"][0] {\n    siteName,\n    navbar {\n      ...,\n      links[] {\n        label,\n        \"slug\": link->slug.current\n      }\n    },\n    footer,\n    globalSeo\n  }": LAYOUT_QUERY_RESULT;
+    "*[_type == \"notFoundPage\"][0]": NOT_FOUND_QUERY_RESULT;
   }
 }
 
