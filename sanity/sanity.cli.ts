@@ -11,6 +11,7 @@ export default defineCliConfig({
      * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
      */
     autoUpdates: true,
+    appId: 'zchutmd96w53urmy0t1j4638',
   },
   schemaExtraction: {
     enabled: true,
