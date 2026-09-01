@@ -16,8 +16,9 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
   redirects: {
-    "/for-parents": "/v1/parents",
+    "/for-parents": "/parents",
     "/contact-us": "/",
+    "/events/coolashack": "/events/cool-as-hack",
   },
 
   fonts: [
