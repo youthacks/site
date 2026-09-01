@@ -1,0 +1,58 @@
+---
+import type { PageBuilder } from "sanity.types";
+import Hero from "./Hero/Hero.astro";
+import HomeHero from "./HomeHero/HomeHero.astro";
+import HomeMission from "./HomeMission/HomeMission.astro";
+import Content from "./Content/Content.astro";
+import HomeImpact from "./HomeImpact/HomeImpact.astro";
+import HomeEvents from "./HomeEvents/HomeEvents.astro";
+import HomeContent from "./HomeContent/HomeContent.astro";
+import Events from "./Events/Events.astro";
+import HomeSupport from "./HomeSupport/HomeSupport.astro";
+import Team from "./Team/Team.astro";
+
+interface Props {
+  sections: PageBuilder;
+}
+const { sections } = Astro.props;
+
+type SectionsMap = {
+  [K in PageBuilder[number]["_type"]]: (props: {
+    data: Extract<PageBuilder[number], { _type: K }>;
+  }) => any;
+};
+
+const sectionsMap: SectionsMap = {
+  hero: Hero,
+  events: Events,
+  team: Team,
+  content: Content,
+
+  homeHero: HomeHero,
+  homeMission: HomeMission,
+  homeImpact: HomeImpact,
+  homeEvents: HomeEvents,
+  homeSupport: HomeSupport,
+  homeContent: HomeContent,
+};
+---
+
+{
+  sections.map((section) => {
+    const Component = sectionsMap[section._type] as (props: any) => any;
+    if (!Component) {
+      console.error(
+        `Component not found for page builder type ${section._type}`,
+      );
+      return null;
+    }
+
+    return <Component data={section} />;
+  })
+}
+
+<style is:global>
+  [data-transparent] + [data-transparent] {
+    padding-top: 0 !important;
+  }
+</style>

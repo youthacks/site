@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Merge } from "type-fest";
+import { getSanityImage, type SanityImageTransform } from "~/lib/assets/sanity";
+
+interface Props extends Merge<HTMLAttributes<"img">, SanityImageTransform> {}
+const {
+  src,
+  width,
+  widths,
+  sizes,
+  height,
+  quality,
+  format,
+  layout,
+  priority,
+  ...props
+} = Astro.props;
+
+const { attributes } = getSanityImage({
+  src,
+  width,
+  widths,
+  sizes,
+  height,
+  quality,
+  format,
+  layout,
+  priority,
+});
+---
+
+<img {...props} {...attributes} />

@@ -1,0 +1,17 @@
+---
+import type { Content } from "sanity.types";
+import PortableText from "~/components/content/PortableText.astro";
+
+interface Props {
+  data: Content;
+}
+const { data } = Astro.props;
+---
+
+<div class="mx-auto max-w-7xl p-8 md:p-12" data-transparent>
+  <PortableText
+    value={data.content || []}
+    color={data.color}
+    class="space-y-4 text-lg text-neutral-900 md:text-xl"
+  />
+</div>

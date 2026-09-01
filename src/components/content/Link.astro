@@ -1,0 +1,38 @@
+---
+import type { MarkProps } from "astro-portabletext/types";
+import type { Color } from "./PortableText.astro";
+
+interface Props extends MarkProps<{ href: string }> {
+  color?: Color;
+  internal?: boolean;
+}
+const { color, node, internal = false } = Astro.props;
+
+const linkColor = {
+  red: "text-rose-700 hover:text-rose-900",
+  yellow: "text-yellow-700 hover:text-yellow-900",
+  blue: "text-cyan-700 hover:text-cyan-900",
+  grey: "text-neutral-600 hover:text-neutral-800",
+  white: "hover:text-white",
+}[color || "red"];
+
+const label = await Astro.slots.render("default");
+---
+
+<a
+  href={node.markDef.href}
+  class:list={["group/link font-semibold transition", linkColor]}
+  {...!internal && { target: "_blank", rel: "noopener noreferrer" }}
+>
+  <span class="underline-offset-2 group-hover/link:underline"
+    >{label.trim()}</span
+  >{" "}
+  <span
+    class:list={[
+      "inline-block transition-transform",
+      internal
+        ? "group-hover/link:translate-x-0.5"
+        : "group-hover/link:translate-x-px group-hover/link:-translate-y-px",
+    ]}>{internal ? "→" : "↗"}</span
+  >
+</a>

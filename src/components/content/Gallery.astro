@@ -1,0 +1,14 @@
+---
+import type { Props as TypeProps } from "astro-portabletext/types";
+import type { GalleryBlock } from "sanity.types";
+import SanityImage from "../SanityImage.astro";
+import GalleryClient from "./GalleryClient.svelte";
+
+interface Props extends TypeProps<GalleryBlock> {}
+const { node } = Astro.props as Props;
+---
+
+<GalleryClient
+  images={(node.images || []).map(({ asset }) => ({ asset: asset! }))}
+  client:load
+/>

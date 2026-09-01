@@ -1,0 +1,55 @@
+---
+import type { Props as TypeProps } from "astro-portabletext/types";
+import type { SponsorGridBlock } from "sanity.types";
+import { sanityClient } from "sanity:client";
+import { SPONSORS_QUERY } from "~/queries";
+import SanityImage from "../SanityImage.astro";
+
+interface Props extends TypeProps<SponsorGridBlock> {}
+const { node } = Astro.props as Props;
+
+const result = await sanityClient.fetch(SPONSORS_QUERY);
+const sponsors = result.filter((sponsor) => {
+  if (!node.pick || node.pick.length === 0) return true;
+  return !!node.pick.find((pick) => pick._ref === sponsor._id);
+});
+---
+
+<div class="@container">
+  <div
+    class="grid grid-cols-2 border-l border-neutral-300 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-5 @4xl:grid-cols-6"
+  >
+    <div
+      class="border-t border-inherit"
+      style={{
+        "grid-column": `1 / span ${sponsors.length}`,
+      }}
+    >
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-2 border-l border-neutral-300 @sm:grid-cols-3 @lg:grid-cols-4 @2xl:grid-cols-5 @4xl:grid-cols-6"
+  >
+    {
+      sponsors.map((sponsor) => {
+        if (!sponsor.image) return null;
+        return (
+          <div class="pointer-events-none border-r border-b border-inherit">
+            <a
+              href={sponsor.url}
+              title={sponsor.title}
+              target="_blank"
+              class="pointer-events-auto block p-4 ring-neutral-400 transition hover:bg-neutral-100 hover:ring-1"
+            >
+              <SanityImage
+                src={sponsor.image.asset}
+                height={80}
+                class="mx-auto w-full max-w-40"
+              />
+            </a>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

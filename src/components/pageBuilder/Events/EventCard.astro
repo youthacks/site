@@ -1,0 +1,61 @@
+---
+import type { Event } from "sanity.types";
+import SanityImage from "~/components/SanityImage.astro";
+import Stamp from "~/assets/stamp.svg";
+
+interface Props {
+  data: Event;
+  color?: "red" | "yellow" | "blue" | "grey";
+}
+const { data, color } = Astro.props;
+
+const linkColor = {
+  red: "text-rose-700 group-hover:text-rose-900",
+  yellow: "text-yellow-700 group-hover:text-yellow-900",
+  blue: "text-cyan-700 group-hover:text-cyan-900",
+  grey: "text-neutral-600 group-hover:text-neutral-800",
+}[color || "red"];
+---
+
+<a
+  href={`/events/${data.slug?.current}`}
+  class="group relative flex gap-6 overflow-clip border border-neutral-300 bg-white p-6 shadow-sm transition hover:border-neutral-400 hover:bg-neutral-100 max-lg:flex-col"
+>
+  <Stamp class:list={["absolute top-6 right-6 h-7", linkColor]} />
+  {
+    data.cover && (
+      <div class="flex-none rotate-1 overflow-clip group-even:-rotate-1 max-lg:order-last max-lg:aspect-3/2 max-lg:max-h-64 lg:w-2/5 lg:min-w-96 lg:contain-size">
+        <SanityImage
+          src={data.cover.asset}
+          width={540}
+          widths={[360, 540, 720, 1080]}
+          sizes="(min-width: 1280px) 540px, (min-width: 1024px) 40vw, 100vw"
+          class="size-full object-cover transition duration-500 ease-in-out group-hover:scale-110"
+        />
+      </div>
+    )
+  }
+  <div class="min-w-0 flex-1">
+    {
+      data.logo && (
+        <SanityImage
+          src={data.logo.asset}
+          height={80}
+          class="mb-4 h-20 w-auto drop-shadow-sm"
+        />
+      )
+    }
+    <p class="font-heading text-2xl font-bold">{data.title}</p>
+    <p class="mt-2 text-lg text-pretty text-neutral-900">
+      {data.description}
+    </p>
+    <p
+      class:list={[
+        "mt-2 text-lg font-semibold underline-offset-2 group-hover:underline",
+        linkColor,
+      ]}
+    >
+      Read more →
+    </p>
+  </div>
+</a>

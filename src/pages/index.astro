@@ -1,27 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { sanityClient } from "sanity:client";
+import { INDEX_QUERY } from "~/queries";
+import Layout from "~/layouts/Layout.astro";
+import PageBuilder from "~/components/pageBuilder/PageBuilder.astro";
 
-import Navbar from "~/components/navbar/Navbar.svelte";
-import HomeHero from "~/components/home/Hero.astro";
-import Footer from "~/components/Footer.astro";
-
-import Upcoming from "~/components/home/Upcoming.astro";
-import Mission from "~/components/home/Mission.astro";
-import Impact from "~/components/home/Impact.astro";
-import Partners from "~/components/home/Partners.astro";
+const result = await sanityClient.fetch(INDEX_QUERY);
+if (!result?.indexPage) {
+  return Astro.rewrite("/404");
+}
 ---
 
-<Layout pageTitle="We are makers | Hackathons for teens in the UK">
-  <Navbar client:load />
-
-  <HomeHero />
-
-  <div class="divide-y divide-neutral-300 *:even:bg-neutral-50">
-    <Upcoming />
-    <Mission />
-    <Impact />
-    <Partners />
-  </div>
-
-  <Footer />
+<Layout title={result.indexPage.title} seo={result.indexPage.seo}>
+  <PageBuilder sections={result.indexPage.sections || []} />
 </Layout>

@@ -1,0 +1,55 @@
+---
+import { PortableText as BasePortableText } from "astro-portabletext";
+import type { PortableTextProps } from "astro-portabletext/types";
+import Link from "./Link.astro";
+import InternalLink from "./InternalLink.astro";
+import type { HTMLAttributes } from "astro/types";
+import SponsorGrid from "./SponsorGrid.astro";
+import Gallery from "./Gallery.astro";
+
+export type Color = "red" | "yellow" | "blue" | "grey" | "white";
+
+interface Props extends HTMLAttributes<"div"> {
+  value: PortableTextProps["value"];
+  color?: Color;
+}
+const { value, color, ...props } = Astro.props;
+---
+
+<div {...props} data-content>
+  <BasePortableText
+    value={value}
+    components={{
+      mark: {
+        link: Link,
+        internalLink: InternalLink,
+      },
+      type: {
+        sponsorGridBlock: SponsorGrid,
+        galleryBlock: Gallery,
+      },
+    }}
+  >
+    <fragment slot="mark"
+      >{
+        ({ Component, props, children }: any) => (
+          <Component {...props} color={color}>
+            {children}
+          </Component>
+        )
+      }</fragment
+    >
+  </BasePortableText>
+</div>
+
+<style is:global>
+  @reference "../../styles/global.css";
+  [data-content] {
+    h2 {
+      @apply mt-8 font-heading text-2xl font-bold text-black md:text-3xl;
+    }
+    p {
+      @apply max-w-4xl leading-normal;
+    }
+  }
+</style>

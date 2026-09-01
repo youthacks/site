@@ -1,0 +1,38 @@
+---
+import type { HomeImpact } from "sanity.types";
+
+interface Props {
+  data: HomeImpact;
+}
+const { data } = Astro.props;
+
+const bgColor = {
+  red: "bg-red-200",
+  yellow: "bg-yellow-200",
+  blue: "bg-cyan-200",
+  grey: "bg-neutral-100",
+}[data.color || "red"];
+
+const pillColor = ["text-rose-700", "text-yellow-700", "text-cyan-700"];
+---
+
+<div class:list={[bgColor, "bg-noise"]}>
+  <div class="mx-auto max-w-7xl p-8 md:p-12">
+    <h2 class="font-heading text-3xl font-bold md:text-4xl">{data.title}</h2>
+    <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {
+        (data.statistics || []).slice(0, 3).map((stat, idx) => (
+          <div
+            class:list={[
+              "rounded-full border border-current bg-white/20 p-6 py-8 text-center shadow-sm",
+              pillColor[idx],
+            ]}
+          >
+            <p class="font-heading text-5xl font-bold">{stat.number}</p>
+            <p class="mt-1 text-xl text-black">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

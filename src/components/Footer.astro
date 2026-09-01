@@ -1,108 +1,101 @@
 ---
-import logo from "~/assets/logos/youthacks-logo.svg";
+import type { Footer } from "sanity.types";
+import resolveInternalLink from "~/lib/internalLink";
 
 import SiFacebook from "~/assets/icons/SiFacebook.svg";
+import SiX from "~/assets/icons/SiX.svg";
 import SiInstagram from "~/assets/icons/SiInstagram.svg";
 import SiTiktok from "~/assets/icons/SiTiktok.svg";
 import SiGithub from "~/assets/icons/SiGithub.svg";
+import type { SvgComponent } from "astro/types";
+import SanityImage from "./SanityImage.astro";
+import PortableText from "~/components/content/PortableText.astro";
 
-import ContactButton from "~/components/navbar/ContactModal.svelte";
+const socialIcons: Record<string, SvgComponent> = {
+  "facebook.com": SiFacebook,
+  "twitter.com": SiX,
+  "x.com": SiX,
+  "instagram.com": SiInstagram,
+  "tiktok.com": SiTiktok,
+  "github.com": SiGithub,
+};
 
-const FOOTER_LINKS = [
-  { label: "Our events", href: "/events" },
-  { label: "About us", href: "/about" },
-  { label: "Support us", href: "/donate" },
-  { label: "Info for parents", href: "/parents" },
-  { label: "Contact", href: "#contact" },
-];
-
-const FOOTER_SOCIALS = [
-  {
-    icon: SiFacebook,
-    href: "https://www.facebook.com/people/Youthacks/61575504317362/",
-  },
-  { icon: SiInstagram, href: "https://www.instagram.com/youthacks" },
-  { icon: SiTiktok, href: "https://www.tiktok.com/@youthacks" },
-  { icon: SiGithub, href: "https://github.com/youthacks" },
-];
+interface Props {
+  data: Footer;
+}
+const { data } = Astro.props;
 ---
 
-<footer class="bg-footer-dots bg-neutral-900 text-white">
-  <div class="mx-auto max-w-7xl p-8">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="sm:max-lg:col-span-2">
-        <img src={logo.src} alt="Youthacks" class="h-12 w-auto invert" />
-      </div>
+<footer class="bg-neutral-950 text-white">
+  <div class="mx-auto max-w-7xl p-8 md:p-12">
+    <div class="gap-8 space-y-8 *:break-inside-avoid md:columns-2 lg:columns-3">
       <div>
-        <h2 class="font-satoshi text-2xl font-bold">This site</h2>
+        <h2 class="font-heading text-3xl font-bold">{data.sitemapTitle}</h2>
         <div class="mt-2 space-y-1">
           {
-            FOOTER_LINKS.map(({ label, href }) =>
-              href === "#contact" ? (
-                <ContactButton
-                  client:load
-                  class="block max-w-fit text-neutral-400 underline-offset-2 transition hover:text-white hover:underline sm:text-lg"
-                >
-                  {label}
-                </ContactButton>
-              ) : (
-                <a
-                  href={href}
-                  class="block max-w-fit text-neutral-400 underline-offset-2 transition hover:text-white hover:underline sm:text-lg"
-                >
-                  {label}
-                </a>
-              ),
-            )
-          }
-        </div>
-      </div>
-      <div>
-        <h2 class="font-satoshi text-2xl font-bold">Social media</h2>
-        <div class="mt-2 flex flex-wrap gap-2.5">
-          {
-            FOOTER_SOCIALS.map(({ icon: Icon, href }) => (
+            (data.sitemap || []).map(async (item) => (
               <a
-                href={href}
-                target="_blank"
-                class="group grid size-10 place-items-center rounded-full border border-neutral-700 transition hover:bg-neutral-800"
+                href={await resolveInternalLink(item.link)}
+                class="block max-w-fit text-lg text-neutral-400 underline-offset-2 transition hover:text-white hover:underline"
               >
-                <Icon class="size-4 text-white transition group-hover:scale-110" />
+                {item.label}
               </a>
             ))
           }
         </div>
       </div>
-    </div>
-    <div class="mt-8 border-t border-neutral-800 pt-4">
-      <div class="text-sm text-neutral-500 italic">
-        <p>© 2025 Youthacks. UK charity status pending.</p>
-        <p class="mt-0.5">
-          Fiscally sponsored by The Hack Foundation (d.b.a. Hack Club), a
-          501(c)(3) nonprofit registered in the United States.
-        </p>
+      <div>
+        <h2 class="font-heading text-3xl font-bold">{data.socialsTitle}</h2>
+        <div class="mt-2 flex flex-wrap gap-2">
+          {
+            (data.socials || []).map((link) => {
+              const Icon =
+                socialIcons[new URL(link).hostname.replace("www.", "")];
+              if (!Icon) return null;
+
+              return (
+                <a
+                  href={link}
+                  target="_blank"
+                  class="grid size-10 place-items-center rounded-full border border-neutral-700 transition hover:border-neutral-600 hover:bg-white/10"
+                >
+                  <Icon class="size-4 text-white" />
+                </a>
+              );
+            })
+          }
+        </div>
       </div>
-      <div class="mt-2 text-xs text-neutral-500 italic">
-        <p>
-          made by <a
-            href="https://gideon.sh"
-            target="_blank"
-            class="underline underline-offset-2 transition hover:text-white"
-            >heygideon</a
-          > with the awesome Youthacks team
-        </p>
-        <p class="mt-0.5">
-          photography by William Wallace, Jacob, Edward Hesketh, Jonas, and others
-        </p>
-        <p class="mt-2">
-          this website is <a
-            href="https://github.com/youthacks/site-v3"
-            target="_blank"
-            class="underline underline-offset-2 transition hover:text-white"
-            >open source!</a
-          >
-        </p>
+      <div>
+        <h2 class="font-heading text-3xl font-bold">
+          {data.contactTitle}
+        </h2>
+        <div class="mt-2 space-y-3">
+          {
+            (data.contact || []).map((item) => (
+              <div>
+                <p class="text-neutral-400">{item.label}</p>
+                <a
+                  href={`mailto:${item.email}`}
+                  class="block max-w-fit underline-offset-2 hover:underline"
+                >
+                  {item.email}
+                </a>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
+
+    <hr class="my-12 border-neutral-900" />
+
+    {data.logo && <SanityImage src={data.logo} alt="" class="h-10 w-auto" />}
+    <p class="mt-2 font-heading text-xl font-bold">We are makers.</p>
+    <PortableText
+      value={data.copyright || []}
+      color="white"
+      class="mt-2 space-y-2 text-sm text-neutral-500"
+    />
   </div>
 </footer>

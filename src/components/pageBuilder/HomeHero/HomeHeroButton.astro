@@ -1,0 +1,21 @@
+---
+import type { HomeHero } from "sanity.types";
+import resolveInternalLink from "~/lib/internalLink";
+
+interface Props {
+  data: NonNullable<HomeHero["buttons"]>[number];
+}
+const { data } = Astro.props;
+---
+
+<a
+  href={await resolveInternalLink(data.link)}
+  class:list={[
+    "flex h-10 items-center rounded-full px-5 font-semibold sm:h-12 sm:px-6 sm:text-lg",
+    data.isPrimary
+      ? "bg-rose-700 text-white shadow-sm transition hover:bg-rose-900"
+      : "border border-black/25 transition hover:border-black/50 hover:bg-black/10",
+  ]}
+>
+  {data.label} →
+</a>

@@ -2,13 +2,30 @@
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
+import { sanityClient } from "sanity:client";
+import { LAYOUT_QUERY } from "~/queries/layout";
+import type { Seo } from "sanity.types";
+
+import Footer from "~/components/Footer.astro";
+import Navbar from "~/components/Navbar.svelte";
+import imageBuilder from "~/lib/imageBuilder";
 import "../styles/global.css";
 
 interface Props {
-  pageTitle?: string;
-  description?: string;
+  title?: string;
+  seo?: Seo;
 }
-const { pageTitle, description } = Astro.props;
+const { title: givenTitle, seo: givenSeo } = Astro.props;
+
+const result = await sanityClient.fetch(LAYOUT_QUERY);
+
+const pageTitle = givenTitle
+  ? `${givenTitle} - ${result?.siteName}`
+  : result?.siteName;
+const seo = {
+  ...(result?.globalSeo || {}),
+  ...(givenSeo || {}),
+};
 ---
 
 <!doctype html>
@@ -19,15 +36,33 @@ const { pageTitle, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{pageTitle ? `${pageTitle} | Youthacks` : "Youthacks"}</title>
-    <meta
-      name="description"
-      content={description ||
-        "We support and run hackathons and coding events for teens in the UK, and create safe spaces where young coders can learn and thrive, together."}
-    />
+    <title>{pageTitle}</title>
+    {seo.description && <meta name="description" content={seo.description} />}
+    {seo.noIndex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:title" content={givenTitle || result?.siteName} />
+    <meta property="og:site_name" content={result?.siteName} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.toString()} />
+    {
+      seo.description && (
+        <meta name="og:description" content={seo.description} />
+      )
+    }
+    {
+      seo.image && (
+        <meta
+          property="og:image"
+          content={imageBuilder.image(seo.image).url()}
+        />
+      )
+    }
+
+    <meta name="twitter:card" content="summary_large_image" />
 
     <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-satoshi" preload />
+    <Font cssVariable="--font-heading" preload />
+    <Font cssVariable="--font-serif" />
     <Font cssVariable="--font-cursive" />
 
     <ClientRouter />
@@ -39,6 +74,18 @@ const { pageTitle, description } = Astro.props;
       async></script>
   </head>
   <body>
+    <Navbar
+      client:load
+      transition:persist
+      logo={result?.navbar?.logo}
+      links={(result?.navbar?.links || []).map(({ label, slug }) => ({
+        label,
+        slug,
+      }))}
+    />
+
     <slot />
+
+    {result?.footer && <Footer data={result.footer} />}
   </body>
 </html>

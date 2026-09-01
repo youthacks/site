@@ -1,0 +1,186 @@
+---
+import type { Hero } from "sanity.types";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "~/components/SanityImage.astro";
+import Scribble from "~/assets/images/hero-scribble.svg";
+
+interface Props {
+  data: Hero;
+}
+const { data } = Astro.props;
+
+const bgColor = {
+  red: "bg-rose-200",
+  yellow: "bg-yellow-200",
+  blue: "bg-cyan-200",
+  grey: "bg-neutral-200",
+}[data.color || "red"];
+
+const textColor = {
+  red: "text-rose-700",
+  yellow: "text-yellow-700",
+  blue: "text-cyan-700",
+  grey: "text-neutral-600",
+}[data.color || "red"];
+---
+
+<div class="relative isolate">
+  {
+    !data.transparent && (
+      <div
+        data-part="background"
+        class:list={[
+          "absolute inset-0 -z-10 overflow-x-clip bg-noise",
+          bgColor,
+          data.image && "mb-12",
+        ]}
+      >
+        <div class="absolute inset-0 mx-auto max-w-7xl overflow-y-clip">
+          <Scribble
+            data-part="scribble"
+            class="absolute -top-26 -right-34 opacity-50"
+          />
+        </div>
+      </div>
+    )
+  }
+
+  <div class="mx-auto max-w-7xl p-8 pt-32! md:p-12">
+    <p
+      data-part="subtitle"
+      class:list={["mb-2 text-lg font-semibold md:text-xl", textColor]}
+    >
+      {data.subtitle}
+    </p>
+    <h1
+      data-part="heading"
+      class="max-w-3xl font-heading text-5xl font-bold text-balance md:text-6xl"
+    >
+      {
+        (data.title?.[0].children || []).map((child) =>
+          child.marks?.includes("strong") ? (
+            <>
+              <strong class:list={[textColor]}>{child.text}</strong>
+            </>
+          ) : (
+            child.text
+          ),
+        )
+      }
+    </h1>
+    {
+      data.description && (
+        <div
+          data-part="paragraph"
+          class="mt-4 max-w-4xl text-lg leading-snug md:text-xl"
+        >
+          <PortableText value={data.description || []} />
+        </div>
+      )
+    }
+  </div>
+
+  {
+    data.image && (
+      <div class="mx-auto max-w-7xl px-8 md:px-12">
+        <figure
+          data-part="figure"
+          class="-mx-2 -rotate-1 space-y-4 border border-neutral-300 bg-white p-4 shadow-md"
+        >
+          <SanityImage
+            src={data.image}
+            width={1280}
+            layout="constrained"
+            class="aspect-3/2 max-h-96 w-full object-cover"
+            priority
+          />
+          {data.image.caption && (
+            <figcaption class="text-center font-serif leading-tight italic">
+              {data.image.caption}
+            </figcaption>
+          )}
+        </figure>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    [data-part="background"] {
+      animation: background 500ms ease 100ms both;
+    }
+    @keyframes background {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    [data-part="heading"] {
+      animation: heading 1s cubic-bezier(0.16, 1, 0.3, 1) 300ms both;
+    }
+    @keyframes heading {
+      0% {
+        translate: 0 24px;
+        opacity: 0;
+      }
+      100% {
+        translate: 0 0;
+        opacity: 1;
+      }
+    }
+
+    [data-part="subtitle"] {
+      animation: paragraph 1s cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+    }
+    [data-part="paragraph"] {
+      animation: paragraph 1s cubic-bezier(0.16, 1, 0.3, 1) 500ms both;
+    }
+    @keyframes paragraph {
+      0% {
+        translate: 0 16px;
+        opacity: 0;
+      }
+      100% {
+        translate: 0 0;
+        opacity: 1;
+      }
+    }
+
+    [data-part="figure"] {
+      animation: figure 1s cubic-bezier(0.16, 1, 0.3, 1) 600ms both;
+    }
+    @keyframes figure {
+      0% {
+        translate: 0 16px;
+        opacity: 0;
+        filter: blur(4px);
+      }
+      100% {
+        translate: 0 0;
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    [data-part="scribble"] > :global(path) {
+      transform-origin: top right;
+      animation: scribble 1s cubic-bezier(0.645, 0.045, 0.355, 1) both;
+    }
+    @keyframes scribble {
+      0% {
+        stroke-dasharray: 1;
+        stroke-dashoffset: -1;
+        scale: 0.95;
+      }
+      100% {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 0;
+        scale: 1;
+      }
+    }
+  }
+</style>

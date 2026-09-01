@@ -1,0 +1,25 @@
+---
+import type { MarkProps } from "astro-portabletext/types";
+import type { Color } from "./PortableText.astro";
+import Link from "./Link.astro";
+import resolveInternalLink from "~/lib/internalLink";
+
+interface Props extends MarkProps<{ reference: { _ref: string } }> {
+  color?: Color;
+}
+const { node, ...props } = Astro.props;
+---
+
+<Link
+  {...props}
+  internal
+  node={{
+    ...node,
+    markDef: {
+      ...node.markDef,
+      href: await resolveInternalLink(node.markDef.reference),
+    },
+  }}
+>
+  <slot />
+</Link>

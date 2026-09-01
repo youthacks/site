@@ -3,10 +3,13 @@
 
 @theme inline {
   --font-sans: var(--font-sans);
-  --font-satoshi: var(--font-satoshi);
+  --font-heading: var(--font-heading);
+  --font-serif: var(--font-serif);
   --font-cursive: var(--font-cursive);
 
   --animate-blink: blink 1.5s step-start infinite;
+
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 @keyframes blink {
   0%,
@@ -20,7 +23,8 @@
 
 @layer base {
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth bg-neutral-50;
+    /* font-size: clamp(16px, 1.25vw, 20px); */
   }
   body,
   .font-sans {
@@ -28,16 +32,28 @@
     /* ss06: single-storey 'a' */
     font-feature-settings: "ss01";
   }
-  .font-satoshi {
-    /* ss01: single-storey 'a' */
-    /* ss03: 't' with tail */
-    font-feature-settings: "ss03";
+  .font-heading {
   }
 
-  body > * {
+  body * {
     /* set per-element, because letter-spacing uses em units */
     @apply tracking-tight;
   }
+  .font-serif,
+  .font-serif * {
+    @apply tracking-normal;
+  }
+
+  img {
+    width: auto;
+  }
+}
+
+@utility bg-noise {
+  background-image: url("/patterns/noise.png");
+  background-size: auto auto;
+  background-position: center;
+  background-repeat: repeat;
 }
 
 /* instead of HeroBackground, you can use this class */
@@ -100,4 +116,8 @@
       transform: scale(1);
     }
   }
+}
+
+strong {
+  font-weight: 600;
 }
