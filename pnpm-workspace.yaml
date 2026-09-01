@@ -3,6 +3,10 @@ allowBuilds:
   sharp: true
   workerd: true
 
+minimumReleaseAgeExclude:
+  - '@astrojs/internal-helpers@0.11.0'
+  - '@astrojs/vercel@11.0.9'
+
 onlyBuiltDependencies:
   - "@tailwindcss/oxide"
   - esbuild

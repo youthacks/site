@@ -11,6 +11,8 @@ import node from "@astrojs/node";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
   redirects: {
@@ -63,7 +65,5 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare({
-    imageService: "compile",
-  }),
+  adapter: vercel(),
 });
